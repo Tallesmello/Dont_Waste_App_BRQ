@@ -69,11 +69,6 @@ class CadastroActivity : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
 
-                                /**
-                                 * Aqui, o novo usuário gerado é automaticamente inscrito, então nós apenas saímos e o enviamos para a
-                                 * tela principal com id e e-mail que o usuário usou para se cadastrar.
-                                 */
-
                                 val intent =
                                     Intent(this, SegundaTelaCadastroActivity::class.java)
                                 startActivity(intent)
