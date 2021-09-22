@@ -22,7 +22,7 @@ import java.util.*
 class SegundaTelaCadastroActivity : AppCompatActivity(){
 
     private lateinit var viewModel: SegundaTelaCadastroViewModel
-    private lateinit var dataUltimaCompra1: TextInputLayout
+    private lateinit var dataUltimaCompra1: TextInputEditText
 
     lateinit var btnVoltarHomeSegundaTelaCadastro: AppCompatImageView
     lateinit var btnVoltarCadastro: AppCompatButton
