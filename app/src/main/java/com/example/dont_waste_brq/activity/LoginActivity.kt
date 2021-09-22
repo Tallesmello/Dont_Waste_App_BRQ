@@ -9,32 +9,23 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.dont_waste_brq.R
+import com.example.dont_waste_brq.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var btnVoltarHomeLogin: AppCompatImageView
-    lateinit var btnLogar: AppCompatButton
-    lateinit var emailLogin: TextInputEditText
-    lateinit var senhaLogin: TextInputEditText
-    lateinit var btnEsqueciMinhaSenha: TextView
-
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        btnVoltarHomeLogin = findViewById(R.id.btn_volta_hm_n_logada_login)
-        btnLogar = findViewById(R.id.btn_Login_tela_login)
-        btnEsqueciMinhaSenha = findViewById(R.id.btn_esqueci_senha_login)
-        emailLogin = findViewById(R.id.edit_email_login)
-        senhaLogin = findViewById(R.id.edit_senha_login)
-
-
-        btnLogar.setOnClickListener {
+        binding.btnLoginTelaLogin.setOnClickListener {
             when {
-                TextUtils.isEmpty(emailLogin.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(binding.editEmailLogin.text.toString().trim { it <= ' ' }) -> {
                     Toast.makeText(
                         this,
                         "Por favor insira um email",
@@ -42,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                 }
 
-                TextUtils.isEmpty(senhaLogin.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(binding.editSenhaLogin.text.toString().trim { it <= ' ' }) -> {
                     Toast.makeText(
                         this,
                         "Por favor insira uma senha",
@@ -50,8 +41,8 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                 }
                 else -> {
-                    val email: String = emailLogin.text.toString().trim { it <= ' '}
-                    val senha: String = senhaLogin.text.toString().trim { it <= ' '}
+                    val email: String = binding.editEmailLogin.text.toString().trim { it <= ' '}
+                    val senha: String = binding.editSenhaLogin.text.toString().trim { it <= ' '}
 
                     // Usar o Login salvo no Firebase
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha)
