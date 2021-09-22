@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Dont_Waste_BRQ</string>
+    <string name="dont_waste_hm_n_logada">Don\'t\n Waste</string>
+    <string name="organize_hm_n_logada">organize</string>
+    <string name="sua_despensa_inteligente_hm_n_logada">Sua despensa inteligente</string>
+    <string name="primeiro_acesso_btn_hm_n_logada">Primeiro Acesso</string>
+    <string name="login_btn_hm_n_logada">Login</string>
+    <string name="email_btn_cadastro">Email</string>
+    <string name="senha_btn_cadastro">Senha</string>
+    <string name="proximo_btn_cadastro">Próximo</string>
+    <string name="nome_edit_segunda_tela_cadastro">Nome</string>
+    <string name="quantas_pessoas_segunda_tela_cadastro">Quantas pessoas que residem na casa ?</string>
+    <string name="dataa_ultima_compra_segunda_tela_cadastro">Qual a data da sua última compra ?</string>
+    <string name="frequencia_compras_segunda_tela_cadastro">Com que frequência faz compras ?</string>
+    <string name="voltar_segunda_tela_cadastro">Voltar</string>
+    <string name="salvar_segunda_tela_cadastro">Salvar</string>
+    <string name="esqueci_minha_senha_login">Esqueci minha senha</string>
+    <string name="logar_login">Logar</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "917839864102",
+    "project_id": "dont-waste-brq",
+    "storage_bucket": "dont-waste-brq.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917839864102:android:ae38628c012b3a45aee1e7",
+        "android_client_info": {
+          "package_name": "com.example.dont_waste_brq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917839864102-5rjset84aulseb56b66mqcsgh8a8rvds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCefEhmnI6WxyfgEhqK790cDhu3psgJYi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917839864102-5rjset84aulseb56b66mqcsgh8a8rvds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

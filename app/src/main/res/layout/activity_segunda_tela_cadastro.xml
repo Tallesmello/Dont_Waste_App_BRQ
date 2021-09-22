@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SegundaTelaCadastroActivity">
+
+    <!--    Botão Home não logada -->
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_volta_hm_n_logada_segunda_tela_cadastro"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="32dp"
+        android:src="@drawable/cadastro_1_icone_home"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--    Imagem Usuario -->
+
+    <ImageView
+        android:id="@+id/imagem_user_segunda_tela_cadastro"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/cadastro_1_icone_usuario"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_volta_hm_n_logada_segunda_tela_cadastro" />
+
+    <!--    Edit Nome -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_nome_segunda_tela_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bordar_costumizado"
+        android:hint="@string/nome_edit_segunda_tela_cadastro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_user_segunda_tela_cadastro">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_nome_segunda_tela_cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Edit Quantidade de pessoas-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_quantidade_pessoas_segunda_tela_cadastro"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/bordar_costumizado"
+        android:hint="@string/quantas_pessoas_segunda_tela_cadastro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_nome_segunda_tela_cadastro">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/material_auto_complete_text_view_quantidade_pessoas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Edit Data -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_data_compra_segunda_tela_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/bordar_costumizado"
+        android:hint="@string/dataa_ultima_compra_segunda_tela_cadastro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_quantidade_pessoas_segunda_tela_cadastro">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_data_compra_segunda_tela_cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Edit Frequencia de compras -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_frequencia_compras_segunda_tela_cadastro"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/bordar_costumizado"
+        android:hint="@string/frequencia_compras_segunda_tela_cadastro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_data_compra_segunda_tela_cadastro">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/edit_frequencia_compras_segunda_tela_cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="none"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    Botão Voltar -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_voltar_segunda_tela_cadastro"
+        android:layout_width="168dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="@string/voltar_segunda_tela_cadastro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <!--    Botão Salvar -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_salvar_segunda_tela_cadastro"
+        android:layout_width="168dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="@string/salvar_segunda_tela_cadastro"
+        android:backgroundTint="@color/cor_texto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
