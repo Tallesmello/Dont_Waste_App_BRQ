@@ -1,92 +1,129 @@
 package com.example.dont_waste_brq.activity
 
-import android.app.Activity
-import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.activity_segunda_tela_cadastro.*
 import java.text.SimpleDateFormat
-import java.util.*
 
-class SegundaTelaCadastroActivity : AppCompatActivity(){
+
+class SegundaTelaCadastroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
-
+    private var tudoOk: Boolean = true
     private lateinit var viewModel: SegundaTelaCadastroViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySegundaTelaCadastroBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
+        viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
+
+
 
 //        [12:53] Gustavo Wellington Reis Xavier Torres
 //gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
-        val itemsPessoas = listOf("1", "2", "3", "Mais de 3")
-        val adapterPessoas = ArrayAdapter(this, R.layout.list_item, itemsPessoas)
-        binding.materialAutoCompleteTextViewQuantidadePessoas.setAdapter(adapterPessoas)
 
-
+        viewModel.quantidadePessoasSpinner(
+            this,
+            binding.materialAutoCompleteTextViewQuantidadePessoas
+        )
 //o date picker, para conseguir puxar o calendario
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker().setTitleText("Selecione a data").build()
 
-
+        val datePicker = viewModel.criacaoDataPicker()
 //quando clica em ok ao escolher uma data no date picker
-        datePicker.addOnPositiveButtonClickListener {
-            val simpleDateFormat = SimpleDateFormat.getDateInstance()
-            val dateString = simpleDateFormat.format(it)
-            binding.editDataCompraSegundaTelaCadastro.setText(dateString)
-        }
-//metodo para o date picker aparecer corretamente
-        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
-            if (view.isInTouchMode && isFocused) {
-                view.performClick()
-            }
 
+        viewModel.salvandoDataNoDataPicker(datePicker, binding.editDataCompraSegundaTelaCadastro)
+//metodo para o date picker aparecer corretamente
+
+        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
+            viewModel.recuperandoFocoDataPicker(view, isFocused)
         }
 //mostrar o date picker ao clicar no edit text
+
         binding.editDataCompraSegundaTelaCadastro.setOnClickListener {
             datePicker.show(supportFragmentManager, "tag")
         }
 //genrencia o spinner da frequencia de compras
-        val itemsFrequencia = listOf("Semanal", "Quinzenal", "Mensal")
-        val adapterFrequencia = ArrayAdapter(this, R.layout.list_item, itemsFrequencia)
-        binding.editFrequenciaComprasSegundaTelaCadastro.setAdapter(adapterFrequencia)
 
+        viewModel.opcoesFrequenciaSpinner(this, binding.editFrequenciaComprasSegundaTelaCadastro)
 
-
-        viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
 
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
-            startActivity(Intent(this, HomeNaoLogadaActivity::class.java))
+            startActivity(viewModel.trocandoTelaPara(this, HomeNaoLogadaActivity()))
         }
 
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            val intentVoltar = Intent(this, CadastroActivity::class.java)
-            startActivity(intentVoltar)
+            startActivity(viewModel.trocandoTelaPara(this, CadastroActivity()))
+
         }
 
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            val intentSalvar = Intent(this, LoginActivity::class.java)
-            startActivity(intentSalvar)
+            if (!teste()) {
+                startActivity(viewModel.trocandoTelaPara(this, LoginActivity()))
+            } else {
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
 
+//    fun inicializandoForms() {
+//        binding.editNomeSegundaTelaCadastro.text
+//
+//
+//    }
+
+//    fun validaFormulario() : Boolean{
+//        if (binding.editNomeSegundaTelaCadastro.text.toString().isEmpty()){
+//            error("*")
+//            tudoOk = false
+//        }
+//        if (!validaCampo(binding.materialAutoCompleteTextViewQuantidadePessoas)){
+//            error("*")
+//            tudoOk = false
+//        }
+//        if (!validaCampo(binding.editFrequenciaComprasSegundaTelaCadastro)){
+//            error("*")
+//            tudoOk = false
+//        }
+//        if (!validaCampo(binding.editDataCompraSegundaTelaCadastro)){
+//            error("*")
+//            tudoOk = false
+//        }
+//        return tudoOk
+//    }
+//    fun validaCampo(campo: View): Boolean {
+//        return campo.isSelected
+//    }
+
+    fun teste() : Boolean {
+        var campoCerto = false
+        if (!binding.editFrequenciaComprasSegundaTelaCadastro.isSelected){
+            Toast.makeText(this, "Insira todos os campos 1", Toast.LENGTH_LONG).show()
+            campoCerto = true
+            return campoCerto
+        } else if(!binding.materialAutoCompleteTextViewQuantidadePessoas.isSelected) {
+            Toast.makeText(this, "Insira todos os campos 2", Toast.LENGTH_LONG).show()
+            campoCerto = true
+            return campoCerto
+        } else if (!binding.editDataCompraSegundaTelaCadastro.isSelected) {
+            Toast.makeText(this, "Insira todos os campos 3", Toast.LENGTH_LONG).show()
+            campoCerto = true
+            return campoCerto
+        } else if (binding.editNomeSegundaTelaCadastro.text.toString() != null) {
+            Toast.makeText(this, "Insira todos os campos 4", Toast.LENGTH_LONG).show()
+            campoCerto = true
+            return campoCerto
+        }
+    return campoCerto
+    }
 }

@@ -3,6 +3,8 @@ package com.example.dont_waste_brq.activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.Gravity
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.databinding.ActivityCadastroBinding
@@ -23,7 +25,13 @@ class CadastroActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(CadastroViewModel::class.java)
 
         binding.btnVoltaCadastro.setOnClickListener {
-            startActivity(Intent(this, HomeNaoLogadaActivity::class.java))
+            startActivity(viewModel.trocandoTelaPara(this, HomeNaoLogadaActivity()))
+            finish()
+        }
+
+
+        binding.btnAjudaCadastro.setOnClickListener {
+           viewModel.notificacaoPersonalizada(this, "A senha deve conter de 6 a 8 caracteres numéricos")
         }
 
         binding.btnProximoCadastro.setOnClickListener {
@@ -58,6 +66,8 @@ class CadastroActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
 
 }
