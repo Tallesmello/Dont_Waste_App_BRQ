@@ -13,6 +13,7 @@ import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 
 
@@ -67,10 +68,10 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
         }
 
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            if (validacaoSpinnerFrequencia() == 1
-                && validacaoDataPicker() == 1
-                && validacaoQuantidadePessoas() == 1
-                && validacaoNome() == 1
+            if (viewModel.validacaoSpinnerFrequencia(binding.editFrequenciaComprasSegundaTelaCadastro,this) == 1
+                && viewModel.validacaoDataPicker(binding.editDataCompraSegundaTelaCadastro,this) == 1
+                && viewModel.validacaoQuantidadePessoas(binding.materialAutoCompleteTextViewQuantidadePessoas,this) == 1
+                && viewModel.validacaoNome(binding.editNomeSegundaTelaCadastro,this) == 1
             ) {
                 startActivity(viewModel.trocandoTelaPara(this, LoginActivity()))
             }
@@ -79,45 +80,5 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
     }
 
 
-    fun validacaoSpinnerFrequencia(): Int {
-        var dataFrequencia = binding.editFrequenciaComprasSegundaTelaCadastro.text.toString()
-        if (dataFrequencia.isNullOrEmpty()) {
-            Toast.makeText(this, "Preencha a frequência de compras", Toast.LENGTH_LONG).show()
-        } else {
-            return 1
-        }
-        return 0
-    }
 
-    fun validacaoDataPicker(): Int {
-        var ultimaCompra = binding.editDataCompraSegundaTelaCadastro.text.toString()
-        if (ultimaCompra.isNullOrEmpty()) {
-            Toast.makeText(this, "Selecione a data da ultima compra", Toast.LENGTH_LONG).show()
-        } else {
-            return 1
-        }
-        return 0
-    }
-
-    fun validacaoQuantidadePessoas(): Int {
-        var quantidadePessoas =
-            binding.materialAutoCompleteTextViewQuantidadePessoas.text.toString()
-        if (quantidadePessoas.isNullOrEmpty()) {
-            Toast.makeText(this, "Selecione a quantidade de pessoas", Toast.LENGTH_LONG).show()
-        } else {
-            return 1
-        }
-        return 0
-    }
-
-    fun validacaoNome(): Int {
-        var nome = binding.editNomeSegundaTelaCadastro.text.toString()
-        if (nome.isNullOrEmpty()) {
-            Toast.makeText(this, "Informe um nome", Toast.LENGTH_LONG).show()
-
-        } else {
-            return 1
-        }
-        return 0
-    }
 }

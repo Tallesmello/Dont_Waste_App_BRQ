@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -55,16 +56,52 @@ class SegundaTelaCadastroViewModel : ViewModel() {
         return datePicker
     }
 
-    fun validaCampos(dP: MaterialDatePicker<Long>,
-                     spinnerFrequencia: MaterialAutoCompleteTextView,
-                     spinnerQuantidadeDePessoas: MaterialAutoCompleteTextView,) {
 
+    fun validacaoSpinnerFrequencia(campo : MaterialAutoCompleteTextView, context: Context): Int {
+        var dataFrequencia = campo.text.toString()
+        if (dataFrequencia.isNullOrEmpty()) {
+            Toast.makeText(context, "Preencha a frequência de compras", Toast.LENGTH_LONG).show()
+        } else {
+            return 1
+        }
+        return 0
+    }
 
-
+    fun validacaoDataPicker(campo : TextInputEditText,context: Context): Int {
+        var ultimaCompra = campo.text.toString()
+        if (ultimaCompra.isNullOrEmpty()) {
+            mensagem(context,"Selecione a data da ultima compra")
+        } else {
+            return 1
+        }
+        return 0
     }
 
 
 
+    fun validacaoQuantidadePessoas(campo : MaterialAutoCompleteTextView, context: Context): Int {
+        var quantidadePessoas =
+            campo.text.toString()
+        if (quantidadePessoas.isNullOrEmpty()) {
+            mensagem(context,"Selecione a quantidade de pessoas")
+        } else {
+            return 1
+        }
+        return 0
+    }
 
+    fun validacaoNome(campo : TextInputEditText,context: Context): Int {
+        var nome = campo.text.toString()
+        if (nome.isNullOrEmpty()) {
+            mensagem(context,"Informe um nome")
+
+        } else {
+            return 1
+        }
+        return 0
+    }
+    private fun mensagem(context: Context,msg : String) {
+        Toast.makeText(context,msg , Toast.LENGTH_LONG).show()
+    }
 
 }
