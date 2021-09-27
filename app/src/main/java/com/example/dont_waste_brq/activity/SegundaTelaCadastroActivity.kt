@@ -12,6 +12,7 @@ import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import java.text.SimpleDateFormat
 
 
@@ -21,13 +22,12 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
     private var tudoOk: Boolean = true
     private lateinit var viewModel: SegundaTelaCadastroViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySegundaTelaCadastroBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
-
-
 
 //        [12:53] Gustavo Wellington Reis Xavier Torres
 //gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
@@ -67,7 +67,11 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
         }
 
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            if (!teste()) {
+            if (validacaoSpinnerFrequencia() == 1
+                && validacaoDataPicker() == 1
+                && validacaoQuantidadePessoas() == 1
+                && validacaoNome() == 1
+            ) {
                 startActivity(viewModel.trocandoTelaPara(this, LoginActivity()))
             } else {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
@@ -76,54 +80,46 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
 
     }
 
-//    fun inicializandoForms() {
-//        binding.editNomeSegundaTelaCadastro.text
-//
-//
-//    }
 
-//    fun validaFormulario() : Boolean{
-//        if (binding.editNomeSegundaTelaCadastro.text.toString().isEmpty()){
-//            error("*")
-//            tudoOk = false
-//        }
-//        if (!validaCampo(binding.materialAutoCompleteTextViewQuantidadePessoas)){
-//            error("*")
-//            tudoOk = false
-//        }
-//        if (!validaCampo(binding.editFrequenciaComprasSegundaTelaCadastro)){
-//            error("*")
-//            tudoOk = false
-//        }
-//        if (!validaCampo(binding.editDataCompraSegundaTelaCadastro)){
-//            error("*")
-//            tudoOk = false
-//        }
-//        return tudoOk
-//    }
-//    fun validaCampo(campo: View): Boolean {
-//        return campo.isSelected
-//    }
-
-    fun teste() : Boolean {
-        var campoCerto = false
-        if (!binding.editFrequenciaComprasSegundaTelaCadastro.isSelected){
+    fun validacaoSpinnerFrequencia(): Int {
+        var dataFrequencia = binding.editFrequenciaComprasSegundaTelaCadastro.text.toString()
+        if (dataFrequencia.isNullOrEmpty()) {
             Toast.makeText(this, "Insira todos os campos 1", Toast.LENGTH_LONG).show()
-            campoCerto = true
-            return campoCerto
-        } else if(!binding.materialAutoCompleteTextViewQuantidadePessoas.isSelected) {
-            Toast.makeText(this, "Insira todos os campos 2", Toast.LENGTH_LONG).show()
-            campoCerto = true
-            return campoCerto
-        } else if (!binding.editDataCompraSegundaTelaCadastro.isSelected) {
-            Toast.makeText(this, "Insira todos os campos 3", Toast.LENGTH_LONG).show()
-            campoCerto = true
-            return campoCerto
-        } else if (binding.editNomeSegundaTelaCadastro.text.toString() != null) {
-            Toast.makeText(this, "Insira todos os campos 4", Toast.LENGTH_LONG).show()
-            campoCerto = true
-            return campoCerto
+        } else {
+            return 1
         }
-    return campoCerto
+        return 0
+    }
+
+    fun validacaoDataPicker(): Int {
+        var ultimaCompra = binding.editDataCompraSegundaTelaCadastro.text.toString()
+        if (ultimaCompra.isNullOrEmpty()) {
+            Toast.makeText(this, "Insira todos os campos 3", Toast.LENGTH_LONG).show()
+        } else {
+            return 1
+        }
+        return 0
+    }
+
+    fun validacaoQuantidadePessoas(): Int {
+        var quantidadePessoas =
+            binding.materialAutoCompleteTextViewQuantidadePessoas.text.toString()
+        if (quantidadePessoas.isNullOrEmpty()) {
+            Toast.makeText(this, "Insira todos os campos 2", Toast.LENGTH_LONG).show()
+        } else {
+            return 1
+        }
+        return 0
+    }
+
+    fun validacaoNome(): Int {
+        var nome = binding.editNomeSegundaTelaCadastro.text.toString()
+        if (nome.isNullOrEmpty()) {
+            Toast.makeText(this, "Insira todos os campos 4", Toast.LENGTH_LONG).show()
+
+        } else {
+            return 1
+        }
+        return 0
     }
 }
