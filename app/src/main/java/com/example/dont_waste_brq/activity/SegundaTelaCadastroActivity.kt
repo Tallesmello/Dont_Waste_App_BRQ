@@ -73,8 +73,6 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
                 && validacaoNome() == 1
             ) {
                 startActivity(viewModel.trocandoTelaPara(this, LoginActivity()))
-            } else {
-                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -84,7 +82,7 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
     fun validacaoSpinnerFrequencia(): Int {
         var dataFrequencia = binding.editFrequenciaComprasSegundaTelaCadastro.text.toString()
         if (dataFrequencia.isNullOrEmpty()) {
-            Toast.makeText(this, "Insira todos os campos 1", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Preencha a frequência de compras", Toast.LENGTH_LONG).show()
         } else {
             return 1
         }
@@ -94,7 +92,7 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
     fun validacaoDataPicker(): Int {
         var ultimaCompra = binding.editDataCompraSegundaTelaCadastro.text.toString()
         if (ultimaCompra.isNullOrEmpty()) {
-            Toast.makeText(this, "Insira todos os campos 3", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Selecione a data da ultima compra", Toast.LENGTH_LONG).show()
         } else {
             return 1
         }
@@ -105,7 +103,7 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
         var quantidadePessoas =
             binding.materialAutoCompleteTextViewQuantidadePessoas.text.toString()
         if (quantidadePessoas.isNullOrEmpty()) {
-            Toast.makeText(this, "Insira todos os campos 2", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Selecione a quantidade de pessoas", Toast.LENGTH_LONG).show()
         } else {
             return 1
         }
@@ -115,7 +113,7 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
     fun validacaoNome(): Int {
         var nome = binding.editNomeSegundaTelaCadastro.text.toString()
         if (nome.isNullOrEmpty()) {
-            Toast.makeText(this, "Insira todos os campos 4", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Informe um nome", Toast.LENGTH_LONG).show()
 
         } else {
             return 1
