@@ -17,9 +17,6 @@ import java.text.SimpleDateFormat
 
 class SegundaTelaCadastroViewModel : ViewModel() {
 
-    private val mNome = MutableLiveData<String>()
-    val nome: LiveData<String> = mNome
-
     fun trocandoTelaPara(context: Context, activity: AppCompatActivity): Intent {
         return Intent(context, activity::class.java)
     }
