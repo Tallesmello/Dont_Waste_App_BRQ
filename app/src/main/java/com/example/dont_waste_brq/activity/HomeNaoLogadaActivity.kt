@@ -21,6 +21,10 @@ class HomeNaoLogadaActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        setupListners()
+    }
+
+    private fun setupListners() {
         binding.btnPrimeiroAcessoHmNLogada.setOnClickListener {
             val intent = Intent(this, CadastroActivity::class.java)
             startActivity(intent)
