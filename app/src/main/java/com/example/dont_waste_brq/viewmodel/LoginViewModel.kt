@@ -13,4 +13,9 @@ class LoginViewModel : ViewModel() {
             Toast.LENGTH_LONG
         ).show()
     }
+    fun validandoEmailSenhaLogin(campoEmail : String , campoSenha : String): Pair<String, String> {
+        val email: String = campoEmail.trim { it <= ' ' }
+        val senha: String = campoSenha.trim { it <= ' ' }
+        return Pair(email, senha)
+    }
 }

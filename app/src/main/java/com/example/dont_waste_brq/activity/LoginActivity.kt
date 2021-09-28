@@ -22,34 +22,35 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val email = binding.editEmailLogin.text.toString()
+        val senha = binding.editSenhaLogin.text.toString()
 
         binding.btnLoginTelaLogin.setOnClickListener {
             when {
-                TextUtils.isEmpty(binding.editEmailLogin.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(email.trim { it <= ' ' }) -> {
                     viewModel.mensagemToast(this, "Por favor insira um email")
                 }
 
-                TextUtils.isEmpty(binding.editSenhaLogin.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(senha.trim { it <= ' ' }) -> {
                     viewModel.mensagemToast(this, "Por favor insira uma senha")
                 }
                 else -> {
-                    val email: String = binding.editEmailLogin.text.toString().trim { it <= ' ' }
-                    val senha: String = binding.editSenhaLogin.text.toString().trim { it <= ' ' }
+                    val (emailValidado: String, senhaValidado: String) = viewModel.validandoEmailSenhaLogin(email,senha)
                     // Usar o Login salvo no Firebase
-                    autenticacaoEmailESenhaFirebase(email, senha)
+                    autenticacaoEmailESenhaFirebase(emailValidado, senhaValidado)
                 }
 
             }
         }
     }
 
+
+
     private fun autenticacaoEmailESenhaFirebase(email: String, senha: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
                     viewModel.mensagemToast(this, "Você Logou com sucesso.")
-
                     /**
                      * Aqui, o novo usuário gerado é automaticamente inscrito, então nós apenas saímos e o enviamos para a
                      * tela principal com id e e-mail que o usuário usou para se cadastrar.

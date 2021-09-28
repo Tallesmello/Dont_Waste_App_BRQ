@@ -5,8 +5,9 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
+import com.google.android.material.textfield.TextInputEditText
 
-class CadastroViewModel: ViewModel() {
+class CadastroViewModel : ViewModel() {
 
     fun notificacao(msg: String, context: Context) {
         Toast.makeText(
@@ -16,7 +17,7 @@ class CadastroViewModel: ViewModel() {
         ).show()
     }
 
-   fun notificacaoPersonalizada(context: Context, msg: String) {
+    fun notificacaoPersonalizada(context: Context, msg: String) {
         val toast: Toast = Toast.makeText(
             context,
             msg,
@@ -28,5 +29,14 @@ class CadastroViewModel: ViewModel() {
 
     fun trocandoTelaPara(context: Context, activity: AppCompatActivity): Intent {
         return Intent(context, activity::class.java)
+    }
+
+    fun validanddoEmailESenha(
+        campoEmail: String,
+        campoSenha: String
+    ): Pair<String, String> {
+        val salvarEmail: String = campoEmail.trim { it <= ' ' }
+        val salvarSenha: String = campoSenha.trim { it <= ' ' }
+        return Pair(salvarEmail, salvarSenha)
     }
 }

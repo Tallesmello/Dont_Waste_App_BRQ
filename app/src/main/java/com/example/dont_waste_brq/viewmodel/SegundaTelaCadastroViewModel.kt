@@ -27,7 +27,10 @@ class SegundaTelaCadastroViewModel : ViewModel() {
         campoSpinner.setAdapter(adapterFrequencia)
     }
 
-     fun salvandoDataNoDataPicker(datePicker: MaterialDatePicker<Long>, campoSpinnerDataCompra: TextInputEditText) {
+    fun salvandoDataNoDataPicker(
+        datePicker: MaterialDatePicker<Long>,
+        campoSpinnerDataCompra: TextInputEditText
+    ) {
         datePicker.addOnPositiveButtonClickListener {
             val simpleDateFormat = SimpleDateFormat.getDateInstance()
             val dateString = simpleDateFormat.format(it)
@@ -41,8 +44,11 @@ class SegundaTelaCadastroViewModel : ViewModel() {
         }
     }
 
-    fun quantidadePessoasSpinner(context: Context, spinnerQuantidadeDePessoas: MaterialAutoCompleteTextView) {
-        val itemsPessoas  = listOf("1", "2", "3", "Mais de 3")
+    fun quantidadePessoasSpinner(
+        context: Context,
+        spinnerQuantidadeDePessoas: MaterialAutoCompleteTextView
+    ) {
+        val itemsPessoas = listOf("1", "2", "3", "Mais de 3")
         val adapterPessoas = ArrayAdapter(context, R.layout.list_item, itemsPessoas)
         spinnerQuantidadeDePessoas.setAdapter(adapterPessoas)
     }
@@ -54,20 +60,20 @@ class SegundaTelaCadastroViewModel : ViewModel() {
     }
 
 
-    fun validacaoSpinnerFrequencia(campo : MaterialAutoCompleteTextView, context: Context): Int {
+    fun validacaoSpinnerFrequencia(campo: MaterialAutoCompleteTextView, context: Context): Int {
         var dataFrequencia = campo.text.toString()
         if (dataFrequencia.isNullOrEmpty()) {
-            Toast.makeText(context, "Preencha a frequência de compras", Toast.LENGTH_LONG).show()
+            mensagem(context,"Preencha a frequência de compras")
         } else {
             return 1
         }
         return 0
     }
 
-    fun validacaoDataPicker(campo : TextInputEditText,context: Context): Int {
+    fun validacaoDataPicker(campo: TextInputEditText, context: Context): Int {
         var ultimaCompra = campo.text.toString()
         if (ultimaCompra.isNullOrEmpty()) {
-            mensagem(context,"Selecione a data da ultima compra")
+            mensagem(context, "Selecione a data da ultima compra")
         } else {
             return 1
         }
@@ -75,30 +81,29 @@ class SegundaTelaCadastroViewModel : ViewModel() {
     }
 
 
-
-    fun validacaoQuantidadePessoas(campo : MaterialAutoCompleteTextView, context: Context): Int {
-        var quantidadePessoas =
-            campo.text.toString()
+    fun validacaoQuantidadePessoas(campo: MaterialAutoCompleteTextView, context: Context): Int {
+        var quantidadePessoas = campo.text.toString()
         if (quantidadePessoas.isNullOrEmpty()) {
-            mensagem(context,"Selecione a quantidade de pessoas")
+            mensagem(context, "Selecione a quantidade de pessoas")
         } else {
             return 1
         }
         return 0
     }
 
-    fun validacaoNome(campo : TextInputEditText,context: Context): Int {
+    fun validacaoNome(campo: TextInputEditText, context: Context): Int {
         var nome = campo.text.toString()
         if (nome.isNullOrEmpty()) {
-            mensagem(context,"Informe um nome")
+            mensagem(context, "Informe um nome")
 
         } else {
             return 1
         }
         return 0
     }
-    private fun mensagem(context: Context,msg : String) {
-        Toast.makeText(context,msg , Toast.LENGTH_LONG).show()
+
+    private fun mensagem(context: Context, msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
     }
 
 }

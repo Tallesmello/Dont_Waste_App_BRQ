@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat
 class SegundaTelaCadastroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
-    private var tudoOk: Boolean = true
     private lateinit var viewModel: SegundaTelaCadastroViewModel
 
 
@@ -29,49 +28,48 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
         binding = ActivitySegundaTelaCadastroBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
+        val spinnerQtdPessoas = binding.materialAutoCompleteTextViewQuantidadePessoas
+        val dataPicker = binding.editDataCompraSegundaTelaCadastro
+        val frquenciaDeCompras = binding.editFrequenciaComprasSegundaTelaCadastro
+        val nome = binding.editNomeSegundaTelaCadastro
 
-//        [12:53] Gustavo Wellington Reis Xavier Torres
-//gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
-
+        //        [12:53] Gustavo Wellington Reis Xavier Torres
+        //gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
         viewModel.quantidadePessoasSpinner(
             this,
-            binding.materialAutoCompleteTextViewQuantidadePessoas
+            spinnerQtdPessoas
         )
-//o date picker, para conseguir puxar o calendario
-
+        //o date picker, para conseguir puxar o calendario
         val datePicker = viewModel.criacaoDataPicker()
-//quando clica em ok ao escolher uma data no date picker
 
-        viewModel.salvandoDataNoDataPicker(datePicker, binding.editDataCompraSegundaTelaCadastro)
-//metodo para o date picker aparecer corretamente
+        //quando clica em ok ao escolher uma data no date picker
+        viewModel.salvandoDataNoDataPicker(datePicker, dataPicker)
 
-        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
+        //metodo para o date picker aparecer corretamente
+        dataPicker.setOnFocusChangeListener { view, isFocused ->
             viewModel.recuperandoFocoDataPicker(view, isFocused)
         }
-//mostrar o date picker ao clicar no edit text
 
-        binding.editDataCompraSegundaTelaCadastro.setOnClickListener {
+        //mostrar o date picker ao clicar no edit text
+        dataPicker.setOnClickListener {
             datePicker.show(supportFragmentManager, "tag")
         }
-//genrencia o spinner da frequencia de compras
 
-        viewModel.opcoesFrequenciaSpinner(this, binding.editFrequenciaComprasSegundaTelaCadastro)
-
-
+        //genrencia o spinner da frequencia de compras
+        viewModel.opcoesFrequenciaSpinner(this, frquenciaDeCompras)
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
             startActivity(viewModel.trocandoTelaPara(this, HomeNaoLogadaActivity()))
         }
 
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
             startActivity(viewModel.trocandoTelaPara(this, CadastroActivity()))
-
         }
 
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            if (viewModel.validacaoSpinnerFrequencia(binding.editFrequenciaComprasSegundaTelaCadastro,this) == 1
-                && viewModel.validacaoDataPicker(binding.editDataCompraSegundaTelaCadastro,this) == 1
-                && viewModel.validacaoQuantidadePessoas(binding.materialAutoCompleteTextViewQuantidadePessoas,this) == 1
-                && viewModel.validacaoNome(binding.editNomeSegundaTelaCadastro,this) == 1
+            if (viewModel.validacaoSpinnerFrequencia(frquenciaDeCompras,this) == 1
+                && viewModel.validacaoDataPicker(dataPicker,this) == 1
+                && viewModel.validacaoQuantidadePessoas(spinnerQtdPessoas,this) == 1
+                && viewModel.validacaoNome(nome,this) == 1
             ) {
                 startActivity(viewModel.trocandoTelaPara(this, LoginActivity()))
             }
