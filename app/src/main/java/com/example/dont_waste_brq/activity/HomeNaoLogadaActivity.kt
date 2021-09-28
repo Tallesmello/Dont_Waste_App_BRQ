@@ -3,16 +3,11 @@ package com.example.dont_waste_brq.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.AppCompatButton
-import androidx.lifecycle.ViewModelProvider
-import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityHomeNaoLogadaBinding
-import com.example.dont_waste_brq.viewmodel.HomeNaoLogadaViewModel
 
 
 class HomeNaoLogadaActivity : AppCompatActivity() {
 
-    private lateinit var viewmodel : HomeNaoLogadaViewModel
     private lateinit var binding: ActivityHomeNaoLogadaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

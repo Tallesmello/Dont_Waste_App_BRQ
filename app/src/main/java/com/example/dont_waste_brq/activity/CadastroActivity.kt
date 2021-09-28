@@ -11,7 +11,6 @@ import com.example.dont_waste_brq.domain.repository.RepositoryImpl
 import com.example.dont_waste_brq.viewmodel.cadastro.CadastroState
 import com.example.dont_waste_brq.viewmodel.cadastro.CadastroViewModel
 import com.example.dont_waste_brq.viewmodel.cadastro.CadastroViewModelFactory
-import java.lang.Exception
 
 class CadastroActivity : BaseActivity() {
 
@@ -40,6 +39,15 @@ class CadastroActivity : BaseActivity() {
             cadastrar()
         }
     }
+    private fun cadastrar() {
+        if (dadosValidos()) {
+            val usuario = Usuario(
+                binding.editEmailCadastro.text.toString(),
+                binding.editSenhaCadastro.text.toString()
+            )
+            viewModel.cadastrarUsuario(usuario)
+        }
+    }
 
     private fun setupObservers() {
         viewModel.cadastroState.observe(this, Observer { state ->
@@ -63,16 +71,6 @@ class CadastroActivity : BaseActivity() {
 
     private fun erroAoCadastrar(mensagem: String?) {
         toast("Erro ao cadastrar usuário:\n$mensagem")
-    }
-
-    private fun cadastrar() {
-        if (dadosValidos()) {
-            val usuario = Usuario(
-                binding.editEmailCadastro.text.toString(),
-                binding.editSenhaCadastro.text.toString()
-            )
-            viewModel.cadastrarUsuario(usuario)
-        }
     }
 
     private fun dadosValidos(): Boolean {

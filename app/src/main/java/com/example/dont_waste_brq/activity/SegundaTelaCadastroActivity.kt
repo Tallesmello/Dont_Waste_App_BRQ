@@ -1,29 +1,17 @@
 package com.example.dont_waste_brq.activity
 
-import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.activity_segunda_tela_cadastro.*
 import java.text.SimpleDateFormat
-import java.util.*
 
-class SegundaTelaCadastroActivity : AppCompatActivity(){
+class SegundaTelaCadastroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
 
