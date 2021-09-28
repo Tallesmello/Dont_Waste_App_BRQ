@@ -1,15 +1,30 @@
 package com.example.dont_waste_brq.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.*
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import com.google.android.material.datepicker.CompositeDateValidator
+
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.CalendarConstraints.DateValidator
+import com.google.android.material.datepicker.DateValidatorPointBackward
+
+import com.google.android.material.datepicker.DateValidatorPointForward
+
+
+
+
 
 class SegundaTelaCadastroActivity : AppCompatActivity() {
 
@@ -17,6 +32,7 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SegundaTelaCadastroViewModel
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySegundaTelaCadastroBinding.inflate(layoutInflater)
@@ -31,16 +47,25 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
 
 
 //o date picker, para conseguir puxar o calendario
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker().setTitleText("Selecione a data").build()
+        val datePicker = MaterialDatePicker
+                .Builder
+                .datePicker()
+                .setCalendarConstraints(limites())
+                .setTitleText("Selecione a data")
+                .build()
 
-
-//quando clica em ok ao escolher uma data no date picker
-        datePicker.addOnPositiveButtonClickListener {
-            val simpleDateFormat = SimpleDateFormat.getDateInstance()
-            val dateString = simpleDateFormat.format(it)
+        datePicker.addOnPositiveButtonClickListener { data ->
+            var dateString = ""
+            try {
+                val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+                dateString = simpleDateFormat.format(data)
+            } catch (ex: Exception) {
+                Log.e("SegundaTelaCadastro",
+                    "SimpleDateFormat exception \n${ex.message}")
+            }
             binding.editDataCompraSegundaTelaCadastro.setText(dateString)
         }
+
 //metodo para o date picker aparecer corretamente
         binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
             if (view.isInTouchMode && isFocused) {
@@ -75,6 +100,32 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
             startActivity(intentSalvar)
         }
 
+    }
+
+    private fun limites(): CalendarConstraints {
+        val constraintsBuilderRange =  CalendarConstraints.Builder()
+
+        val calendarStart = Calendar.getInstance()
+        val calendarEnd = Calendar.getInstance()
+
+        calendarStart.add(Calendar.YEAR, -1)
+
+        val minDate = calendarStart.timeInMillis
+        val maxDate = calendarEnd.timeInMillis
+
+        constraintsBuilderRange.setStart(minDate);
+        constraintsBuilderRange.setEnd(maxDate);
+
+        val dateValidatorMin: DateValidator = DateValidatorPointForward.from(minDate)
+        val dateValidatorMax: DateValidator = DateValidatorPointBackward.before(maxDate)
+
+        var  listValidators = ArrayList<DateValidator>()
+        listValidators.add(dateValidatorMin)
+        listValidators.add(dateValidatorMax)
+        var  validators = CompositeDateValidator.allOf(listValidators)
+        constraintsBuilderRange.setValidator(validators)
+
+        return constraintsBuilderRange.build();
     }
 
 }
