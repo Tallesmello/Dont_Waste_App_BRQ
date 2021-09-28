@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.example.dont_waste_brq.databinding.ActivityHomeNaoLogadaBinding
 
 
-class HomeNaoLogadaActivity : AppCompatActivity() {
+class HomeNaoLogadaActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHomeNaoLogadaBinding
 
