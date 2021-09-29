@@ -11,7 +11,7 @@ import com.example.dont_waste_brq.databinding.ActivityLoginBinding
 import com.example.dont_waste_brq.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel

@@ -7,7 +7,7 @@ import com.example.dont_waste_brq.databinding.ActivityHomeNaoLogadaBinding
 import com.example.dont_waste_brq.viewmodel.HomeNaoLogadaViewModel
 
 
-class HomeNaoLogadaActivity : AppCompatActivity() {
+class HomeNaoLogadaActivity : BaseActivity() {
 
     private lateinit var viewModel : HomeNaoLogadaViewModel
     private lateinit var binding : ActivityHomeNaoLogadaBinding

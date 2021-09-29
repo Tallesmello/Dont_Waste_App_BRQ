@@ -12,7 +12,7 @@ import com.example.dont_waste_brq.databinding.ActivityCadastroBinding
 import com.example.dont_waste_brq.viewmodel.CadastroViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class CadastroActivity : AppCompatActivity() {
+class CadastroActivity : BaseActivity() {
 
     private lateinit var binding: ActivityCadastroBinding
     private lateinit var viewModel: CadastroViewModel
@@ -25,12 +25,16 @@ class CadastroActivity : AppCompatActivity() {
         val email = binding.editEmailCadastro.text.toString()
         val senha = binding.editEmailCadastro.text.toString()
         viewModel = ViewModelProvider(this).get(CadastroViewModel::class.java)
+        iniciandoBotoes(senha, email)
+    }
+
+    private fun iniciandoBotoes(senha: String, email: String) {
         binding.btnVoltaCadastro.setOnClickListener {
-            startActivity(viewModel.trocandoTelaPara(this, HomeNaoLogadaActivity()))
+            trocandoTelaPara(HomeNaoLogadaActivity())
             finish()
         }
         binding.btnAjudaCadastro.setOnClickListener {
-           viewModel.notificacaoPersonalizada(this, "A senha deve conter de 6 a 8 caracteres numéricos")
+            mensagem("A senha deve conter de 6 a 8 caracteres numéricos")
         }
         binding.btnProximoCadastro.setOnClickListener {
             validacao(senha, email)

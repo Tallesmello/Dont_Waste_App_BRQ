@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 
 
-class SegundaTelaCadastroActivity : AppCompatActivity() {
+class SegundaTelaCadastroActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
     private lateinit var viewModel: SegundaTelaCadastroViewModel
