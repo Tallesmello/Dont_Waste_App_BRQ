@@ -16,4 +16,6 @@
     <string name="salvar_segunda_tela_cadastro">Salvar</string>
     <string name="esqueci_minha_senha_login">Esqueci minha senha</string>
     <string name="logar_login">Logar</string>
+    <string name="enviar_senha">Enviar</string>
+    <string name="esqueci_minha_senha">Esqueci minha senha</string>
 </resources>

@@ -35,11 +35,19 @@ class LoginActivity : AppCompatActivity() {
                     viewModel.mensagemToast(this, "Por favor insira uma senha")
                 }
                 else -> {
-                    val (emailValidado: String, senhaValidado: String) = viewModel.validandoEmailSenhaLogin(email,senha)
+                    val (emailValidado: String, senhaValidado: String) = viewModel.validandoEmailSenhaLogin(
+                        email,
+                        senha
+                    )
                     // Usar o Login salvo no Firebase
                     autenticacaoEmailESenhaFirebase(emailValidado, senhaValidado)
                 }
 
+            }
+            //vai para tela esqueci minha senha
+            binding.btnEsqueciSenhaLogin.setOnClickListener {
+                viewModel.trocandoTelaPara(this,EsqueciMinhaSenhaActivity())
+                finish()
             }
         }
     }
