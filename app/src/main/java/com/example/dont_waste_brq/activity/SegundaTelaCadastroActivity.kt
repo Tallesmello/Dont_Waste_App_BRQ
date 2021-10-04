@@ -69,24 +69,20 @@ class SegundaTelaCadastroActivity : AppCompatActivity(){
         val adapterFrequencia = ArrayAdapter(this, R.layout.list_item, itemsFrequencia)
         binding.editFrequenciaComprasSegundaTelaCadastro.setAdapter(adapterFrequencia)
 
-
-
         viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
 
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
-            startActivity(Intent(this, HomeNaoLogadaActivity::class.java))
+            finish()
         }
 
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            val intentVoltar = Intent(this, CadastroActivity::class.java)
-            startActivity(intentVoltar)
+           val intentVolar = Intent(this, CadastroActivity::class.java)
+            startActivity(intentVolar)
         }
 
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            val intentSalvar = Intent(this, LoginActivity::class.java)
+            val intentSalvar = Intent(this, HomeLogadaActivity::class.java)
             startActivity(intentSalvar)
         }
-
     }
-
 }
