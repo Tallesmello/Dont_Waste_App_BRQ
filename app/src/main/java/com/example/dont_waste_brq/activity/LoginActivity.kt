@@ -23,6 +23,10 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.btnVoltaHmNLogadaLogin.setOnClickListener {
+            finish()
+        }
+
         binding.btnLoginTelaLogin.setOnClickListener {
             when {
                 TextUtils.isEmpty(binding.editEmailLogin.text.toString().trim { it <= ' ' }) -> {

@@ -23,7 +23,7 @@ class CadastroActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(CadastroViewModel::class.java)
 
         binding.btnVoltaCadastro.setOnClickListener {
-            startActivity(Intent(this, HomeNaoLogadaActivity::class.java))
+            finish()
         }
 
         binding.btnProximoCadastro.setOnClickListener {
