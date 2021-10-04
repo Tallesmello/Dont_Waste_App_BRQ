@@ -1,4 +1,4 @@
-package com.example.dont_waste_brq.viewmodel
+package com.example.dont_waste_brq.activity.viewmodel
 
 import android.content.Context
 import android.content.Intent

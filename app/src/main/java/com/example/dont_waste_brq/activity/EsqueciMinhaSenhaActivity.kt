@@ -1,11 +1,10 @@
 package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
-import com.example.dont_waste_brq.viewmodel.EsqueciMinhaSenhaViewModel
+import com.example.dont_waste_brq.activity.viewmodel.EsqueciMinhaSenhaViewModel
 
 class EsqueciMinhaSenhaActivity : AppCompatActivity() {
 

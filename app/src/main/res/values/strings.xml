@@ -18,4 +18,6 @@
     <string name="logar_login">Logar</string>
     <string name="enviar_senha">Enviar</string>
     <string name="esqueci_minha_senha">Esqueci minha senha</string>
+    <string name="insira_um_email_valido">email vazio</string>
+    <string name="insira_uma_senha_valido">senha vazia</string>
 </resources>

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
-import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
+import com.example.dont_waste_brq.activity.viewmodel.SegundaTelaCadastroViewModel
 import com.google.android.material.datepicker.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,11 +21,6 @@ import com.google.android.material.datepicker.CalendarConstraints.DateValidator
 import com.google.android.material.datepicker.DateValidatorPointBackward
 
 import com.google.android.material.datepicker.DateValidatorPointForward
-
-
-
-
-
 class SegundaTelaCadastroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
@@ -91,7 +86,7 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
         }
 
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            val intentVoltar = Intent(this, CadastroActivity::class.java)
+            val intentVoltar = Intent(this, PrimeiroAcessoActivity::class.java)
             startActivity(intentVoltar)
         }
 
