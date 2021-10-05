@@ -1,4 +1,4 @@
-package com.example.dont_waste_brq.activity.viewmodel;
+package com.example.dont_waste_brq.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.dont_waste_brq.R;
 
-public class ProdutosProximosVencimentoActivity extends AppCompatActivity {
+public class RelatorioDeDesperdicioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produtos_proximos_vencimento);
+        setContentView(R.layout.activity_relatorio_de_desperdicio);
     }
 }
