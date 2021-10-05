@@ -33,8 +33,5 @@ class EsqueciMinhaSenhaActivity : AppCompatActivity() {
 //            viewModel.mensagemToast(this, "E-mail Inválido")
 //        }
 
-
-
-
     }
 }
