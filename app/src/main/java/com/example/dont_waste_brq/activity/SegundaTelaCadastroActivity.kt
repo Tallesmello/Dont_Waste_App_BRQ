@@ -8,8 +8,10 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
+import com.example.dont_waste_brq.activity.enum.QtdPessoasEnum
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.activity.viewmodel.SegundaTelaCadastroViewModel
+import com.example.dont_waste_brq.model.Cadastro
 import com.google.android.material.datepicker.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,10 +38,16 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
 
 //        [12:53] Gustavo Wellington Reis Xavier Torres
 //gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
-        val itemsPessoas = listOf("1", "2", "3", "Mais de 3")
+
+
+        val itemsPessoas = listOf(
+            QtdPessoasEnum.UM.descricao,
+            QtdPessoasEnum.DOIS.descricao,
+            QtdPessoasEnum.TRES.descricao,
+            QtdPessoasEnum.TRES_OU_MAIS.descricao
+        )
         val adapterPessoas = ArrayAdapter(this, R.layout.list_item, itemsPessoas)
         binding.materialAutoCompleteTextViewQuantidadePessoas.setAdapter(adapterPessoas)
-
 
 //o date picker, para conseguir puxar o calendario
         val datePicker = MaterialDatePicker
@@ -94,6 +102,8 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
             val intentSalvar = Intent(this, LoginActivity::class.java)
             startActivity(intentSalvar)
         }
+
+
 
     }
 

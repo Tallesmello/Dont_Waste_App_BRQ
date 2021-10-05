@@ -32,9 +32,7 @@ class PrimeiroAcessoActivity : BaseActivity() {
         binding.btnProximoCadastro.setOnClickListener {
             if (dadosValidos()) {
                 val user = gerandoUsuario()
-                Firebase.cadastrarUsuario(user).let {
-                    trocarTela(SegundaTelaCadastroActivity())
-                }
+                Firebase.cadastrarUsuario(user) { trocarTela(SegundaTelaCadastroActivity()) }
             }
         }
     }
