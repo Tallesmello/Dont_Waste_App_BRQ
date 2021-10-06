@@ -20,4 +20,7 @@
     <string name="esqueci_minha_senha">Esqueci minha senha</string>
     <string name="insira_um_email_valido">email vazio</string>
     <string name="insira_uma_senha_valido">senha vazia</string>
+    <string name="nome_invalido">Nome inválido</string>
+    <string name="quantidade_nao_selecionada">Seleione uma opção</string>
+    <string name="data_invalida">Selecione uma data</string>
 </resources>

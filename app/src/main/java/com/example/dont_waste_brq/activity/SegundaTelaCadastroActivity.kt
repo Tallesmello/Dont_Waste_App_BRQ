@@ -5,12 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
+import com.example.dont_waste_brq.activity.enum.FrequenciaEnum
 import com.example.dont_waste_brq.activity.enum.QtdPessoasEnum
+import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
-import com.example.dont_waste_brq.activity.viewmodel.SegundaTelaCadastroViewModel
 import com.example.dont_waste_brq.model.Cadastro
 import com.google.android.material.datepicker.*
 import java.text.SimpleDateFormat
@@ -23,11 +22,13 @@ import com.google.android.material.datepicker.CalendarConstraints.DateValidator
 import com.google.android.material.datepicker.DateValidatorPointBackward
 
 import com.google.android.material.datepicker.DateValidatorPointForward
-class SegundaTelaCadastroActivity : AppCompatActivity() {
+
+class SegundaTelaCadastroActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
 
-    private lateinit var viewModel: SegundaTelaCadastroViewModel
+    private var dataValida = Date()
+    private val datePicker: MaterialDatePicker<Long> by lazy { setupDatePicker() }
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,101 +37,164 @@ class SegundaTelaCadastroActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-//        [12:53] Gustavo Wellington Reis Xavier Torres
-//gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
+        setupAutocomplete()
+        setupListners()
+    }
 
-
-        val itemsPessoas = listOf(
-            QtdPessoasEnum.UM.descricao,
-            QtdPessoasEnum.DOIS.descricao,
-            QtdPessoasEnum.TRES.descricao,
-            QtdPessoasEnum.TRES_OU_MAIS.descricao
-        )
-        val adapterPessoas = ArrayAdapter(this, R.layout.list_item, itemsPessoas)
+    private fun setupAutocomplete() {
+        val adapterPessoas =
+            ArrayAdapter(this, R.layout.list_item, QtdPessoasEnum.getArrayListOfDescricao())
         binding.materialAutoCompleteTextViewQuantidadePessoas.setAdapter(adapterPessoas)
 
-//o date picker, para conseguir puxar o calendario
-        val datePicker = MaterialDatePicker
-            .Builder
-            .datePicker()
-            .setCalendarConstraints(limites())
-            .setTitleText("Selecione a data")
-            .build()
 
-        datePicker.addOnPositiveButtonClickListener { data ->
-            var dateString = ""
-            try {
-                val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
-                dateString = simpleDateFormat.format(data)
-            } catch (ex: Exception) {
-                Log.e("SegundaTelaCadastro",
-                    "SimpleDateFormat exception \n${ex.message}")
-            }
-            binding.editDataCompraSegundaTelaCadastro.setText(dateString)
+        // todo - o listOf<String>() deve ser corrigido
+        val adapterFrequencia = ArrayAdapter(this, R.layout.list_item, FrequenciaEnum.getArrayListOfFrequencia())
+        binding.editFrequenciaComprasSegundaTelaCadastro.setAdapter(adapterFrequencia)
+    }
+
+    private fun setupListners() {
+        binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
+           trocarTela(HomeNaoLogadaActivity())
         }
-
-//metodo para o date picker aparecer corretamente
+        binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
+            trocarTela(PrimeiroAcessoActivity())
+        }
+        binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
+            if (validarCadastro()) {
+                salvarCadastro()
+            }
+        }
+        /* será que isso é necessário ???
         binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
             if (view.isInTouchMode && isFocused) {
                 view.performClick()
             }
-
-        }
-//mostrar o date picker ao clicar no edit text
+        } */
         binding.editDataCompraSegundaTelaCadastro.setOnClickListener {
             datePicker.show(supportFragmentManager, "tag")
         }
-//genrencia o spinner da frequencia de compras
-        val itemsFrequencia = listOf("Semanal", "Quinzenal", "Mensal")
-        val adapterFrequencia = ArrayAdapter(this, R.layout.list_item, itemsFrequencia)
-        binding.editFrequenciaComprasSegundaTelaCadastro.setAdapter(adapterFrequencia)
-
-
-
-        viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
-
-        binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
-            startActivity(Intent(this, HomeNaoLogadaActivity::class.java))
-        }
-
-        binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            val intentVoltar = Intent(this, PrimeiroAcessoActivity::class.java)
-            startActivity(intentVoltar)
-        }
-
-        binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            val intentSalvar = Intent(this, LoginActivity::class.java)
-            startActivity(intentSalvar)
-        }
-
-
-
     }
 
-    private fun limites(): CalendarConstraints {
-        val constraintsBuilderRange =  CalendarConstraints.Builder()
+    private fun validarCadastro(): Boolean {
+        var res = true
+        binding.textNomeSegundaTelaCadastro.error = null
+        binding.textQuantidadePessoasSegundaTelaCadastro.error = null
+        if (binding.editNomeSegundaTelaCadastro.text.toString().trim().length < 4) {
+            binding.textNomeSegundaTelaCadastro.error = getString(R.string.nome_invalido)
+            binding.textNomeSegundaTelaCadastro.isErrorEnabled = true
+            res = false
+        } else {
+            binding.textNomeSegundaTelaCadastro.isErrorEnabled = false
+        }
 
-        val calendarStart = Calendar.getInstance()
-        val calendarEnd = Calendar.getInstance()
 
-        calendarStart.add(Calendar.YEAR, -1)
+        if (QtdPessoasEnum.getEnumFromDescricao(
+                binding
+                    .materialAutoCompleteTextViewQuantidadePessoas.text.toString()
+            ) == null
+        ) {
+            binding.textQuantidadePessoasSegundaTelaCadastro.isErrorEnabled = true
+            binding.textQuantidadePessoasSegundaTelaCadastro.error =
+                getString(R.string.quantidade_nao_selecionada)
+            res = false
+        } else {
+            binding.textQuantidadePessoasSegundaTelaCadastro.isErrorEnabled = false
+        }
 
-        val minDate = calendarStart.timeInMillis
-        val maxDate = calendarEnd.timeInMillis
 
-        constraintsBuilderRange.setStart(minDate);
-        constraintsBuilderRange.setEnd(maxDate);
+        if (binding.editDataCompraSegundaTelaCadastro.text.isNullOrEmpty()) {
+            binding.textDataCompraSegundaTelaCadastro.error = getString(R.string.data_invalida)
+            binding.textDataCompraSegundaTelaCadastro.isErrorEnabled = true
+            res = false
+        } else {
+            binding.textDataCompraSegundaTelaCadastro.isErrorEnabled = false
+        }
 
-        val dateValidatorMin: DateValidator = DateValidatorPointForward.from(minDate)
-        val dateValidatorMax: DateValidator = DateValidatorPointBackward.before(maxDate)
 
-        var  listValidators = ArrayList<DateValidator>()
-        listValidators.add(dateValidatorMin)
-        listValidators.add(dateValidatorMax)
-        var  validators = CompositeDateValidator.allOf(listValidators)
-        constraintsBuilderRange.setValidator(validators)
+        if (FrequenciaEnum.getEnumFromFrequencia(
+                binding
+                    .editFrequenciaComprasSegundaTelaCadastro.text.toString()
+            ) == null
+        ) {
+            binding.textFrequenciaComprasSegundaTelaCadastro.isErrorEnabled = true
+            binding.textFrequenciaComprasSegundaTelaCadastro.error =
+                getString(R.string.quantidade_nao_selecionada)
+            res = false
+        } else {
+            binding.textFrequenciaComprasSegundaTelaCadastro.isErrorEnabled = false
+        }
 
-        return constraintsBuilderRange.build();
+
+        return res
     }
+
+
+    private fun salvarCadastro() {
+        val cadastro = Cadastro(
+            binding.editNomeSegundaTelaCadastro.text.toString(),
+            QtdPessoasEnum.getEnumFromDescricao(
+                binding.materialAutoCompleteTextViewQuantidadePessoas.text.toString()
+            ),
+            dataValida,
+            FrequenciaEnum.getEnumFromFrequencia(
+                binding.editFrequenciaComprasSegundaTelaCadastro.text.toString()
+            )
+        )
+        Firebase.cadastrarUsuario()
+//        if (cadastro salvo com sucesso) {
+        val intentSalvar = Intent(this, LoginActivity::class.java)
+        startActivity(intentSalvar)
+    }
+}
+
+
+private fun setupDatePicker(): MaterialDatePicker<Long> {
+    val datePicker = MaterialDatePicker
+        .Builder
+        .datePicker()
+        .setCalendarConstraints(limites())
+        .setTitleText("Selecione a data")
+        .build()
+
+    datePicker.addOnPositiveButtonClickListener { data ->
+        var dateString = ""
+        try {
+            val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+            dateString = simpleDateFormat.format(data)
+            dataValida = Date(data)
+        } catch (ex: Exception) {
+            Log.e(
+                "SegundaTelaCadastro",
+                "SimpleDateFormat exception \n${ex.message}"
+            )
+        }
+        binding.editDataCompraSegundaTelaCadastro.setText(dateString)
+    }
+    return datePicker
+}
+
+private fun limites(): CalendarConstraints {
+    val constraintsBuilderRange = CalendarConstraints.Builder()
+
+    val calendarStart = Calendar.getInstance()
+    val calendarEnd = Calendar.getInstance()
+
+    calendarStart.add(Calendar.YEAR, -1)
+
+    val minDate = calendarStart.timeInMillis
+    val maxDate = calendarEnd.timeInMillis
+    constraintsBuilderRange.setStart(minDate);
+    constraintsBuilderRange.setEnd(maxDate);
+    val dateValidatorMin: DateValidator = DateValidatorPointForward.from(minDate)
+    val dateValidatorMax: DateValidator = DateValidatorPointBackward.before(maxDate)
+
+    var listValidators = ArrayList<DateValidator>()
+    listValidators.add(dateValidatorMin)
+    listValidators.add(dateValidatorMax)
+    var validators = CompositeDateValidator.allOf(listValidators)
+    constraintsBuilderRange.setValidator(validators)
+
+    return constraintsBuilderRange.build();
+}
 
 }
