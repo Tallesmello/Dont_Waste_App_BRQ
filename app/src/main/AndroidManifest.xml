@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ" >
         <activity
-            android:name=".activity.RelatorioDeDesperdicioActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activity.ProdutosProximosVencimentoActivity"
-            android:exported="true" />
-        <activity
             android:name=".activity.BaseActivity"
             android:exported="true" />
         <activity
