@@ -16,13 +16,13 @@ object Firebase {
         }
     }
 
-    fun resetSenha(usuario: Usuario): Boolean {
-        var result = false
+
+    fun resetSenha(usuario: Usuario, sucesso: () -> Unit) {
         firebaseAuth.sendPasswordResetEmail(usuario.email)
             .addOnCompleteListener { task ->
-                result = task.isSuccessful
+                if (task.isSuccessful)
+                    sucesso()
             }
-        return result
     }
 
 }

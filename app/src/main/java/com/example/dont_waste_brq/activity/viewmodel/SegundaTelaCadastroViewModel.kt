@@ -1,107 +1,120 @@
 package com.example.dont_waste_brq.activity.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.example.dont_waste_brq.R
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.example.dont_waste_brq.activity.enum.FrequenciaEnum
+import com.example.dont_waste_brq.activity.enum.QtdPessoasEnum
+import com.google.android.material.datepicker.*
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SegundaTelaCadastroViewModel : ViewModel() {
 
-    fun trocandoTelaPara(context: Context, activity: AppCompatActivity): Intent {
-        return Intent(context, activity::class.java)
-    }
-
-    fun opcoesFrequenciaSpinner(context: Context, campoSpinner: MaterialAutoCompleteTextView) {
-        val itemsFrequencia = listOf("Semanal", "Quinzenal", "Mensal")
+    fun spinnerFrequencia(context: Context,campoFrequencia : MaterialAutoCompleteTextView) {
+        //genrencia o spinner da frequencia de compras
+        val itemsFrequencia = listOf(
+            FrequenciaEnum.SEMANALMENTE,
+            FrequenciaEnum.QUINZENALMENTE,
+            FrequenciaEnum.MENSALMENTE
+        )
         val adapterFrequencia = ArrayAdapter(context, R.layout.list_item, itemsFrequencia)
-        campoSpinner.setAdapter(adapterFrequencia)
+        campoFrequencia.setAdapter(adapterFrequencia)
     }
 
-    fun salvandoDataNoDataPicker(
-        datePicker: MaterialDatePicker<Long>,
-        campoSpinnerDataCompra: TextInputEditText
-    ) {
-        datePicker.addOnPositiveButtonClickListener {
-            val simpleDateFormat = SimpleDateFormat.getDateInstance()
-            val dateString = simpleDateFormat.format(it)
-            campoSpinnerDataCompra.setText(dateString)
+    fun dataPicker(campoSpinner : MaterialAutoCompleteTextView ,supportFragment : FragmentManager) {
+        val datePicker = construcaoDoCalendarView()
+        datePicker.addOnPositiveButtonClickListener { data ->
+            firmandoData(data,campoSpinner)
+        }
+        //metodo para o date picker aparecer corretamente
+        campoSpinner.setOnFocusChangeListener { view, isFocused ->
+            if (view.isInTouchMode && isFocused) {
+                view.performClick()
+            }
+        }
+
+        //mostrar o date picker ao clicar no edit text
+        campoSpinner.setOnClickListener {
+            datePicker.show(supportFragment, "tag")
         }
     }
 
-    fun recuperandoFocoDataPicker(view: View, isFocused: Boolean) {
-        if (view.isInTouchMode && isFocused) {
-            view.performClick()
-        }
-    }
-
-    fun quantidadePessoasSpinner(
-        context: Context,
-        spinnerQuantidadeDePessoas: MaterialAutoCompleteTextView
-    ) {
-        val itemsPessoas = listOf("1", "2", "3", "Mais de 3")
+    fun SpinnerQtdPessoas(context: Context,campo : MaterialAutoCompleteTextView) {
+        //gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
+        val itemsPessoas = listOf(
+            QtdPessoasEnum.UM.descricao,
+            QtdPessoasEnum.DOIS.descricao,
+            QtdPessoasEnum.TRES.descricao,
+            QtdPessoasEnum.TRES_OU_MAIS.descricao
+        )
         val adapterPessoas = ArrayAdapter(context, R.layout.list_item, itemsPessoas)
-        spinnerQuantidadeDePessoas.setAdapter(adapterPessoas)
+        campo.setAdapter(adapterPessoas)
     }
 
-    fun criacaoDataPicker(): MaterialDatePicker<Long> {
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker().setTitleText("Selecione a data").build()
+    @SuppressLint("SimpleDateFormat")
+    private fun firmandoData(data: Long?,campo : MaterialAutoCompleteTextView) {
+        var dateString = ""
+        try {
+            val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+            dateString = simpleDateFormat.format(data)
+        } catch (ex: Exception) {
+            Log.e(
+                "SegundaTelaCadastro",
+                "SimpleDateFormat exception \n${ex.message}"
+            )
+        }
+        campo.setText(dateString)
+    }
+
+    private fun construcaoDoCalendarView(): MaterialDatePicker<Long> {
+        //o date picker, para conseguir puxar o calendario
+        val datePicker = MaterialDatePicker
+            .Builder
+            .datePicker()
+            .setCalendarConstraints(limites())
+            .setTitleText("Selecione a data")
+            .build()
         return datePicker
     }
 
+    private fun limites(): CalendarConstraints {
+        val constraintsBuilderRange = CalendarConstraints.Builder()
 
-    fun validacaoSpinnerFrequencia(campo: MaterialAutoCompleteTextView, context: Context): Int {
-        var dataFrequencia = campo.text.toString()
-        if (dataFrequencia.isNullOrEmpty()) {
-            mensagem(context,"Preencha a frequência de compras")
-        } else {
-            return 1
-        }
-        return 0
+        val calendarStart = Calendar.getInstance()
+        val calendarEnd = Calendar.getInstance()
+
+        calendarStart.add(Calendar.YEAR, -1)
+
+        val minDate = calendarStart.timeInMillis
+        val maxDate = calendarEnd.timeInMillis
+
+        constraintsBuilderRange.setStart(minDate);
+        constraintsBuilderRange.setEnd(maxDate);
+
+        val dateValidatorMin: CalendarConstraints.DateValidator = DateValidatorPointForward.from(minDate)
+        val dateValidatorMax: CalendarConstraints.DateValidator = DateValidatorPointBackward.before(maxDate)
+
+        var listValidators = ArrayList<CalendarConstraints.DateValidator>()
+        listValidators.add(dateValidatorMin)
+        listValidators.add(dateValidatorMax)
+        var validators = CompositeDateValidator.allOf(listValidators)
+        constraintsBuilderRange.setValidator(validators)
+
+        return constraintsBuilderRange.build();
     }
 
-    fun validacaoDataPicker(campo: TextInputEditText, context: Context): Int {
-        var ultimaCompra = campo.text.toString()
-        if (ultimaCompra.isNullOrEmpty()) {
-            mensagem(context, "Selecione a data da ultima compra")
-        } else {
-            return 1
-        }
-        return 0
-    }
 
-
-    fun validacaoQuantidadePessoas(campo: MaterialAutoCompleteTextView, context: Context): Int {
-        var quantidadePessoas = campo.text.toString()
-        if (quantidadePessoas.isNullOrEmpty()) {
-            mensagem(context, "Selecione a quantidade de pessoas")
-        } else {
-            return 1
-        }
-        return 0
-    }
-
-    fun validacaoNome(campo: TextInputEditText, context: Context): Int {
-        var nome = campo.text.toString()
-        if (nome.isNullOrEmpty()) {
-            mensagem(context, "Informe um nome")
-
-        } else {
-            return 1
-        }
-        return 0
-    }
-
-    private fun mensagem(context: Context, msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
-    }
 
 }
