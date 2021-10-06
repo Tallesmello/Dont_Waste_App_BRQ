@@ -16,7 +16,7 @@ object Firebase {
         }
     }
 
-    suspend fun resetSenha(usuario: Usuario): Boolean {
+    fun resetSenha(usuario: Usuario): Boolean {
         var result = false
         firebaseAuth.sendPasswordResetEmail(usuario.email)
             .addOnCompleteListener { task ->
