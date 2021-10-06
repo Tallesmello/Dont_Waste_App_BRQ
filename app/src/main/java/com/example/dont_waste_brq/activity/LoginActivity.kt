@@ -42,12 +42,12 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             }
+        }
             //vai para tela esqueci minha senha
             binding.btnEsqueciSenhaLogin.setOnClickListener {
-                viewModel.trocandoTelaPara(this,EsqueciMinhaSenhaActivity())
-                finish()
+               startActivity(Intent(this, EsqueciMinhaSenhaActivity::class.java))
             }
-        }
+
     }
 
 
