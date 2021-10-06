@@ -57,10 +57,6 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     viewModel.mensagemToast(this, "Você Logou com sucesso.")
-                    /**
-                     * Aqui, o novo usuário gerado é automaticamente inscrito, então nós apenas saímos e o enviamos para a
-                     * tela principal com id e e-mail que o usuário usou para se cadastrar.
-                     */
                     val intent =
                         Intent(this, HomeLogadaActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

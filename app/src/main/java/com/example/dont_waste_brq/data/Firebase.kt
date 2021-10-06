@@ -2,7 +2,6 @@ package com.example.dont_waste_brq.data
 
 import com.example.dont_waste_brq.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.tasks.await
 
 object Firebase {
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -22,7 +21,7 @@ object Firebase {
         firebaseAuth.sendPasswordResetEmail(usuario.email)
             .addOnCompleteListener { task ->
                 result = task.isSuccessful
-            }.await()
+            }
         return result
     }
 
