@@ -35,16 +35,19 @@ class LoginActivity : BaseActivity() {
         binding.btnEsqueciSenhaLogin.setOnClickListener {
             trocarTela(EsqueciMinhaSenhaActivity())
         }
+
+        binding.btnVoltaHmNLogadaLogin.setOnClickListener {
+            trocarTela(HomeNaoLogadaActivity())
+            finish()
+        }
     }
 
     private fun autenticacaoEmailESenhaFirebase(usuario: Usuario){
         Firebase.cadastrarUsuario(usuario, {sucesso()}).let {
-            Intent(this,HomeLogadaActivity::class.java).apply {
+            Intent(this, HomeLogadaActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(this)
             }
-        }.let {
-            this.mensagem("falha na o sei pq mais falho")
         }
     }
 

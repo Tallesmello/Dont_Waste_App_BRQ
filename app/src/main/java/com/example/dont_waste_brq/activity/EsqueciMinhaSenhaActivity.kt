@@ -1,6 +1,10 @@
 package com.example.dont_waste_brq.activity
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.service.autofill.OnClickAction
+import android.util.Patterns
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
@@ -23,7 +27,6 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
     private lateinit var binding: ActivityEsqueciMinhaSenhaBinding
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEsqueciMinhaSenhaBinding.inflate(layoutInflater)
@@ -34,10 +37,12 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
 
         binding.btnLoginTelaSenha.setOnClickListener {
             if (recuperarSenha()) {
-                trocarTela(LoginActivity())
-
-                finish()
+                exibirDialog()
             }
+        }
+
+        binding.btnVoltaHmNLogadaSenha.setOnClickListener {
+            trocarTela(HomeNaoLogadaActivity())
         }
 
         //FUNÇÃO VALIDAR EMAIL VALIDO
@@ -50,33 +55,41 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
 
     }
 
-    private fun recuperarSenha() : Boolean {
+    private fun exibirDialog() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Redefinição de senha")
+        dialog.setMessage(
+            "Foi encaminhado um link com redefinição de senha no e-mail cadastrado. \n" +
+                    "Por favor, verifique seu e-mail."
+        )
+        dialog.setPositiveButton("OK") { dialogInterface, i ->
+
+            trocarTela(LoginActivity())
+            finish()
+
+        }
+        dialog.create()
+        dialog.show()
+    }
+
+
+    private fun recuperarSenha(): Boolean {
 
         var result = false
         var email = binding.editEmailSenha.text.toString().trim()
         if (email.isEmpty()) {
             binding.textEmailSenha.error = "Insira um email"
             result = false
+        } else if (!Patterns.EMAIL_ADDRESS
+                .matcher(email).matches()
+        ) {
+            binding.textEmailSenha.error = "Insira um e-mail válido"
+            result = false
         } else {
             Firebase.resetSenha(email, this, binding.textEmailSenha)
             result = true
         }
-            return result
+        return result
     }
 
-//    private fun enviarEmail( email : String) {
-//
-//        try {
-//            Firebase.firebaseAuth.sendPasswordResetEmail(email)
-//                .addOnSuccessListener { task ->
-//                    Toast.makeText(this, "Encaminhamos um email", Toast.LENGTH_LONG).show()
-//                }
-//
-//                .addOnFailureListener{
-//                    binding.textEmailSenha.error = "Email Inválido"
-//                }
-//        } catch (e:  Exception) {
-//            e.printStackTrace()
-//        }
-//    }
 }

@@ -21,20 +21,19 @@ object Firebase {
         }
     }
 
-    fun resetSenha(email : String, context: Context, campoTexto: TextInputLayout): Boolean {
+    fun resetSenha(email: String, context: Context, campoTexto: TextInputLayout): Boolean {
         var result = false
         firebaseAuth.sendPasswordResetEmail(email)
             .addOnSuccessListener { task ->
-                    Toast.makeText(context, "Recuperação de senha encaminhado para o email cadastrado", Toast.LENGTH_LONG).show()
                 result = true
             }
-                .addOnFailureListener{
-                    campoTexto.error = "Email Inválido"
-                }
-        return result
+            .addOnFailureListener {
+                campoTexto.error = "Email Inválido"
             }
-
+        return result
     }
+
+}
 
 
 

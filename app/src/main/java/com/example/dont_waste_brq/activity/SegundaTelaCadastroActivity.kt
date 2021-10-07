@@ -46,6 +46,7 @@ class SegundaTelaCadastroActivity : BaseActivity() {
     private fun setupListners() {
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
            trocarTela(HomeNaoLogadaActivity())
+            finish()
         }
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
             trocarTela(PrimeiroAcessoActivity())
@@ -54,6 +55,7 @@ class SegundaTelaCadastroActivity : BaseActivity() {
             if (validarCadastro()) {
                 salvarCadastro()
                 trocarTela(HomeLogadaActivity())
+                finish()
             }
         }
         /* será que isso é necessário ???

@@ -7,7 +7,7 @@ import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 
 class HomeLogadaActivity : BaseActivity() {
 
-    private lateinit var binding : ActivityHomeLogadaBinding
+    private lateinit var binding: ActivityHomeLogadaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,11 +17,14 @@ class HomeLogadaActivity : BaseActivity() {
 
         binding.btnDesperdiciosHomeLogada.setOnClickListener {
             trocarTela(DesperdiciosActivity())
+            finish()
         }
 
         binding.btnVencimentosProximosHomeLogada.setOnClickListener {
             trocarTela(VencimentosProximosActivity())
+            finish()
         }
+
 
     }
 }
