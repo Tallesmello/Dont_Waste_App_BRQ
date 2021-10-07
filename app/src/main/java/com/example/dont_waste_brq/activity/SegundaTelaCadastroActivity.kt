@@ -138,14 +138,14 @@ class SegundaTelaCadastroActivity : BaseActivity() {
             dataValida,
             FrequenciaEnum.getEnumFromFrequencia(
                 binding.editFrequenciaComprasSegundaTelaCadastro.text.toString()
+
             )
         )
-        Firebase.cadastrarUsuario()
-//        if (cadastro salvo com sucesso) {
-        val intentSalvar = Intent(this, LoginActivity::class.java)
-        startActivity(intentSalvar)
-    }
+//        Firebase.cadastrarUsuario()
+////        if (cadastro salvo com sucesso) {
+//        trocarTela(LoginActivity())
 }
+
 
 
 private fun setupDatePicker(): MaterialDatePicker<Long> {
