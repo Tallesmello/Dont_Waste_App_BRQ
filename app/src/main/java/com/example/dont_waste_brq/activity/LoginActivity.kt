@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun autenticacaoEmailESenhaFirebase(usuario: Usuario){
-        Firebase.cadastrarUsuario(usuario, {sucesso()}).let {
+        Firebase.cadastrarUsuario(usuario, binding.textEmailLogin, {sucesso()}).let {
             Intent(this, HomeLogadaActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(this)

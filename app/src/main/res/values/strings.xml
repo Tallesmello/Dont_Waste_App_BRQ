@@ -23,4 +23,6 @@
     <string name="nome_invalido">Nome inválido</string>
     <string name="quantidade_nao_selecionada">Seleione uma opção</string>
     <string name="data_invalida">Selecione uma data</string>
+    <string name="botao_ajuda_senha">A senha deve conter de 6 a 8 caracteres numéricos</string>
+    <string name="error_user_exists">A senha deve conter de 6 a 8 caracteres numéricos</string>
 </resources>
