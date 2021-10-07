@@ -1,75 +1,82 @@
 package com.example.dont_waste_brq.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import android.util.Patterns
+import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityLoginBinding
-import com.example.dont_waste_brq.viewmodel.LoginViewModel
-import com.google.firebase.auth.FirebaseAuth
+import com.example.dont_waste_brq.data.Firebase
+import com.example.dont_waste_brq.model.Usuario
 
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val email = binding.editEmailLogin.text.toString()
-        val senha = binding.editSenhaLogin.text.toString()
+        initListeners()
 
+    }
+
+    private fun initListeners() {
         binding.btnLoginTelaLogin.setOnClickListener {
-            when {
-                TextUtils.isEmpty(email.trim { it <= ' ' }) -> {
-                    viewModel.mensagemToast(this, "Por favor insira um email")
-                }
-
-                TextUtils.isEmpty(senha.trim { it <= ' ' }) -> {
-                    viewModel.mensagemToast(this, "Por favor insira uma senha")
-                }
-                else -> {
-                    val (emailValidado: String, senhaValidado: String) = viewModel.validandoEmailSenhaLogin(email,senha)
-                    // Usar o Login salvo no Firebase
-                    autenticacaoEmailESenhaFirebase(emailValidado, senhaValidado)
-                }
-
+            if (dadosValidos()) {
+                val userExistente = Usuario(
+                    binding.editEmailLogin.text.toString(),
+                    binding.editSenhaLogin.text.toString()
+                )
+                // Usar o Login salvo no Firebase
+                autenticacaoEmailESenhaFirebase(userExistente)
             }
+        }
+        binding.btnEsqueciSenhaLogin.setOnClickListener {
+            trocarTela(EsqueciMinhaSenhaActivity())
         }
     }
 
-
-
-    private fun autenticacaoEmailESenhaFirebase(email: String, senha: String) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    viewModel.mensagemToast(this, "Você Logou com sucesso.")
-                    /**
-                     * Aqui, o novo usuário gerado é automaticamente inscrito, então nós apenas saímos e o enviamos para a
-                     * tela principal com id e e-mail que o usuário usou para se cadastrar.
-                     */
-                    val intent =
-                        Intent(this, HomeLogadaActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
-                    intent.putExtra("email_id", email)
-                    startActivity(intent)
-                    finish()
-                } else {
-
-                    //Se o registro não for bem sucedido eles mostram uma mensagem de erro
-                    viewModel.mensagemToast(this, task.exception!!.message.toString())
-                }
+    private fun autenticacaoEmailESenhaFirebase(usuario: Usuario){
+        Firebase.cadastrarUsuario(usuario, {sucesso()}).let {
+            Intent(this,HomeLogadaActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
             }
+        }.let {
+            this.mensagem("falha na o sei pq mais falho")
+        }
+    }
+
+    private fun sucesso() {
+        mensagem("Deu certo")
+    }
+
+    private fun dadosValidos(): Boolean {
+        var ok = true
+        val email = binding.editEmailLogin.text.toString()
+        val senha = binding.editSenhaLogin.text.toString()
+        binding.textEmailLogin.error = ""
+        binding.textSenhaLogin.error = ""
+        if (email.trim().isEmpty() ||
+            !Patterns.EMAIL_ADDRESS
+                .matcher(email).matches()
+        ) {
+            binding.textEmailLogin.error = getString(R.string.insira_um_email_valido)
+            ok = false
+        }
+        if (senha.trim().length < 6) {
+            binding.textSenhaLogin.error = getString(R.string.insira_uma_senha_valido)
+            ok = false
+        }
+        return ok
     }
 
 
+
 }
+
+
+
+
 

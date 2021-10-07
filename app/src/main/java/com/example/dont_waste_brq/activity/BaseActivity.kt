@@ -1,21 +1,25 @@
 package com.example.dont_waste_brq.activity
 
-import android.content.Context
 import android.content.Intent
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Toast
+import com.example.dont_waste_brq.R
 
-open class BaseActivity : AppCompatActivity() {
-
-    protected fun mensagem(msg: String) {
-        Toast.makeText(applicationContext, msg, Toast.LENGTH_LONG).show()
+abstract class BaseActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_base)
     }
 
-    protected fun trocandoTelaPara(activity: AppCompatActivity) {
-       Intent(applicationContext,activity::class.java).apply {
-           startActivity(this)
-       }
+    fun trocarTela(activity: AppCompatActivity){
+        Intent(this,activity::class.java).apply {
+            startActivity(this)
+        }
     }
-
+    fun mensagem(msg : String){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
+    }
 
 }
+

@@ -1,82 +1,192 @@
 package com.example.dont_waste_brq.activity
 
-import android.content.Context
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.R
+import com.example.dont_waste_brq.activity.enum.FrequenciaEnum
+import com.example.dont_waste_brq.activity.enum.QtdPessoasEnum
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
-import com.example.dont_waste_brq.viewmodel.SegundaTelaCadastroViewModel
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.google.android.material.textfield.TextInputEditText
+import com.example.dont_waste_brq.model.Cadastro
+import com.google.android.material.datepicker.*
 import java.text.SimpleDateFormat
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SegundaTelaCadastroActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySegundaTelaCadastroBinding
-    private lateinit var viewModel: SegundaTelaCadastroViewModel
 
+    private var dataValida = Date()
+    private val datePicker: MaterialDatePicker<Long> by lazy { setupDatePicker() }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySegundaTelaCadastroBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(SegundaTelaCadastroViewModel::class.java)
-        val spinnerQtdPessoas = binding.materialAutoCompleteTextViewQuantidadePessoas
-        val dataPicker = binding.editDataCompraSegundaTelaCadastro
-        val frquenciaDeCompras = binding.editFrequenciaComprasSegundaTelaCadastro
-        val nome = binding.editNomeSegundaTelaCadastro
+        val view = binding.root
+        setContentView(view)
 
-        //        [12:53] Gustavo Wellington Reis Xavier Torres
-        //gerencia o spinner(lista de opção) com a quantidade de pessoas que residem na casa
-        viewModel.quantidadePessoasSpinner(
-            this,
-            spinnerQtdPessoas
-        )
-        //o date picker, para conseguir puxar o calendario
-        val datePicker = viewModel.criacaoDataPicker()
+        setupAutocomplete()
+        setupListners()
+    }
 
-        //quando clica em ok ao escolher uma data no date picker
-        viewModel.salvandoDataNoDataPicker(datePicker, dataPicker)
+    private fun setupAutocomplete() {
+        val adapterPessoas =
+            ArrayAdapter(this, R.layout.list_item, QtdPessoasEnum.getArrayListOfDescricao())
+        binding.materialAutoCompleteTextViewQuantidadePessoas.setAdapter(adapterPessoas)
 
-        //metodo para o date picker aparecer corretamente
-        dataPicker.setOnFocusChangeListener { view, isFocused ->
-            viewModel.recuperandoFocoDataPicker(view, isFocused)
-        }
 
-        //mostrar o date picker ao clicar no edit text
-        dataPicker.setOnClickListener {
-            datePicker.show(supportFragmentManager, "tag")
-        }
+        // todo - o listOf<String>() deve ser corrigido
+        val adapterFrequencia = ArrayAdapter(this, R.layout.list_item, FrequenciaEnum.getArrayListOfFrequencia())
+        binding.editFrequenciaComprasSegundaTelaCadastro.setAdapter(adapterFrequencia)
+    }
 
-        //genrencia o spinner da frequencia de compras
-        viewModel.opcoesFrequenciaSpinner(this, frquenciaDeCompras)
+    private fun setupListners() {
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
-            startActivity(viewModel.trocandoTelaPara(this, HomeNaoLogadaActivity()))
+           trocarTela(HomeNaoLogadaActivity())
         }
-
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            startActivity(viewModel.trocandoTelaPara(this, CadastroActivity()))
+            trocarTela(PrimeiroAcessoActivity())
         }
-
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            if (viewModel.validacaoSpinnerFrequencia(frquenciaDeCompras,this) == 1
-                && viewModel.validacaoDataPicker(dataPicker,this) == 1
-                && viewModel.validacaoQuantidadePessoas(spinnerQtdPessoas,this) == 1
-                && viewModel.validacaoNome(nome,this) == 1
-            ) {
-                startActivity(viewModel.trocandoTelaPara(this, LoginActivity()))
+            if (validarCadastro()) {
+                salvarCadastro()
+                trocarTela(HomeLogadaActivity())
             }
         }
+        /* será que isso é necessário ???
+        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
+            if (view.isInTouchMode && isFocused) {
+                view.performClick()
+            }
+        } */
+        binding.editDataCompraSegundaTelaCadastro.setOnClickListener {
+            datePicker.show(supportFragmentManager, "tag")
+        }
+    }
 
+    private fun validarCadastro(): Boolean {
+        var res = true
+        binding.textNomeSegundaTelaCadastro.error = null
+        binding.textQuantidadePessoasSegundaTelaCadastro.error = null
+        if (binding.editNomeSegundaTelaCadastro.text.toString().trim().length < 4) {
+            binding.textNomeSegundaTelaCadastro.error = getString(R.string.nome_invalido)
+            binding.textNomeSegundaTelaCadastro.isErrorEnabled = true
+            res = false
+        } else {
+            binding.textNomeSegundaTelaCadastro.isErrorEnabled = false
+        }
+
+
+        if (QtdPessoasEnum.getEnumFromDescricao(
+                binding
+                    .materialAutoCompleteTextViewQuantidadePessoas.text.toString()
+            ) == null
+        ) {
+            binding.textQuantidadePessoasSegundaTelaCadastro.isErrorEnabled = true
+            binding.textQuantidadePessoasSegundaTelaCadastro.error =
+                getString(R.string.quantidade_nao_selecionada)
+            res = false
+        } else {
+            binding.textQuantidadePessoasSegundaTelaCadastro.isErrorEnabled = false
+        }
+
+
+        if (binding.editDataCompraSegundaTelaCadastro.text.isNullOrEmpty()) {
+            binding.textDataCompraSegundaTelaCadastro.error = getString(R.string.data_invalida)
+            binding.textDataCompraSegundaTelaCadastro.isErrorEnabled = true
+            res = false
+        } else {
+            binding.textDataCompraSegundaTelaCadastro.isErrorEnabled = false
+        }
+
+
+        if (FrequenciaEnum.getEnumFromFrequencia(
+                binding
+                    .editFrequenciaComprasSegundaTelaCadastro.text.toString()
+            ) == null
+        ) {
+            binding.textFrequenciaComprasSegundaTelaCadastro.isErrorEnabled = true
+            binding.textFrequenciaComprasSegundaTelaCadastro.error =
+                getString(R.string.quantidade_nao_selecionada)
+            res = false
+        } else {
+            binding.textFrequenciaComprasSegundaTelaCadastro.isErrorEnabled = false
+        }
+
+
+        return res
     }
 
 
+    private fun salvarCadastro() {
+        val cadastro = Cadastro(
+            binding.editNomeSegundaTelaCadastro.text.toString(),
+            QtdPessoasEnum.getEnumFromDescricao(
+                binding.materialAutoCompleteTextViewQuantidadePessoas.text.toString()
+            ),
+            dataValida,
+            FrequenciaEnum.getEnumFromFrequencia(
+                binding.editFrequenciaComprasSegundaTelaCadastro.text.toString()
+
+            )
+        )
+//        Firebase.cadastrarUsuario()
+////        if (cadastro salvo com sucesso) {
+//        trocarTela(LoginActivity())
+}
+
+
+
+private fun setupDatePicker(): MaterialDatePicker<Long> {
+    val datePicker = MaterialDatePicker
+        .Builder
+        .datePicker()
+        .setCalendarConstraints(limites())
+        .setTitleText("Selecione a data")
+        .build()
+
+    datePicker.addOnPositiveButtonClickListener { data ->
+        var dateString = ""
+        try {
+            val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+            dateString = simpleDateFormat.format(data)
+            dataValida = Date(data)
+        } catch (ex: Exception) {
+            Log.e(
+                "SegundaTelaCadastro",
+                "SimpleDateFormat exception \n${ex.message}"
+            )
+        }
+        binding.editDataCompraSegundaTelaCadastro.setText(dateString)
+    }
+    return datePicker
+}
+
+private fun limites(): CalendarConstraints {
+    val constraintsBuilderRange = CalendarConstraints.Builder()
+
+    val calendarStart = Calendar.getInstance()
+    val calendarEnd = Calendar.getInstance()
+
+    calendarStart.add(Calendar.YEAR, -1)
+
+    val minDate = calendarStart.timeInMillis
+    val maxDate = calendarEnd.timeInMillis
+    constraintsBuilderRange.setStart(minDate);
+    constraintsBuilderRange.setEnd(maxDate);
+    val dateValidatorMin: CalendarConstraints.DateValidator = DateValidatorPointForward.from(minDate)
+    val dateValidatorMax: CalendarConstraints.DateValidator = DateValidatorPointBackward.before(maxDate)
+
+    var listValidators = ArrayList<CalendarConstraints.DateValidator>()
+    listValidators.add(dateValidatorMin)
+    listValidators.add(dateValidatorMax)
+    var validators = CompositeDateValidator.allOf(listValidators)
+    constraintsBuilderRange.setValidator(validators)
+
+    return constraintsBuilderRange.build();
+}
 
 }

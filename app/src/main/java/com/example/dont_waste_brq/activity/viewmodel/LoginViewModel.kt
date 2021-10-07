@@ -1,7 +1,9 @@
-package com.example.dont_waste_brq.viewmodel
+package com.example.dont_waste_brq.activity.viewmodel
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
@@ -17,5 +19,10 @@ class LoginViewModel : ViewModel() {
         val email: String = campoEmail.trim { it <= ' ' }
         val senha: String = campoSenha.trim { it <= ' ' }
         return Pair(email, senha)
+    }
+
+
+    fun trocandoTelaPara(context: Context, activity: AppCompatActivity): Intent {
+        return Intent(context, activity::class.java)
     }
 }
