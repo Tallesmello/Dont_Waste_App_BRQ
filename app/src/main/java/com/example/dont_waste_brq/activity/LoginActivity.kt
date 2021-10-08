@@ -65,11 +65,11 @@ class LoginActivity : BaseActivity() {
             !Patterns.EMAIL_ADDRESS
                 .matcher(email).matches()
         ) {
-            binding.textEmailLogin.error = getString(R.string.insira_um_email_valido)
+            binding.textEmailLogin.error = getString(R.string.dados_invalidos)
             ok = false
         }
         if (senha.trim().length < 6) {
-            binding.textSenhaLogin.error = getString(R.string.insira_uma_senha_valido)
+            binding.textSenhaLogin.error = getString(R.string.dados_invalidos)
             ok = false
         }
         return ok

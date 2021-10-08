@@ -26,7 +26,7 @@ object Firebase {
                 try {
                     throw task.getException()!!
                 } catch (e: FirebaseAuthUserCollisionException) {
-                    campoEmail.error = "Email já cadastrado!"
+                    campoEmail.error = "Email já cadastrado"
                     campoEmail.requestFocus()
 
                 }

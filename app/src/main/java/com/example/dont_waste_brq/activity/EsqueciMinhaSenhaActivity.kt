@@ -43,6 +43,7 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
 
         binding.btnVoltaHmNLogadaSenha.setOnClickListener {
             trocarTela(HomeNaoLogadaActivity())
+            finish()
         }
 
         //FUNÇÃO VALIDAR EMAIL VALIDO
