@@ -10,7 +10,7 @@ import com.example.dont_waste_brq.model.Usuario
 
 class LoginActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding:  ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
