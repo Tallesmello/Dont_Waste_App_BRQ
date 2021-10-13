@@ -17,7 +17,6 @@ class DesperdiciosActivity : BaseActivity() {
 
         binding.btnDesoerdiciosVoltaLogin.setOnClickListener {
             trocarTela(HomeLogadaActivity())
-            finish()
         }
 
     }

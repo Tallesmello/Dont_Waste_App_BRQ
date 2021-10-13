@@ -16,7 +16,6 @@ class VencimentosProximosActivity : BaseActivity() {
 
         binding.btnVencimentosVoltaLogin.setOnClickListener {
             trocarTela(HomeLogadaActivity())
-            finish()
         }
     }
 }

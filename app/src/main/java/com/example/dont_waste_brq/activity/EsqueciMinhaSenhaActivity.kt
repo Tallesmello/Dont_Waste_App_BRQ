@@ -86,7 +86,8 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
         ) {
             binding.textEmailSenha.error = "Insira um e-mail válido"
             result = false
-        } else {
+        }
+        else {
             Firebase.resetSenha(email, this, binding.textEmailSenha)
             result = true
         }
