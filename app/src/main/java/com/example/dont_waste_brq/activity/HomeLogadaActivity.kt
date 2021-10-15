@@ -1,9 +1,11 @@
 package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
+import com.google.android.material.appbar.AppBarLayout
 
 class HomeLogadaActivity : BaseActivity() {
 
@@ -27,4 +29,6 @@ class HomeLogadaActivity : BaseActivity() {
 
 
     }
+
+
 }

@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ">
         <activity
+            android:name=".activity.HomeTeste"
+            android:exported="true"
+            android:label="@string/title_activity_home_teste"
+            android:theme="@style/Theme.Dont_Waste_BRQ.NoActionBar" />
+        <activity
             android:name=".activity.VencimentosProximosActivity"
             android:exported="true" />
         <activity
