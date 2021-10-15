@@ -30,4 +30,5 @@
     <string name="organizecat">organize</string>
     <string name="wastecat">Waste</string>
     <string name="don_tcat" tools:ignore="StringEscaping">Don't</string>
+    <string name="itens_despensa">Itens Despensa</string>
 </resources>
