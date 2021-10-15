@@ -121,9 +121,9 @@
 
     <TextView
         android:id="@+id/txt_cadastrar"
-        android:layout_width="404dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="188dp"
+        android:layout_width="405dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="190dp"
         android:background="@drawable/bordar_costumizado"
         android:gravity="center"
         android:text="@string/clique_para_cadastrar_o_que_h_na_sua"
@@ -140,12 +140,14 @@
         android:layout_width="99dp"
         android:layout_height="130dp"
         android:layout_marginStart="108dp"
+        android:layout_marginTop="60dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@+id/txt_organize_cateforias"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_sem_fundo"
-        tools:layout_editor_absoluteY="57dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btn_voltar_categorias"
@@ -157,7 +159,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-   
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,5 +29,5 @@
     <string name="voltarcategorias">Voltar</string>
     <string name="organizecat">organize</string>
     <string name="wastecat">Waste</string>
-    <string name="don_tcat">Don\'t</string>
+    <string name="don_tcat" tools:ignore="StringEscaping">Don't</string>
 </resources>
