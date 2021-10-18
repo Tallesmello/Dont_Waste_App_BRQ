@@ -31,4 +31,8 @@
     <string name="wastecat">Waste</string>
     <string name="don_tcat" tools:ignore="StringEscaping">Don't</string>
     <string name="itens_despensa">Itens Despensa</string>
+    <string name="voltar_geladeira_btn">Voltar</string>
+    <string name="don_t_geladeira">Don\'t</string>
+    <string name="waste_geladeira">Waste</string>
+    <string name="organize_geladeira">organize</string>
 </resources>
