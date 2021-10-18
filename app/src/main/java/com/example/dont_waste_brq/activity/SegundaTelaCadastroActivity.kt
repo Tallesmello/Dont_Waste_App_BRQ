@@ -44,21 +44,21 @@ class SegundaTelaCadastroActivity : BaseActivity() {
     }
 
     private fun setupListners() {
-        binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
-           trocarTela(HomeNaoLogadaActivity())
-            finish()
-        }
-        binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            trocarTela(PrimeiroAcessoActivity())
-
-        }
-        binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
-            if (validarCadastro()) {
-                salvarCadastro()
-                trocarTela(HomeLogadaActivity())
-                finish()
-            }
-        }
+//        binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
+//           trocarTela(HomeNaoLogadaActivity())
+//            finish()
+//        }
+//        binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
+//            trocarTela(PrimeiroAcessoActivity())
+//
+//        }
+//        binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
+//            if (validarCadastro()) {
+//                salvarCadastro()
+//                trocarTela(HomeLogadaActivity())
+//                finish()
+//            }
+//        }
         /* será que isso é necessário ???
         binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
             if (view.isInTouchMode && isFocused) {

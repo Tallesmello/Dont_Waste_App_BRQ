@@ -102,9 +102,6 @@
         app:flow_verticalBias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/appbar">
-    </include>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

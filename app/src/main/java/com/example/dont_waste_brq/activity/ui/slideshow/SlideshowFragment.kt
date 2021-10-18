@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.dont_waste_brq.activity.R
-import com.example.dont_waste_brq.activity.databinding.FragmentSlideshowBinding
+import com.example.dont_waste_brq.databinding.FragmentSlideshowBinding
 
 class SlideshowFragment : Fragment() {
 

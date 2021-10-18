@@ -17,6 +17,7 @@
     <style name="Theme.Dont_Waste_BRQ.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="titleEnabled">false</item>
     </style>
 
     <style name="Theme.Dont_Waste_BRQ.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
