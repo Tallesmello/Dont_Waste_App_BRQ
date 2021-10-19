@@ -1,21 +1,13 @@
 package com.example.dont_waste_brq.activity
 
-import com.example.dont_waste_brq.activity.BaseActivity
 
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toolbar
-import androidx.appcompat.widget.ToolbarWidgetWrapper
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.activity.PrimeiroAcessoActivity
-import com.example.dont_waste_brq.databinding.ActivityPrimeiroAcessoBinding
 import com.example.dont_waste_brq.databinding.ActivityRelatorioDeDesperdicioBinding
 import com.miguelcatalan.materialsearchview.MaterialSearchView
-import com.example.dont_waste_brq.activity.VencimentosProximosActivity as VencimentosProximosActivity
 
 class DesperdiciosActivity : BaseActivity() {
 
@@ -61,8 +53,8 @@ class DesperdiciosActivity : BaseActivity() {
      * Configurar comportamentos do menu em appBar
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        R.id.action_settings.apply {
-            trocarTela(ActivityMenu())
+        R.id.menu_hamburguer.apply {
+            trocarTela(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)
     }

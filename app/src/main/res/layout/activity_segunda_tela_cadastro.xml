@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,23 +8,29 @@
 
     <!--    Botão Home não logada -->
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_volta_hm_n_logada_segunda_tela_cadastro"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="32dp"
+        android:src="@drawable/cadastro_1_icone_home"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <!--    Imagem Usuario -->
-
-    <!--    Edit Nome -->
 
     <ImageView
         android:id="@+id/imagem_user_segunda_tela_cadastro"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/cadastro_1_icone_usuario"
-        app:layout_constraintBottom_toTopOf="@id/text_nome_segunda_tela_cadastro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_volta_hm_n_logada_segunda_tela_cadastro" />
+
+    <!--    Edit Nome -->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_nome_segunda_tela_cadastro"
@@ -90,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            />
+            android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:inputType="none" />
+            android:inputType="none"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,10 +147,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/appbar">
-    </include>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

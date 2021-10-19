@@ -46,14 +46,6 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
             finish()
         }
 
-        //FUNÇÃO VALIDAR EMAIL VALIDO
-        //  private fun validarEmailValido ()
-//            if (viewModel.mensagemToast(this, "Senha enviada com sucesso"))
-//
-//    }else{
-//            viewModel.mensagemToast(this, "E-mail Inválido")
-//        }
-
     }
 
     private fun exibirDialog() {
