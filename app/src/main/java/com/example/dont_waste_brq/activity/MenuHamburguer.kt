@@ -18,5 +18,9 @@ class MenuHamburguer : BaseActivity() {
         binding.textCadastrar.setOnClickListener {
             trocarTela(TelaCategorias())
         }
+
+        binding.imageSair.setOnClickListener {
+            finish()
+        }
     }
 }

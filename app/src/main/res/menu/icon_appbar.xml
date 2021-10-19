@@ -7,6 +7,7 @@
             android:title="home"
             app:showAsAction="ifRoom"
             android:iconTint="@color/black"
+            
             />
         <item
             android:id="@+id/pesquisa"

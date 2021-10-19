@@ -8,6 +8,15 @@
     android:layout_margin="8dp">
 
     <ImageView
+        android:id="@+id/image_sair"
+        android:layout_width="35dp"
+        android:layout_height="39dp"
+        android:src="@drawable/ic_baseline_clear_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
+
+    <ImageView
         android:id="@+id/imagem_lixeira_hm_logada"
         android:layout_width="71dp"
         android:layout_height="69dp"
