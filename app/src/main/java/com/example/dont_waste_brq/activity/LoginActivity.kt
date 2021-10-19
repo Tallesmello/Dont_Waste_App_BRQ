@@ -50,14 +50,12 @@ class LoginActivity : BaseActivity() {
 
     private fun sucesso(task: Task<AuthResult>) {
         if (task.isSuccessful) {
-            mensagem("Deu certo")
             Intent(this, HomeLogadaActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(this)
             }
         } else {
-            Toast.makeText(this, "erro de usuário/senha", Toast.LENGTH_SHORT).show()
-            // todo - implementar mensagem de erro
+            binding.textSenhaLogin.error = "Email/senha inválido"
         }
 
     }

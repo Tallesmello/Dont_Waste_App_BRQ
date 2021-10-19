@@ -75,7 +75,7 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
                     mensagem = "Usuário não encontrado"
                 }
             }
-            exibirDialog("Ops ...  \n$mensagem") // todo - arrumar aqui também
+            binding.textEmailSenha.error = "Ops, email não encontrado!"
         }
     }
 
