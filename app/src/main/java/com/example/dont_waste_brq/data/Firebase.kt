@@ -2,10 +2,13 @@ package com.example.dont_waste_brq.data
 
 import android.content.Context
 import android.provider.Settings.Global.getString
+import android.util.Log
 import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.model.Usuario
+import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
@@ -34,16 +37,21 @@ object Firebase {
             }
         }
     }
-        fun resetSenha(email: String, context: Context, campoTexto: TextInputLayout): Boolean {
-            var result = false
+
+    fun logarUsuario(usuario: Usuario, sucesso: (task: Task<AuthResult>) -> Unit) {
+        firebaseAuth.signInWithEmailAndPassword(
+            usuario.email,
+            usuario.senha
+        ).addOnCompleteListener { task ->
+            sucesso(task)
+        }
+    }
+
+        fun resetSenha(email: String, sucesso: (task: Task<Void>) -> Unit) {
             firebaseAuth.sendPasswordResetEmail(email)
-                .addOnSuccessListener { task ->
-                    result = true
+                .addOnCompleteListener {
+                    sucesso(it)
                 }
-                .addOnFailureListener {
-                    campoTexto.error = "Email Inválido"
-                }
-            return result
         }
 
     }
