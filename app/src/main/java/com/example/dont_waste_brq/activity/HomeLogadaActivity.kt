@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.view.size
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
 import com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -62,6 +63,8 @@ class HomeLogadaActivity : BaseActivity() {
          */
         val item : MenuItem = menu!!.findItem(R.id.pesquisa)
         searchView.setMenuItem(item)
+        val size = searchView.size
+
 
         return super.onCreateOptionsMenu(menu)
     }

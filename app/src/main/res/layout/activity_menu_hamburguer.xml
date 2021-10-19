@@ -11,6 +11,8 @@
         android:id="@+id/image_sair"
         android:layout_width="35dp"
         android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_clear_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

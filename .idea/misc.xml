@@ -6,9 +6,12 @@
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable-v24/bordar_costumizado.xml" value="0.33645833333333336" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.33645833333333336" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable-v24/shape_segunda_tela_cadastro.xml" value="0.33645833333333336" />
+        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.28717948717948716" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.33645833333333336" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3312820512820513" />
-        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_menu_hamburguer.xml" value="0.33645833333333336" />
+        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_menu_camera.xml" value="0.28717948717948716" />
+        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.28717948717948716" />
+        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_menu_hamburguer.xml" value="0.2" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/drawable/ic_search.xml" value="0.33645833333333336" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_base.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_esqueci_minha_senha.xml" value="0.22" />
@@ -24,7 +27,7 @@
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_segunda_tela_cadastro.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_tela_categorias.xml" value="0.2989583333333333" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/app_bar_home_teste.xml" value="0.22" />
-        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/appbar.xml" value="0.2" />
+        <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/appbar.xml" value="0.25" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/content_home_teste.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/fragment_gallery.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/beatrizlima/Documents/Dont_Waste_App_BRQ/app/src/main/res/layout/fragment_home.xml" value="0.2916666666666667" />
