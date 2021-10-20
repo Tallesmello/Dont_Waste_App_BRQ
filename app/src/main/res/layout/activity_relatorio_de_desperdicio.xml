@@ -2,6 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.DesperdiciosActivity">
+
+
+
+
+
+
+
     <ImageView
         android:id="@+id/imagem_marca_dagua_desperdicios"
         android:layout_width="match_parent"
@@ -14,14 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
     <!--    Imagem lixeira -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_desoerdicios_volta_login"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="32dp"
-        android:src="@drawable/cadastro_1_icone_home"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
     <!--    Imagem Usuario -->
     <ImageView
         android:id="@+id/imagem_lixeira"
@@ -59,4 +59,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_nome_desperdicios"/>
+
+    <include
+        android:id="@+id/toolbar_desperdicios"
+        layout="@layout/appbar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

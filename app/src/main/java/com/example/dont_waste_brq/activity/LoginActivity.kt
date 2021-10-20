@@ -3,10 +3,13 @@ package com.example.dont_waste_brq.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityLoginBinding
 import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.model.Usuario
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 
 class LoginActivity : BaseActivity() {
 
@@ -42,17 +45,19 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun autenticacaoEmailESenhaFirebase(usuario: Usuario){
-        Firebase.cadastrarUsuario(usuario, binding.textEmailLogin, {sucesso()}).let {
+    private fun autenticacaoEmailESenhaFirebase(usuario: Usuario) =
+        Firebase.logarUsuario(usuario) { sucesso(it) }
+
+    private fun sucesso(task: Task<AuthResult>) {
+        if (task.isSuccessful) {
             Intent(this, HomeLogadaActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(this)
             }
+        } else {
+            binding.textSenhaLogin.error = "Email/senha inválido"
         }
-    }
 
-    private fun sucesso() {
-        mensagem("Deu certo")
     }
 
     private fun dadosValidos(): Boolean {

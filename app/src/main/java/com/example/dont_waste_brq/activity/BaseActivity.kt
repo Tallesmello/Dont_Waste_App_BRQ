@@ -1,9 +1,14 @@
 package com.example.dont_waste_brq.activity
 
 import android.content.Intent
+import android.icu.text.CaseMap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.annotation.IdRes
+import androidx.appcompat.app.ActionBar
 import com.example.dont_waste_brq.R
 
 abstract class BaseActivity : AppCompatActivity() {
