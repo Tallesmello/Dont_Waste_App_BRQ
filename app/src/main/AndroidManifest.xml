@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ">
         <activity
+            android:name=".activity.TelaGeladeiraActivity"
+            android:exported="true" />
+        <activity android:name=".activity.DespensaActivity" />
+        <activity android:name=".activity.CategoriasActivity" />
+        <activity
             android:name=".activity.VencimentosProximosActivity"
             android:exported="true" />
         <activity
