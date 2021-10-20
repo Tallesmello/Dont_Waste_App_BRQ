@@ -1,27 +1,19 @@
 package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Patterns
 import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
 import com.example.dont_waste_brq.activity.viewmodel.EsqueciMinhaSenhaViewModel
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.auth.FirebaseAuth
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnFailureListener
-
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.data.Firebase
+import com.google.android.gms.tasks.Task
 
 
 class EsqueciMinhaSenhaActivity : BaseActivity() {
 
     private lateinit var viewModel: EsqueciMinhaSenhaViewModel
     private lateinit var binding: ActivityEsqueciMinhaSenhaBinding
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,50 +25,58 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
 
 
         binding.btnLoginTelaSenha.setOnClickListener {
-            if (recuperarSenha()) {
-                trocarTela(LoginActivity())
-
-                finish()
-            }
+            recuperarSenha()
         }
 
-        //FUNÇÃO VALIDAR EMAIL VALIDO
-        //  private fun validarEmailValido ()
-//            if (viewModel.mensagemToast(this, "Senha enviada com sucesso"))
-//
-//    }else{
-//            viewModel.mensagemToast(this, "E-mail Inválido")
-//        }
+        binding.btnVoltaHmNLogadaSenha.setOnClickListener {
+            trocarTela(HomeNaoLogadaActivity())
+            finish()
+        }
 
     }
 
-    private fun recuperarSenha() : Boolean {
+    private fun exibirDialog(mensagem: String) {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Redefinição de senha")
+        dialog.setMessage( mensagem )
+        dialog.setPositiveButton("OK") { dialogInterface, i ->
 
-        var result = false
-        var email = binding.editEmailSenha.text.toString().trim()
+            trocarTela(LoginActivity())
+            finish()
+
+        }
+        dialog.create()
+        dialog.show()
+    }
+
+
+    private fun recuperarSenha() {
+
+        val email = binding.editEmailSenha.text.toString().trim()
         if (email.isEmpty()) {
             binding.textEmailSenha.error = "Insira um email"
-            result = false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.textEmailSenha.error = "Insira um e-mail válido"
         } else {
-            Firebase.resetSenha(email, this, binding.textEmailSenha)
-            result = true
+            Firebase.resetSenha(email) {
+                sucesso(it)
+            }
         }
-            return result
     }
 
-//    private fun enviarEmail( email : String) {
-//
-//        try {
-//            Firebase.firebaseAuth.sendPasswordResetEmail(email)
-//                .addOnSuccessListener { task ->
-//                    Toast.makeText(this, "Encaminhamos um email", Toast.LENGTH_LONG).show()
-//                }
-//
-//                .addOnFailureListener{
-//                    binding.textEmailSenha.error = "Email Inválido"
-//                }
-//        } catch (e:  Exception) {
-//            e.printStackTrace()
-//        }
-//    }
+    private fun sucesso(task: Task<Void>) {
+        if (task.isSuccessful) {
+            exibirDialog("Foi encaminhado um link com redefinição de senha no e-mail cadastrado. \n" +
+                    "Por favor, verifique seu e-mail.")
+        } else {
+            var mensagem = task.exception?.message
+            if (mensagem != null) {
+                if (mensagem.startsWith("There is no user record")) {
+                    mensagem = "Usuário não encontrado"
+                }
+            }
+            binding.textEmailSenha.error = "Ops, email não encontrado!"
+        }
+    }
+
 }

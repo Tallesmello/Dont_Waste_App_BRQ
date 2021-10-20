@@ -83,9 +83,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_primeiro_acesso_hm_n_logada"
-        android:layout_width="168dp"
+        android:layout_width="@dimen/dimensao_largura_buttons"
         android:layout_height="48dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/primeiro_acesso_btn_hm_n_logada"
         android:fontFamily="@font/open_sans_bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,9 +96,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login_hm_n_logada"
-        android:layout_width="168dp"
+        android:layout_width="@dimen/dimensao_largura_buttons"
         android:layout_height="48dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/login_btn_hm_n_logada"
         android:fontFamily="@font/open_sans_bold"
         android:backgroundTint="@color/cor_texto"

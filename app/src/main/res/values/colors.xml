@@ -11,5 +11,6 @@
     <color name="color_button">#5EBAA8</color>
     <color name="color_button_cinza">#DCDCDC</color>
     <color name="red">#FF0000</color>
+    <color name="cinza_view">#979595</color>
     <color name="cinza_escuro">#D3D3D3</color>
 </resources>

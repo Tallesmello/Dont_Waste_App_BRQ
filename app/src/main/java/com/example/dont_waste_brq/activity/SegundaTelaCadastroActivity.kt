@@ -46,14 +46,17 @@ class SegundaTelaCadastroActivity : BaseActivity() {
     private fun setupListners() {
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
            trocarTela(HomeNaoLogadaActivity())
+            finish()
         }
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
             trocarTela(PrimeiroAcessoActivity())
+
         }
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
             if (validarCadastro()) {
                 salvarCadastro()
                 trocarTela(HomeLogadaActivity())
+                finish()
             }
         }
         /* será que isso é necessário ???
@@ -71,7 +74,7 @@ class SegundaTelaCadastroActivity : BaseActivity() {
         var res = true
         binding.textNomeSegundaTelaCadastro.error = null
         binding.textQuantidadePessoasSegundaTelaCadastro.error = null
-        if (binding.editNomeSegundaTelaCadastro.text.toString().trim().length < 4) {
+        if (binding.editNomeSegundaTelaCadastro.text.toString().trim().length < 3) {
             binding.textNomeSegundaTelaCadastro.error = getString(R.string.nome_invalido)
             binding.textNomeSegundaTelaCadastro.isErrorEnabled = true
             res = false

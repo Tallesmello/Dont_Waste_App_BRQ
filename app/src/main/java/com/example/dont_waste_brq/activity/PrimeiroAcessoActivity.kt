@@ -1,8 +1,10 @@
 package com.example.dont_waste_brq.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
+import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.databinding.ActivityPrimeiroAcessoBinding
@@ -27,12 +29,12 @@ class PrimeiroAcessoActivity : BaseActivity() {
             finish()
         }
         binding.btnAjudaCadastro.setOnClickListener {
-            mensagem("\"A senha deve conter de 6 a 8 caracteres numéricos\"")
-        }
+           notificacaoPersonalizada(this, getString(R.string.botao_ajuda_senha))
+                    }
         binding.btnProximoCadastro.setOnClickListener {
             if (dadosValidos()) {
                 val user = gerandoUsuario()
-                Firebase.cadastrarUsuario(user) { trocarTela(SegundaTelaCadastroActivity()) }
+                Firebase.cadastrarUsuario(user, binding.textEmailCadastro) { trocarTela(SegundaTelaCadastroActivity()) }
             }
         }
     }
@@ -65,5 +67,14 @@ class PrimeiroAcessoActivity : BaseActivity() {
         return ok
     }
 
+    fun notificacaoPersonalizada(context: Context, msg: String) {
+        val toast: Toast = Toast.makeText(
+            context,
+            msg,
+            Toast.LENGTH_LONG
+        );
+        toast.setGravity(0, -80, 380);
+        toast.show()
+    }
 
 }

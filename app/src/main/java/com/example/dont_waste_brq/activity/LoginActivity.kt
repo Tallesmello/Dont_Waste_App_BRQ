@@ -3,14 +3,17 @@ package com.example.dont_waste_brq.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityLoginBinding
 import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.model.Usuario
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 
 class LoginActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding:  ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +38,26 @@ class LoginActivity : BaseActivity() {
         binding.btnEsqueciSenhaLogin.setOnClickListener {
             trocarTela(EsqueciMinhaSenhaActivity())
         }
-    }
 
-    private fun autenticacaoEmailESenhaFirebase(usuario: Usuario){
-        Firebase.cadastrarUsuario(usuario, {sucesso()}).let {
-            Intent(this,HomeLogadaActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(this)
-            }
-        }.let {
-            this.mensagem("falha na o sei pq mais falho")
+        binding.btnVoltaHmNLogadaLogin.setOnClickListener {
+            trocarTela(HomeNaoLogadaActivity())
+            finish()
         }
     }
 
-    private fun sucesso() {
-        mensagem("Deu certo")
+    private fun autenticacaoEmailESenhaFirebase(usuario: Usuario) =
+        Firebase.logarUsuario(usuario) { sucesso(it) }
+
+    private fun sucesso(task: Task<AuthResult>) {
+        if (task.isSuccessful) {
+            Intent(this, HomeLogadaActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
+            }
+        } else {
+            binding.textSenhaLogin.error = "Email/senha inválido"
+        }
+
     }
 
     private fun dadosValidos(): Boolean {
@@ -62,11 +70,11 @@ class LoginActivity : BaseActivity() {
             !Patterns.EMAIL_ADDRESS
                 .matcher(email).matches()
         ) {
-            binding.textEmailLogin.error = getString(R.string.insira_um_email_valido)
+            binding.textEmailLogin.error = getString(R.string.dados_invalidos)
             ok = false
         }
         if (senha.trim().length < 6) {
-            binding.textSenhaLogin.error = getString(R.string.insira_uma_senha_valido)
+            binding.textSenhaLogin.error = getString(R.string.dados_invalidos)
             ok = false
         }
         return ok

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dont_waste_brq">
+    package="com.example.dont_waste_brq" >
 
     <application
         android:allowBackup="true"
@@ -8,12 +8,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Dont_Waste_BRQ">
+        android:theme="@style/Theme.Dont_Waste_BRQ" >
         <activity
-            android:name=".activity.TelaGeladeiraActivity"
+            android:name=".activity.TelaCategoriasActivity"
             android:exported="true" />
-        <activity android:name=".activity.DespensaActivity" />
-        <activity android:name=".activity.CategoriasActivity" />
+        <activity
+            android:name=".activity.TelaGaladeiraActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MenuHamburguer"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ActivityMenu"
+            android:exported="true" />
+        <activity
+            android:name=".activity.HomeTeste"
+            android:exported="true"
+            android:label="@string/title_activity_home_teste"
+            android:theme="@style/Theme.Dont_Waste_BRQ.NoActionBar" />
         <activity
             android:name=".activity.VencimentosProximosActivity"
             android:exported="true" />
@@ -40,7 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.HomeNaoLogadaActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
