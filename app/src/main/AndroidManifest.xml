@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.Dont_Waste_BRQ" >
         <activity
             android:name=".activity.TelaGaladeiraActivity"
@@ -26,6 +27,11 @@
             android:exported="true"
             android:label="@string/title_activity_home_teste"
             android:theme="@style/Theme.Dont_Waste_BRQ.NoActionBar" />
+=======
+        android:theme="@style/Theme.Dont_Waste_BRQ">
+        <activity android:name=".activity.DespensaActivity"></activity>
+        <activity android:name=".activity.CategoriasActivity" />
+>>>>>>> feature_tela_categorias
         <activity
             android:name=".activity.VencimentosProximosActivity"
             android:exported="true" />
