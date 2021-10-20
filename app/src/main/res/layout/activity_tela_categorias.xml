@@ -165,4 +165,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <include
+        android:id="@+id/appBar_tela_categorias"
+        layout="@layout/appbar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
