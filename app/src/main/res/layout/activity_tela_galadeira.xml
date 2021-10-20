@@ -474,6 +474,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
+    <include
+        android:id="@+id/appBar_tela_geladeira"
+        layout="@layout/appbar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
