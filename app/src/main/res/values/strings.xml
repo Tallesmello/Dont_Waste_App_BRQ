@@ -24,7 +24,6 @@
     <string name="nome_invalido">Nome inválido</string>
     <string name="quantidade_nao_selecionada">Seleione uma opção</string>
     <string name="data_invalida">Selecione uma data</string>
-<<<<<<< HEAD
     <string name="botao_ajuda_senha">A senha deve conter de 6 a 8 caracteres numéricos</string>
     <string name="error_user_exists">A senha deve conter de 6 a 8 caracteres numéricos</string>
     <string name="title_activity_home_teste">HomeTeste</string>
@@ -34,18 +33,15 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-=======
     <string name="clique_para_cadastrar_o_que_h_na_sua">Clique para cadastrar o que há na sua:</string>
     <string name="despensa">Despensa</string>
     <string name="geladeira">Geladeira</string>
     <string name="voltarcategorias">Voltar</string>
     <string name="organizecat">organize</string>
     <string name="wastecat">Waste</string>
-    <string name="don_tcat" tools:ignore="StringEscaping">Don't</string>
+    <string name="don_tcat">Don\'t</string>
     <string name="itens_despensa">Itens Despensa</string>
->>>>>>> feature_tela_categorias
 </resources>
