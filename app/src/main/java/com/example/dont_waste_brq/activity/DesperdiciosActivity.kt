@@ -1,6 +1,5 @@
 package com.example.dont_waste_brq.activity
 
-
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -26,7 +25,13 @@ class DesperdiciosActivity : BaseActivity() {
         toolbar.title = " "
         setSupportActionBar(toolbar)
 
+        setListners()
+    }
 
+    private fun setListners() {
+        binding.toolbarDesperdicios.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+        }
     }
 
     private fun inicializarComponentes() {
@@ -58,6 +63,5 @@ class DesperdiciosActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 }
