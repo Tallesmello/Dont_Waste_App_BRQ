@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityTelaCategoriasBinding
@@ -24,21 +25,7 @@ class TelaCategoriasActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
-
-        binding.imageGeladeira.setOnClickListener {
-            trocarTela(TelaGaladeiraActivity())
-            finish()
-        }
-
-        binding.imageDespensa.setOnClickListener {
-            trocarTela(TelaDespensaActivity())
-            finish()
-        }
-
-        binding.btnVoltarCategorias.setOnClickListener {
-            trocarTela(HomeLogadaActivity())
-            finish()
-        }
+        iniciandoListeners()
 
         val toolbar = binding.appBarTelaCategorias.toolbar
         toolbar.title = " "
@@ -46,6 +33,23 @@ class TelaCategoriasActivity : BaseActivity() {
 
         setListners()
 
+    }
+
+    private fun iniciandoListeners() {
+        binding.imageGeladeira.setOnClickListener {
+            trocarTela(TelaGaladeiraActivity())
+            finish()
+        }
+
+                binding.cardViewDespensa.setOnClickListener {
+                    trocarTela(TelaDespensaActivity())
+                    finish()
+                }
+
+        binding.btnVoltarCategorias.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+            finish()
+        }
     }
 
     /**
@@ -101,4 +105,6 @@ class TelaCategoriasActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }

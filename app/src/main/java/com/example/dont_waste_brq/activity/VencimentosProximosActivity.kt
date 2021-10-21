@@ -36,7 +36,7 @@ class VencimentosProximosActivity : BaseActivity() {
     }
 
     private fun inicializarComponentes() {
-        //searchView = binding.toolbarVencimentos.searchView
+        searchView = binding.toolbarVencimentos.searchView
     }
 
 
