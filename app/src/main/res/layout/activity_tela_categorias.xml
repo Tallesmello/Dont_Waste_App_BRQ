@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.TelaCategoriasActivity">
 
     <TextView
         android:id="@+id/nome_app_categorias"
@@ -101,7 +102,7 @@
             tools:layout_editor_absoluteX="17dp">
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/image_geladeira"
                 android:layout_width="142dp"
                 android:layout_height="233dp"
                 android:layout_gravity="center"

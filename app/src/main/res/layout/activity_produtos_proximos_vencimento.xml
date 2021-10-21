@@ -19,14 +19,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <!--    Imagem lixeira -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_vencimentos_volta_login"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="32dp"
-        android:src="@drawable/cadastro_1_icone_home"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/btn_vencimentos_volta_login"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_margin="32dp"-->
+<!--        android:src="@drawable/cadastro_1_icone_home"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <!--    Imagem Usuario -->
     <ImageView
         android:id="@+id/imagem_lixeira"
@@ -66,6 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_nome_vencimentos" />
 
     <include
+        android:id="@+id/toolbar_vencimentos"
         layout="@layout/appbar">
     </include>
 

@@ -33,7 +33,18 @@ class HomeLogadaActivity : BaseActivity() {
             finish()
         }
 
+        val toolbar = binding.toolbarHomelogada.toolbar
+        toolbar.title = " "
+        setSupportActionBar(toolbar)
 
+        setListners()
+
+    }
+
+    private fun setListners() {
+        binding.toolbarHomelogada.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+        }
     }
 
     private fun inicializaçãoToolbar() {
