@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_cadastrar"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="14dp"
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView
@@ -116,6 +116,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="0dp"
                 android:paddingLeft="5dp"
+                android:textStyle="bold"
                 android:text="@string/geladeira"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
@@ -148,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/despensa"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
         </androidx.cardview.widget.CardView>

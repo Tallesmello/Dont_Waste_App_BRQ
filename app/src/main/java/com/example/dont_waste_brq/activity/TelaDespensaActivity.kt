@@ -13,7 +13,9 @@ class TelaDespensaActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-
+        /**
+         * botão de voltar para tela categorias
+         */
                 binding.btnVoltarDespensa.setOnClickListener {
                     trocarTela(TelaCategoriasActivity())
                     mensagem("Tela abriu")

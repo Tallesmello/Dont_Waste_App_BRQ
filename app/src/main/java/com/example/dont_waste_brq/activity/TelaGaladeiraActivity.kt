@@ -24,14 +24,23 @@ class TelaGaladeiraActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+        Listners()
 
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
-            finish()
         }
-
-
     }
+
+    /**
+     * Icone home volta para Home Logada
+     */
+        private fun Listners() {
+        binding.appBarTelaGeladeira.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+
+        }
+    }
+
 
     private fun inicializaçãoToolbar() {
         val toolbar = binding.appBarTelaGeladeira.toolbar
@@ -70,11 +79,7 @@ class TelaGaladeiraActivity : BaseActivity() {
      * Colocando comportamentos no icone home e menu hamburguer
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        R.id.icon_home.apply {
-            trocarTela(HomeLogadaActivity())
-        }
-
-        R.id.menu_hamburguer.apply {
+              R.id.menu_hamburguer.apply {
             trocarTela(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)

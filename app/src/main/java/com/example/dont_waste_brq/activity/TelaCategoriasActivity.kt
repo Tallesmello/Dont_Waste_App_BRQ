@@ -35,6 +35,7 @@ class TelaCategoriasActivity : BaseActivity() {
         iniciandoListeners()
     }
 
+
     private fun iniciandoListeners() {
         binding.imageGeladeira.setOnClickListener {
             trocarTela(TelaGaladeiraActivity())
@@ -66,12 +67,14 @@ class TelaCategoriasActivity : BaseActivity() {
 
             }
         }
+    }
 
         private fun inicializaçãoToolbar() {
             val toolbar = binding.appBarTelaCategorias.toolbar
             toolbar.title = " "
             setSupportActionBar(toolbar)
         }
+
 
         /**
          * Inicialização da barra de pesquisa
@@ -80,6 +83,7 @@ class TelaCategoriasActivity : BaseActivity() {
         private fun inicializaçãoComponentes() {
             searchView = binding.appBarTelaCategorias.searchView
         }
+
 
 
         /**
@@ -100,6 +104,7 @@ class TelaCategoriasActivity : BaseActivity() {
             return super.onCreateOptionsMenu(menu)
         }
 
+
         /**
          * Colocando comportamentos no icone menu hamburger
          */
@@ -109,7 +114,8 @@ class TelaCategoriasActivity : BaseActivity() {
             }
             return super.onOptionsItemSelected(item)
         }
-    }
 }
+
+
 
 

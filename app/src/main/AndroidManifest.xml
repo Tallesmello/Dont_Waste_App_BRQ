@@ -9,13 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ">
-<<<<<<< HEAD
         <activity
             android:name=".activity.TelaDespensaActivity"
             android:exported="true" />
-=======
-        <activity android:name=".activity.TelaDespensaActivity"></activity>
->>>>>>> feature_clicks_geladeira
         <activity
             android:name=".activity.TelaCategoriasActivity"
             android:exported="true" />
