@@ -24,6 +24,10 @@ class TelaCategoriasActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+
+        binding.imageDespensa.setOnClickListener{
+            trocarTela(TelaDespensaActivity())
+        }
     }
 
     private fun inicializaçãoToolbar() {
