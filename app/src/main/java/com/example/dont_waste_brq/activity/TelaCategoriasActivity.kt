@@ -25,14 +25,16 @@ class TelaCategoriasActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
-        iniciandoListeners()
+
+
+
 
         val toolbar = binding.appBarTelaCategorias.toolbar
         toolbar.title = " "
         setSupportActionBar(toolbar)
 
         setListners()
-
+        iniciandoListeners()
     }
 
     private fun iniciandoListeners() {
@@ -41,9 +43,9 @@ class TelaCategoriasActivity : BaseActivity() {
             finish()
         }
 
-                binding.cardViewDespensa.setOnClickListener {
+                binding.imageDespensa.setOnClickListener {
                     trocarTela(TelaDespensaActivity())
-                    finish()
+
                 }
 
         binding.btnVoltarCategorias.setOnClickListener {
