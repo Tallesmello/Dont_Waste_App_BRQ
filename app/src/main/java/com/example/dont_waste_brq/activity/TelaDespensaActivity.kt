@@ -1,9 +1,6 @@
 package com.example.dont_waste_brq.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.databinding.ActivityTelaCategoriasBinding
 import com.example.dont_waste_brq.databinding.ActivityTelaDespensaBinding
 
 class TelaDespensaActivity : BaseActivity() {
@@ -16,6 +13,13 @@ class TelaDespensaActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        mensagem("Tela abriu")
-    }
-}
+
+                binding.btnVoltarDespensa.setOnClickListener {
+                    trocarTela(TelaCategoriasActivity())
+                    mensagem("Tela abriu")
+                    finish()
+                }
+
+            }
+        }
+
