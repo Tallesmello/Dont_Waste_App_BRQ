@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ" >
         <activity
+            android:name=".activity.TelaCategoriasActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.TelaGaladeiraActivity"
             android:exported="true" />
         <activity
             android:name=".activity.MenuHamburguer"
-            android:exported="true" />
-        <activity
-            android:name=".activity.TelaCategorias"
             android:exported="true" />
         <activity
             android:name=".activity.ActivityMenu"

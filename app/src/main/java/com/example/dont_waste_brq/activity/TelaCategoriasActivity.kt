@@ -7,28 +7,27 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
+import com.example.dont_waste_brq.databinding.ActivityTelaCategoriasBinding
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
-class TelaGaladeiraActivity : BaseActivity(){
+class TelaCategoriasActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityTelaGaladeiraBinding
+    private lateinit var binding: ActivityTelaCategoriasBinding
     private lateinit var searchView: MaterialSearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTelaGaladeiraBinding.inflate(layoutInflater)
+        binding = ActivityTelaCategoriasBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
-
-
     }
+
     private fun inicializaçãoToolbar() {
-        val toolbar = binding.appBarTelaGeladeira.toolbar
+        val toolbar = binding.appBarTelaCategorias.toolbar
         toolbar.title = " "
         setSupportActionBar(toolbar)
     }
@@ -38,7 +37,7 @@ class TelaGaladeiraActivity : BaseActivity(){
      * em appBar
      */
     private fun inicializaçãoComponentes() {
-        searchView = binding.appBarTelaGeladeira.searchView
+        searchView = binding.appBarTelaCategorias.searchView
     }
 
 
