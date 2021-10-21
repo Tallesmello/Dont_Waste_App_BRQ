@@ -24,6 +24,39 @@ class TelaCategoriasActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+
+        binding.imageGeladeira.setOnClickListener {
+            trocarTela(TelaGaladeiraActivity())
+            finish()
+        }
+
+        binding.imageDespensa.setOnClickListener {
+            trocarTela(TelaDespensaActivity())
+            finish()
+        }
+
+        binding.btnVoltarCategorias.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+            finish()
+        }
+
+        val toolbar = binding.appBarTelaCategorias.toolbar
+        toolbar.title = " "
+        setSupportActionBar(toolbar)
+
+        setListners()
+
+    }
+
+    /**
+     * botão de home para voltar na tela home logada
+     * em appBar
+     */
+
+    private fun setListners() {
+        binding.appBarTelaCategorias.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+        }
     }
 
     private fun inicializaçãoToolbar() {
