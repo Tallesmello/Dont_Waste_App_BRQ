@@ -28,6 +28,7 @@ class TelaGaladeiraActivity : BaseActivity() {
 
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
+            finish()
         }
     }
 

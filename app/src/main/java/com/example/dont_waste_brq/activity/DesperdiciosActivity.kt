@@ -31,6 +31,7 @@ class DesperdiciosActivity : BaseActivity() {
     private fun setListners() {
         binding.toolbarDesperdicios.iconHome.setOnClickListener {
             trocarTela(HomeLogadaActivity())
+            finish()
         }
     }
 

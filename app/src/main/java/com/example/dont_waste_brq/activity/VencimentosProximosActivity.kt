@@ -32,6 +32,7 @@ class VencimentosProximosActivity : BaseActivity() {
     private fun setListners() {
         binding.toolbarVencimentos.iconHome.setOnClickListener {
             trocarTela(HomeLogadaActivity())
+            finish()
         }
     }
 
