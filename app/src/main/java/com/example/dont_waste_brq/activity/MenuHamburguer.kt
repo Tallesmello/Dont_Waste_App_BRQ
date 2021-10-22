@@ -2,7 +2,9 @@ package com.example.dont_waste_brq.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.example.dont_waste_brq.R
+import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.databinding.ActivityMenuHamburguerBinding
 
 class MenuHamburguer : BaseActivity() {
@@ -22,5 +24,28 @@ class MenuHamburguer : BaseActivity() {
         binding.imageSair.setOnClickListener {
             finish()
         }
+
+        binding.textLogout.setOnClickListener {
+            exibirDialog()
+        }
+
+        }
+
+        private fun exibirDialog() {
+            val dialog = AlertDialog.Builder(this)
+            dialog.setTitle("Sair")
+            dialog.setMessage("Deseja realmente sair?")
+            dialog.setPositiveButton("Sair") { dialogInterface, i ->
+                Firebase.deslogarApp()
+                trocarTela(HomeNaoLogadaActivity())
+                finish()
+
+            }
+            dialog.setNegativeButton("Cancelar") { dialogInterface, i ->
+                finish()
+
+            }
+            dialog.create()
+            dialog.show()
+        }
     }
-}

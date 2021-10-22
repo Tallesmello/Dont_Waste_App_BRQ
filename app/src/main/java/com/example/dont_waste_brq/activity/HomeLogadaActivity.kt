@@ -86,6 +86,7 @@ class HomeLogadaActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         R.id.menu_hamburguer.apply {
             trocarTela(MenuHamburguer())
+            finish()
         }
         return super.onOptionsItemSelected(item)
     }
