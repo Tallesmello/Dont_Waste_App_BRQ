@@ -6,10 +6,12 @@ import androidx.appcompat.app.AlertDialog
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.databinding.ActivityMenuHamburguerBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class MenuHamburguer : BaseActivity() {
 
-    lateinit var binding : ActivityMenuHamburguerBinding
+    lateinit var binding: ActivityMenuHamburguerBinding
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +27,13 @@ class MenuHamburguer : BaseActivity() {
             finish()
         }
 
-        binding.textLogout.setOnClickListener {
-            exibirDialog()
+
+            binding.textLogout.setOnClickListener {
+                exibirDialog()
+
+            }
         }
 
-        }
 
         private fun exibirDialog() {
             val dialog = AlertDialog.Builder(this)
@@ -42,10 +46,13 @@ class MenuHamburguer : BaseActivity() {
 
             }
             dialog.setNegativeButton("Cancelar") { dialogInterface, i ->
+                trocarTela(this)
                 finish()
 
             }
             dialog.create()
             dialog.show()
         }
+
     }
+
