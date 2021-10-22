@@ -29,10 +29,11 @@ class MenuHamburguer : BaseActivity() {
 
 
             binding.textLogout.setOnClickListener {
-                exibirDialog()
+                    exibirDialog()
+                }
 
             }
-        }
+
 
 
         private fun exibirDialog() {
