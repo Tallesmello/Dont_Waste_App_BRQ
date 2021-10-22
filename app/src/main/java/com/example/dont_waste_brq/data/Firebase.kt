@@ -54,7 +54,19 @@ object Firebase {
                 }
         }
 
+    fun deslogarApp(){
+        firebaseAuth.signOut()
     }
+
+    fun verificarLogado() : Boolean {
+        firebaseAuth.currentUser.apply {
+            return true
+        }
+    }
+
+    }
+
+
 
 
 

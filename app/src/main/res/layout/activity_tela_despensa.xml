@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.TelaDespensaActivity">
+
     <TextView
         android:id="@+id/text_tela_despensa"
         android:layout_width="wrap_content"
@@ -16,5 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_voltar_despensa"
+        android:layout_width="168dp"
+        android:layout_height="42dp"
+        android:layout_margin="16dp"
+        android:background="@color/cor_texto"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Voltar"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
-class TelaGaladeiraActivity : BaseActivity(){
+class TelaGaladeiraActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTelaGaladeiraBinding
     private lateinit var searchView: MaterialSearchView
@@ -24,9 +24,24 @@ class TelaGaladeiraActivity : BaseActivity(){
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+        Listners()
 
-
+        binding.btnVoltarGeladeira.setOnClickListener {
+            trocarTela(TelaCategoriasActivity())
+        }
     }
+
+    /**
+     * Icone home volta para Home Logada
+     */
+        private fun Listners() {
+        binding.appBarTelaGeladeira.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+
+        }
+    }
+
+
     private fun inicializaçãoToolbar() {
         val toolbar = binding.appBarTelaGeladeira.toolbar
         toolbar.title = " "
@@ -46,13 +61,13 @@ class TelaGaladeiraActivity : BaseActivity(){
      * Inflando icones em appBar
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater : MenuInflater = menuInflater
+        val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.icon_appbar, menu)
 
         /**
          * Configurar botão pesquisa (SearchView)
          */
-        val item : MenuItem = menu!!.findItem(R.id.pesquisa)
+        val item: MenuItem = menu!!.findItem(R.id.pesquisa)
         searchView.setMenuItem(item)
         val size = searchView.size
 
@@ -61,12 +76,14 @@ class TelaGaladeiraActivity : BaseActivity(){
     }
 
     /**
-     * Colocando comportamentos no icone menu hamburger
+     * Colocando comportamentos no icone home e menu hamburguer
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        R.id.menu_hamburguer.apply {
+              R.id.menu_hamburguer.apply {
             trocarTela(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)
+
     }
+
 }

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Dont_Waste_BRQ</string>
-    <string name="dont_waste_hm_n_logada" tools:ignore="StringEscaping">Don t Waste</string>
+    <string name="dont_waste_hm_n_logada">Don\'t Waste</string>
     <string name="organize_hm_n_logada">organize</string>
     <string name="sua_despensa_inteligente_hm_n_logada">Sua despensa inteligente</string>
     <string name="primeiro_acesso_btn_hm_n_logada">Primeiro Acesso</string>
@@ -44,4 +44,10 @@
     <string name="wastecat">Waste</string>
     <string name="don_tcat">Don\'t</string>
     <string name="itens_despensa">Itens Despensa</string>
+    <string name="voltar_geladeira_btn">Voltar</string>
+    <string name="don_t_geladeira">Don\'t</string>
+    <string name="waste_geladeira">Waste</string>
+    <string name="organize_geladeira">organize</string>
+    <string name="geladeira_tela_geladeira">GELADEIRA</string>
+    <string name="bebidas_geladeira">Bebidas</string>
 </resources>
