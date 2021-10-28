@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ">
         <activity
+            android:name=".activity.ListaItensGeladeiraActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.TelaDespensaActivity"
             android:exported="true" />
         <activity
