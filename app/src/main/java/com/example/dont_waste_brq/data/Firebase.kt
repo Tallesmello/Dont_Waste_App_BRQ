@@ -19,7 +19,6 @@ object Firebase {
 
     fun cadastrarUsuario(usuario: Usuario, campoEmail: TextInputLayout, sucesso: () -> Unit) {
         firebaseAuth.createUserWithEmailAndPassword(
-
             usuario.email,
             usuario.senha
         ).addOnCompleteListener { task ->

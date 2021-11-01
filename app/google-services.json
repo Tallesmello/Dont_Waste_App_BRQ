@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "253097135260",
-    "project_id": "don-t-waste-app",
-    "storage_bucket": "don-t-waste-app.appspot.com"
+    "project_number": "468265944070",
+    "project_id": "dont-waste-app-brq",
+    "storage_bucket": "dont-waste-app-brq.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:253097135260:android:b563a156f1f117e453b159",
+        "mobilesdk_app_id": "1:468265944070:android:c27e1119b44ba745f36f87",
         "android_client_info": {
           "package_name": "com.example.dont_waste_brq"
         }
       },
       "oauth_client": [
         {
-          "client_id": "253097135260-cio1877gofe83iv8lpqsleo5q8p5krbn.apps.googleusercontent.com",
+          "client_id": "468265944070-kb27v31p4rp485t4jlvoqhaqtco5i9m5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.dont_waste_brq",
-            "certificate_hash": "e49c7b8aef55295077da7d07e6c778bafb0742e9"
+            "certificate_hash": "065afa4cfed579eadb2d38f9b248d3a28d3833b6"
           }
         },
         {
-          "client_id": "253097135260-1d0p8h8icednlf6jja4rikfppag8it7f.apps.googleusercontent.com",
+          "client_id": "468265944070-qkr1mcr6pq10goej3kijgt8kervl3mhs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDK7woKcnMocy_ooWG3U8sspFiVbJmwzQY"
+          "current_key": "AIzaSyA-G_s_alrKYJVS_wOjz5e2621byb2LkMY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "253097135260-1d0p8h8icednlf6jja4rikfppag8it7f.apps.googleusercontent.com",
+              "client_id": "468265944070-qkr1mcr6pq10goej3kijgt8kervl3mhs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
