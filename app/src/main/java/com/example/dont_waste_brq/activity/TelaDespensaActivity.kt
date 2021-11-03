@@ -18,7 +18,6 @@ class TelaDespensaActivity : BaseActivity() {
          */
                 binding.btnVoltarDespensa.setOnClickListener {
                     trocarTela(TelaCategoriasActivity())
-                    mensagem("Tela abriu")
                     finish()
                 }
 

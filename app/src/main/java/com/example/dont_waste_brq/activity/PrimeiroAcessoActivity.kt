@@ -2,14 +2,12 @@ package com.example.dont_waste_brq.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.data.Firebase
 import com.example.dont_waste_brq.databinding.ActivityPrimeiroAcessoBinding
 import com.example.dont_waste_brq.model.Usuario
-import com.google.firebase.auth.FirebaseAuth
 
 class PrimeiroAcessoActivity : BaseActivity() {
 
