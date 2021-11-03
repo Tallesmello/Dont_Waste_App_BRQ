@@ -59,12 +59,12 @@ class SegundaTelaCadastroActivity : BaseActivity() {
                 finish()
             }
         }
-        /* será que isso é necessário ???
-        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
-            if (view.isInTouchMode && isFocused) {
-                view.performClick()
-            }
-        } */
+         //será que isso é necessário ???
+//        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
+//            if (view.isInTouchMode && isFocused) {
+//                view.performClick()
+//            }
+        //}
         binding.editDataCompraSegundaTelaCadastro.setOnClickListener {
             datePicker.show(supportFragmentManager, "tag")
         }

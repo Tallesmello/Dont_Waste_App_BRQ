@@ -33,7 +33,18 @@ class HomeLogadaActivity : BaseActivity() {
             finish()
         }
 
+        val toolbar = binding.toolbarHomelogada.toolbar
+        toolbar.title = " "
+        setSupportActionBar(toolbar)
 
+        setListners()
+
+    }
+
+    private fun setListners() {
+        binding.toolbarHomelogada.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+        }
     }
 
     private fun inicializaçãoToolbar() {
@@ -75,6 +86,7 @@ class HomeLogadaActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         R.id.menu_hamburguer.apply {
             trocarTela(MenuHamburguer())
+            finish()
         }
         return super.onOptionsItemSelected(item)
     }

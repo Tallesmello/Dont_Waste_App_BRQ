@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Dont_Waste_BRQ</string>
-    <string name="dont_waste_hm_n_logada" tools:ignore="StringEscaping">Don t Waste</string>
+    <string name="dont_waste_hm_n_logada">Don\'t Waste</string>
     <string name="organize_hm_n_logada">organize</string>
     <string name="sua_despensa_inteligente_hm_n_logada">Sua despensa inteligente</string>
     <string name="primeiro_acesso_btn_hm_n_logada">Primeiro Acesso</string>
@@ -50,4 +50,13 @@
     <string name="organize_geladeira">organize</string>
     <string name="geladeira_tela_geladeira">GELADEIRA</string>
     <string name="bebidas_geladeira">Bebidas</string>
+    <string name="todo">TODO</string>
+    <string name="waste">Waste</string>
+    <string name="geladeira_dois">GELADEIRA</string>
+    <string name="todo_test">TODO</string>
+    <string name="frutas_leg_e_verduras_item">FRUTAS LEG. E VERDURAS</string>
+    <string name="mam_o_ITEM">MAMÃO</string>
+    <string name="quantidade_item">0</string>
+    <string name="alimentos_cadastrados_item_frutas_btn">Alimentos cadastrados</string>
+    <string name="novo_item_btn">+ Novo item</string>
 </resources>

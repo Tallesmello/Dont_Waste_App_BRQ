@@ -15,6 +15,8 @@ class LoginActivity : BaseActivity() {
 
     private lateinit var binding:  ActivityLoginBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -56,6 +58,7 @@ class LoginActivity : BaseActivity() {
             }
         } else {
             binding.textSenhaLogin.error = "Email/senha inválido"
+            binding.textEmailLogin.error = "Email/senha inválido"
         }
 
     }

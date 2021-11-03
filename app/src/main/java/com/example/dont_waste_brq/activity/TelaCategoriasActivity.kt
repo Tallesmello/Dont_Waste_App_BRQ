@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityTelaCategoriasBinding
@@ -16,6 +17,8 @@ class TelaCategoriasActivity : BaseActivity() {
     private lateinit var binding: ActivityTelaCategoriasBinding
     private lateinit var searchView: MaterialSearchView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTelaCategoriasBinding.inflate(layoutInflater)
@@ -24,48 +27,97 @@ class TelaCategoriasActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
-    }
 
-    private fun inicializaçãoToolbar() {
+
         val toolbar = binding.appBarTelaCategorias.toolbar
         toolbar.title = " "
         setSupportActionBar(toolbar)
+
+        setListners()
+        iniciandoListeners()
+    }
+
+
+    private fun iniciandoListeners() {
+        binding.imageGeladeira.setOnClickListener {
+            trocarTela(TelaGaladeiraActivity())
+            finish()
+        }
+
+        binding.imageDespensa.setOnClickListener {
+            trocarTela(TelaDespensaActivity())
+
+        }
+
+        binding.btnVoltarCategorias.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+            finish()
+        }
     }
 
     /**
-     * Inicialização da barra de pesquisa
+     * botão de home para voltar na tela home logada
      * em appBar
      */
-    private fun inicializaçãoComponentes() {
-        searchView = binding.appBarTelaCategorias.searchView
+
+    private fun setListners() {
+        binding.appBarTelaCategorias.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+
+            binding.imageDespensa.setOnClickListener {
+                trocarTela(TelaDespensaActivity())
+
+            }
+        }
     }
 
+        private fun inicializaçãoToolbar() {
+            val toolbar = binding.appBarTelaCategorias.toolbar
+            toolbar.title = " "
+            setSupportActionBar(toolbar)
+        }
 
-    /**
-     * Inflando icones em appBar
-     */
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater : MenuInflater = menuInflater
-        inflater.inflate(R.menu.icon_appbar, menu)
 
         /**
-         * Configurar botão pesquisa (SearchView)
+         * Inicialização da barra de pesquisa
+         * em appBar
          */
-        val item : MenuItem = menu!!.findItem(R.id.pesquisa)
-        searchView.setMenuItem(item)
-        val size = searchView.size
-
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    /**
-     * Colocando comportamentos no icone menu hamburger
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        R.id.menu_hamburguer.apply {
-            trocarTela(MenuHamburguer())
+        private fun inicializaçãoComponentes() {
+            searchView = binding.appBarTelaCategorias.searchView
         }
-        return super.onOptionsItemSelected(item)
-    }
+
+
+
+        /**
+         * Inflando icones em appBar
+         */
+        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+            val inflater: MenuInflater = menuInflater
+            inflater.inflate(R.menu.icon_appbar, menu)
+
+            /**
+             * Configurar botão pesquisa (SearchView)
+             */
+            val item: MenuItem = menu!!.findItem(R.id.pesquisa)
+            searchView.setMenuItem(item)
+            val size = searchView.size
+
+
+            return super.onCreateOptionsMenu(menu)
+        }
+
+
+        /**
+         * Colocando comportamentos no icone menu hamburger
+         */
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            R.id.menu_hamburguer.apply {
+                trocarTela(MenuHamburguer())
+            }
+            return super.onOptionsItemSelected(item)
+        }
 }
+
+
+
+

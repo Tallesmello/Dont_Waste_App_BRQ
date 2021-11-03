@@ -7,18 +7,18 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
+import com.example.dont_waste_brq.databinding.ActivityListaItensGeladeiraBinding
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
-class TelaGaladeiraActivity : BaseActivity() {
+class ListaItensGeladeiraActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityTelaGaladeiraBinding
+    private lateinit var binding: ActivityListaItensGeladeiraBinding
     private lateinit var searchView: MaterialSearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTelaGaladeiraBinding.inflate(layoutInflater)
+        binding = ActivityListaItensGeladeiraBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -26,8 +26,8 @@ class TelaGaladeiraActivity : BaseActivity() {
         inicializaçãoToolbar()
         Listners()
 
-        binding.btnVoltarGeladeira.setOnClickListener {
-            trocarTela(TelaCategoriasActivity())
+        binding.btnVoltarItemFrutas.setOnClickListener {
+            trocarTela(TelaGaladeiraActivity())
             finish()
         }
     }
@@ -35,15 +35,15 @@ class TelaGaladeiraActivity : BaseActivity() {
     /**
      * Icone home volta para Home Logada
      */
-        private fun Listners() {
-        binding.appBarTelaGeladeira.iconHome.setOnClickListener {
+    private fun Listners() {
+        binding.appBarItemFrutasGeladeira.iconHome.setOnClickListener {
             trocarTela(HomeLogadaActivity())
 
         }
     }
 
     private fun inicializaçãoToolbar() {
-        val toolbar = binding.appBarTelaGeladeira.toolbar
+        val toolbar = binding.appBarItemFrutasGeladeira.toolbar
         toolbar.title = " "
         setSupportActionBar(toolbar)
     }
@@ -53,7 +53,7 @@ class TelaGaladeiraActivity : BaseActivity() {
      * em appBar
      */
     private fun inicializaçãoComponentes() {
-        searchView = binding.appBarTelaGeladeira.searchView
+        searchView = binding.appBarItemFrutasGeladeira.searchView
     }
 
     /**
@@ -78,11 +78,10 @@ class TelaGaladeiraActivity : BaseActivity() {
      * Colocando comportamentos no icone home e menu hamburguer
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-              R.id.menu_hamburguer.apply {
+        R.id.menu_hamburguer.apply {
             trocarTela(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)
 
     }
-
 }
