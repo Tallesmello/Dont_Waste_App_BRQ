@@ -6,7 +6,7 @@ import android.view.View
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityItensFrutasBinding
 
-class ItensFrutasActivity : AppCompatActivity() {
+class ItensFrutasActivity : BaseActivity() {
 
     private lateinit var binding: ActivityItensFrutasBinding
 
@@ -14,6 +14,10 @@ class ItensFrutasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityItensFrutasBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        voltarTelaGeladeiras()
+        alimentosCadastrados()
+
 
         binding.buttonNovoItem.setOnClickListener {
             if (binding.layoutNovoItem.visibility == View.GONE) {
@@ -24,5 +28,17 @@ class ItensFrutasActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun voltarTelaGeladeiras(){
+        binding.btnVoltarItemFrutas.setOnClickListener {
+            trocarTela(TelaGaladeiraActivity())
+        }
+    }
+
+    private fun alimentosCadastrados(){
+        binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
+            trocarTela(AlimentosCadastradosActivity())
+        }
     }
 }
