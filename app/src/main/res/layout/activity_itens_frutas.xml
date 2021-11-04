@@ -182,19 +182,21 @@
 
     </androidx.cardview.widget.CardView>
 
+    <!--    Texto " Clique para cadastrar "  -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_itens"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginTop="172dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView_item_frutas"
         tools:itemCount="4"
         tools:listitem="@layout/item_geladeira" />
-
-    <!--    Texto " Clique para cadastrar "  -->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_novo_item"

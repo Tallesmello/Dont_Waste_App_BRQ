@@ -30,6 +30,11 @@ class TelaGaladeiraActivity : BaseActivity() {
             trocarTela(TelaCategoriasActivity())
             finish()
         }
+
+        binding.cardViewFrutasVerduras.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
+            finish()
+        }
     }
 
     /**
