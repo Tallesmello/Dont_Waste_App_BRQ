@@ -41,7 +41,11 @@
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_categorias.xml" value="0.33" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_esqueci_minha_senha.xml" value="0.25" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_home_nao_logada.xml" value="0.33" />
+<<<<<<< HEAD
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_itens_frutas.xml" value="0.25" />
+=======
+        <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_itens_frutas.xml" value="0.33" />
+>>>>>>> sugestao_recycler
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_login.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_primeiro_acesso.xml" value="0.33" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_produtos_proximos_vencimento.xml" value="0.3671875" />
