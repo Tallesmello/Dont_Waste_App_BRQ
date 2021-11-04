@@ -24,11 +24,18 @@ class TelaGaladeiraActivity : BaseActivity() {
 
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+        trocadeTelaItem()
         Listners()
 
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
             finish()
+        }
+    }
+
+    private fun trocadeTelaItem(){
+        binding.cardUmGeladeira.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
         }
     }
 
