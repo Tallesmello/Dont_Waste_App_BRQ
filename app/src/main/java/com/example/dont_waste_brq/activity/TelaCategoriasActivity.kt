@@ -17,6 +17,8 @@ class TelaCategoriasActivity : BaseActivity() {
     private lateinit var binding: ActivityTelaCategoriasBinding
     private lateinit var searchView: MaterialSearchView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTelaCategoriasBinding.inflate(layoutInflater)
