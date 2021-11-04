@@ -54,8 +54,6 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-auth-ktx'
-
-    implementation 'com.google.firebase:firebase-functions-ktx:20.0.0'
     implementation 'com.google.android.material:material:<version>'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'

@@ -10,11 +10,13 @@ import android.widget.Toolbar
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import com.example.dont_waste_brq.R
+import com.example.dont_waste_brq.data.RealtimeDatabase
 
 abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
+
     }
 
     fun trocarTela(activity: AppCompatActivity){
@@ -25,6 +27,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun mensagem(msg : String){
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
     }
+
 
 }
 
