@@ -7,7 +7,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
-object Firebase {
+object FirebaseAuth {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
 
@@ -26,7 +26,6 @@ object Firebase {
                     campoEmail.requestFocus()
 
 
-
                 }
 
             }
@@ -42,26 +41,29 @@ object Firebase {
         }
     }
 
-        fun resetSenha(email: String, sucesso: (task: Task<Void>) -> Unit) {
-            firebaseAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener {
-                    sucesso(it)
-                }
-        }
+    fun resetSenha(email: String, sucesso: (task: Task<Void>) -> Unit) {
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener {
+                sucesso(it)
+            }
+    }
 
-    fun deslogarApp(){
-         firebaseAuth.signOut()
+    fun deslogarApp() {
+        firebaseAuth.signOut()
         return
 
     }
-
-    fun verificarLogado() : Boolean {
+    //aki vai validar o user que ta conectado
+    fun verificarLogado(): Boolean {
         firebaseAuth.currentUser.apply {
+
             return true
         }
     }
+//    essa função gera a key para cada user UID
+    fun gerandoKeyDoUsuario() = firebaseAuth.uid.toString()
 
-    }
+}
 
 
 

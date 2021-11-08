@@ -1,20 +1,24 @@
 package com.example.dont_waste_brq.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.cardview.widget.CardView
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
+import com.example.dont_waste_brq.activity.enum.LocalEnum
+import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
+import com.example.dont_waste_brq.model.Armazenar
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class TelaGaladeiraActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTelaGaladeiraBinding
     private lateinit var searchView: MaterialSearchView
+
+    private lateinit var resultado : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +29,16 @@ class TelaGaladeiraActivity : BaseActivity() {
         inicializaçãoComponentes()
         inicializaçãoToolbar()
         Listners()
-
+        clickCards(binding.cardViewFrutasVerduras)
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
             finish()
+        }
+    }
+
+    private fun clickCards(card : CardView) {
+        card.setOnClickListener {
+            gerandoArmazenamento(TipoConteudoEnum.FRUTAS)
         }
     }
 
@@ -82,6 +92,19 @@ class TelaGaladeiraActivity : BaseActivity() {
             trocarTela(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)
+
+    }
+
+
+    companion object TelaGeladeira{
+        val  local = LocalEnum.GELADEIRA
+        private lateinit var armazenar : Armazenar
+        fun gerandoArmazenamento(tipo: TipoConteudoEnum): Armazenar {
+            armazenar.local = local.descricao
+            armazenar.tipoConteudo.descricao = tipo.descricao
+            return armazenar
+        }
+
 
     }
 
