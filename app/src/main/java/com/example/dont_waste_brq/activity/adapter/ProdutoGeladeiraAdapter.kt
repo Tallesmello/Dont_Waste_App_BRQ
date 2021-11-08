@@ -26,7 +26,7 @@ class ProdutoGeladeiraAdapter(
 
     override fun onBindViewHolder(holder: ProdutoGeladeiraViewHolder, position: Int) {
         itens[position].apply {
-           holder.bind(this, getInstanceRemover() )
+           holder.bind(this, getInstanceRemover()) { atualizou() }
         }
     }
 
@@ -46,24 +46,32 @@ class ProdutoGeladeiraAdapter(
     fun removerItem(item: ProdutoGeladeira) {
         itens.remove(item)
         notifyDataSetChanged()
-        houveAtualizacao = true
+        atualizou()
     }
 
     fun adicionarItem(item: ProdutoGeladeira) {
         itens.add(item)
         notifyItemInserted(itens.size)
-        houveAtualizacao = true
+        atualizou()
     }
 
     fun houveAtualizacao() = houveAtualizacao
 
+    fun resetAtualizacoes() {
+        // será usado se/quando as atualizações forem salvas e
+        // continuar na mesma activity
+        houveAtualizacao = false
+    }
+
+    private fun atualizou() { houveAtualizacao = true }
 }
 
 class ProdutoGeladeiraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(
-        item : ProdutoGeladeira,
-        remover: Remover
+        item: ProdutoGeladeira,
+        remover: Remover,
+        atualizou : () -> Unit
     ) {
         val nome = itemView.findViewById<TextView>(R.id.tv_descricao)
         nome.text = item.nome
@@ -75,6 +83,7 @@ class ProdutoGeladeiraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
             if (item.quantidade > 0) {
                 item.quantidade -= 1
                 quantidade.text = item.quantidade.toString()
+                atualizou()
             }
             else {
                exibirDialog(itemView.context, item, remover)
@@ -85,6 +94,7 @@ class ProdutoGeladeiraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
         buttonAdicionar.setOnClickListener {
             item.quantidade += 1
             quantidade.text = item.quantidade.toString()
+            atualizou()
         }
     }
 
@@ -104,7 +114,6 @@ class ProdutoGeladeiraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
         dialog.create()
         dialog.show()
     }
-
 }
 
 interface Remover {
