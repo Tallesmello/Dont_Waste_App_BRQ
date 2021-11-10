@@ -38,7 +38,6 @@ class SegundaTelaCadastroActivity : BaseActivity() {
         binding.materialAutoCompleteTextViewQuantidadePessoas.setAdapter(adapterPessoas)
 
 
-        // todo - o listOf<String>() deve ser corrigido
         val adapterFrequencia = ArrayAdapter(this, R.layout.list_item, FrequenciaEnum.getArrayListOfFrequencia())
         binding.editFrequenciaComprasSegundaTelaCadastro.setAdapter(adapterFrequencia)
     }
@@ -59,12 +58,6 @@ class SegundaTelaCadastroActivity : BaseActivity() {
                 finish()
             }
         }
-         //será que isso é necessário ???
-//        binding.editDataCompraSegundaTelaCadastro.setOnFocusChangeListener { view, isFocused ->
-//            if (view.isInTouchMode && isFocused) {
-//                view.performClick()
-//            }
-        //}
         binding.editDataCompraSegundaTelaCadastro.setOnClickListener {
             datePicker.show(supportFragmentManager, "tag")
         }

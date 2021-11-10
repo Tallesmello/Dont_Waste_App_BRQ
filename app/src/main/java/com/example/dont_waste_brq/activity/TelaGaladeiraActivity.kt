@@ -11,6 +11,8 @@ import com.example.dont_waste_brq.activity.enum.LocalEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
 import com.example.dont_waste_brq.model.Armazenar
+import com.example.dont_waste_brq.model.ProdutoGeladeira
+import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class TelaGaladeiraActivity : BaseActivity() {
@@ -18,30 +20,24 @@ class TelaGaladeiraActivity : BaseActivity() {
     private lateinit var binding: ActivityTelaGaladeiraBinding
     private lateinit var searchView: MaterialSearchView
 
-    private lateinit var resultado : String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTelaGaladeiraBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         inicializaçãoComponentes()
         inicializaçãoToolbar()
         Listners()
-        clickCards(binding.cardViewFrutasVerduras)
+
+        binding.cardViewFrutasVerduras.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
+        }
+
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
             finish()
         }
     }
-
-    private fun clickCards(card : CardView) {
-        card.setOnClickListener {
-            gerandoArmazenamento(TipoConteudoEnum.FRUTAS)
-        }
-    }
-
     /**
      * Icone home volta para Home Logada
      */
@@ -94,18 +90,4 @@ class TelaGaladeiraActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
 
     }
-
-
-    companion object TelaGeladeira{
-        val  local = LocalEnum.GELADEIRA
-        private lateinit var armazenar : Armazenar
-        fun gerandoArmazenamento(tipo: TipoConteudoEnum): Armazenar {
-            armazenar.local = local.descricao
-            armazenar.tipoConteudo.descricao = tipo.descricao
-            return armazenar
-        }
-
-
-    }
-
 }
