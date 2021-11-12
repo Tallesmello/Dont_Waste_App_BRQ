@@ -12,15 +12,23 @@ class ItensFrutasActivity : BaseActivity() {
     private lateinit var binding : ActivityItensFrutasBinding
     private lateinit var dao : GeladeiraDAO
     private lateinit var prod : Produto
+    private lateinit var lista : List<ProdutoGeladeira>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityItensFrutasBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         dao = GeladeiraDAO(TipoConteudoEnum.FRUTAS)
-        prod = ProdutoGeladeira(nome ="maaca",quantidade = 10)
+        prod = ProdutoGeladeira(nome ="maca",quantidade = 10)
         binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
-            dao.adicionarItens(prod)
+            dao.adicionarItens(prod).apply {
+                mensagem("adicionando mais um ")
+            }
+        }
+        binding.btnVoltarItemFrutas.setOnClickListener {
+            dao.removerItem("-Mo5NO0jyFF0DbrKtF1W").isSuccessful.apply {
+                mensagem("Deu certo")
+            }
         }
     }
 

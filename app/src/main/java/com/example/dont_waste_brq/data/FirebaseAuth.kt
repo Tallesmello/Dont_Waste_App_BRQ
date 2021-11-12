@@ -24,10 +24,7 @@ object FirebaseAuth {
                 } catch (e: FirebaseAuthUserCollisionException) {
                     campoEmail.error = "Email já cadastrado"
                     campoEmail.requestFocus()
-
-
                 }
-
             }
         }
     }
