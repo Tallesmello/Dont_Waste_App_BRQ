@@ -12,16 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ">
         <activity
-            android:name=".activity.ItensFrutasActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".activity.AlimentosCadastradosActivity"
+            android:exported="false" />
         <activity
-            android:name=".activity.ListaItensGeladeiraActivity"
+            android:name=".activity.ItensFrutasActivity"
             android:exported="true" />
         <activity
             android:name=".activity.TelaDespensaActivity"
@@ -70,7 +64,11 @@
         <activity
             android:name=".activity.HomeNaoLogadaActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 object FirebaseAuth {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-
     fun cadastrarUsuario(usuario: Usuario, campoEmail: TextInputLayout, sucesso: () -> Unit) {
         firebaseAuth.createUserWithEmailAndPassword(
             usuario.email,

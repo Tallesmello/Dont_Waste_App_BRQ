@@ -27,6 +27,7 @@ class TelaGaladeiraActivity : BaseActivity() {
         setContentView(view)
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+        trocadeTelaItem()
         Listners()
 
         binding.cardViewFrutasVerduras.setOnClickListener {
@@ -36,6 +37,17 @@ class TelaGaladeiraActivity : BaseActivity() {
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
             finish()
+        }
+
+        binding.cardViewFrutasVerduras.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
+            finish()
+        }
+    }
+
+    private fun trocadeTelaItem(){
+        binding.cardUmGeladeira.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
         }
     }
     /**
