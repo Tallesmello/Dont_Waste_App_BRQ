@@ -9,8 +9,9 @@ import com.example.dont_waste_brq.repository.Icrud
 import com.google.android.gms.tasks.Task
 
 class GeladeiraDAO(tipo : TipoConteudoEnum) : Icrud {
-    private val armazenar = Armazenar(ProdutoGeladeira.Geladeira,tipo)
+    private val armazenar = Armazenar(ProdutoGeladeira.GELADEIRA,tipo)
     override fun adicionarItens(produto: Produto) {
+
         RealtimeDatabase
             .chaveCliente()
             .child(armazenar.local.toString())
@@ -21,6 +22,4 @@ class GeladeiraDAO(tipo : TipoConteudoEnum) : Icrud {
     override fun removerItem(key: String): Task<Void> {
         return RealtimeDatabase.pegarInstancia().child(key).removeValue();
     }
-
-
 }

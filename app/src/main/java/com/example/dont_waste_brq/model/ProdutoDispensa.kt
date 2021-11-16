@@ -5,7 +5,7 @@ import com.example.dont_waste_brq.data.RealtimeDatabase
 
 data class ProdutoDispensa(
     override var nome: String,
-    override var quantidade: Int
+    override var quantidade: Int = 0
 ) : Produto(nome,quantidade){
 
     companion object Dispensa {

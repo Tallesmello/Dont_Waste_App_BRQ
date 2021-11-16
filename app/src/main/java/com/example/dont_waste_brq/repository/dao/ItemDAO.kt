@@ -1,4 +1,4 @@
-package com.example.dont_waste_brq.data
+package com.example.dont_waste_brq.repository.dao
 
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 

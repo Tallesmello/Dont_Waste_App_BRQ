@@ -22,4 +22,10 @@ object RealtimeDatabase {
         return pegarInstancia().child(FirebaseAuth.gerandoKeyDoUsuario())
     }
 
+    fun listaDeItens(lista : ArrayList<ProdutoGeladeira>) : ArrayList<ProdutoGeladeira>{
+        for (list in lista){
+            lista.add(list)
+        }
+        return lista
+    }
 }
