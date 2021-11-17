@@ -14,18 +14,10 @@ object RealtimeDatabase {
     fun pegarInstancia(): DatabaseReference {
         return Firebase.database.reference
     }
-
     /**
      * salvando os dados de local e tipo em armazenamento
      */
     fun chaveCliente(): DatabaseReference {
         return pegarInstancia().child(FirebaseAuth.gerandoKeyDoUsuario())
-    }
-
-    fun listaDeItens(lista : ArrayList<ProdutoGeladeira>) : ArrayList<ProdutoGeladeira>{
-        for (list in lista){
-            lista.add(list)
-        }
-        return lista
     }
 }

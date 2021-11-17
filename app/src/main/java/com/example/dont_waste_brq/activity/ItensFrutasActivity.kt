@@ -8,6 +8,7 @@ import com.example.dont_waste_brq.activity.adapter.ProdutoAdapter
 import com.example.dont_waste_brq.activity.enum.LocalEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityItensFrutasBinding
+import com.example.dont_waste_brq.model.Armazenar
 import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
@@ -25,7 +26,6 @@ class ItensFrutasActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityItensFrutasBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         voltarTelaGeladeiras()
         alimentosCadastrados()
@@ -147,13 +147,8 @@ class ItensFrutasActivity : BaseActivity() {
     }
 
     companion object {
-
-        fun getInstance(
-            local: LocalEnum,
-            conteudo: TipoConteudoEnum
-        ) {
-
+        fun getInstance(local: LocalEnum,conteudo: TipoConteudoEnum): Armazenar {
+            return Armazenar(local,conteudo)
         }
-
     }
 }
