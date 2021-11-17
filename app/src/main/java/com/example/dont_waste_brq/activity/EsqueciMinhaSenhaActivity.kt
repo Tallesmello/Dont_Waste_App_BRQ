@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
 import com.example.dont_waste_brq.activity.viewmodel.EsqueciMinhaSenhaViewModel
 import androidx.appcompat.app.AlertDialog
-import com.example.dont_waste_brq.data.Firebase
+import com.example.dont_waste_brq.data.FirebaseAuth
 import com.google.android.gms.tasks.Task
 
 
@@ -58,7 +58,7 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.textEmailSenha.error = "Insira um e-mail válido"
         } else {
-            Firebase.resetSenha(email) {
+            FirebaseAuth.resetSenha(email) {
                 sucesso(it)
             }
         }

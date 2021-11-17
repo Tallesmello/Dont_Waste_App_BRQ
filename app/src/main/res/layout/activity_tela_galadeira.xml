@@ -353,7 +353,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/CardView_bebidas"
+                android:id="@+id/cardView_bebidas"
                 android:layout_width="125dp"
                 android:layout_height="132dp"
                 android:backgroundTint="@color/cor_texto"

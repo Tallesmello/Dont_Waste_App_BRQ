@@ -14,6 +14,11 @@
 
     <!--    Imagem lixeira  -->
 
+        <include
+            android:id="@+id/appBar_item_frutas_geladeira"
+            layout="@layout/appbar" />
+
+
     <ImageView
         android:id="@+id/imageView_logo_geladeira_item_frutas"
         android:layout_width="108dp"
@@ -188,19 +193,24 @@
 
     </androidx.cardview.widget.CardView>
 
+    <!--    Texto " Clique para cadastrar "  -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_itens"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginTop="172dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_novo_item"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView_item_frutas"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_geladeira" />
-
-    <!--    Texto " Clique para cadastrar "  -->
+        app:layout_constraintVertical_bias="0.0"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_geladeira"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_novo_item"
@@ -210,50 +220,55 @@
         android:fontFamily="@font/open_sans_bold"
         android:gravity=""
         android:text="@string/novo_item_btn"
+        app:layout_constraintBottom_toTopOf="@id/layout_novo_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycler_itens"
-        tools:layout_editor_absoluteY="401dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/layout_novo_item"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:background="@drawable/bordar_costumizado"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/button_novo_item"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_voltar_item_frutas"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_novo_item"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible">
 
         <EditText
             android:id="@+id/edittext_novo_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:inputType="textCapWords|textAutoCorrect"
+            android:lines="1"
+            android:maxLines="1" />
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="116dp"
+            android:id="@+id/btn_cancelar_novo_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:background="@color/white"
-            android:src="@drawable/ic_sinal_de_menos"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            android:padding="8dp"
+            android:src="@drawable/ic_sinal_de_menos" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:id="@+id/btn_incluir_novo_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:background="@color/white"
-            android:src="@drawable/ic_add"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            android:padding="8dp"
+            android:src="@drawable/ic_add" />
 
     </LinearLayout>
 
@@ -284,10 +299,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <include
-        android:id="@+id/appBar_item_frutas_geladeira"
-        layout="@layout/appbar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </ScrollView>

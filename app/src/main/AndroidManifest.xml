@@ -18,9 +18,6 @@
             android:name=".activity.ItensFrutasActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ListaItensGeladeiraActivity"
-            android:exported="true" />
-        <activity
             android:name=".activity.TelaDespensaActivity"
             android:exported="true" />
         <activity
