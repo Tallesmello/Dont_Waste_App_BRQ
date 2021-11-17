@@ -43,13 +43,10 @@ object FirebaseAuth {
                 sucesso(it)
             }
     }
+    fun deslogarApp() = firebaseAuth.signOut()
 
-    fun deslogarApp() {
-        firebaseAuth.signOut()
-        return
-
-    }
     //aki vai validar o user que ta conectado
+    fun verificarLogado()  = firebaseAuth.currentUser != null
     fun usuarioLogado(): Boolean = firebaseAuth.currentUser != null
 
 
