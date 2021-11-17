@@ -15,7 +15,7 @@
             android:name=".activity.AlimentosCadastradosActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ItensFrutasActivity"
+            android:name=".activity.ItensProdutosActivity"
             android:exported="true" />
         <activity
             android:name=".activity.TelaDespensaActivity"

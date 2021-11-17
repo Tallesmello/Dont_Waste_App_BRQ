@@ -1,5 +1,7 @@
 package com.example.dont_waste_brq.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -7,32 +9,53 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dont_waste_brq.activity.adapter.ProdutoAdapter
 import com.example.dont_waste_brq.activity.enum.LocalEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
-import com.example.dont_waste_brq.databinding.ActivityItensFrutasBinding
+import com.example.dont_waste_brq.databinding.ActivityItensProdutosBinding
 import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.model.ProdutoGeladeira
+import com.example.dont_waste_brq.repository.dao.DispensaDAO
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
+import com.example.dont_waste_brq.repository.dao.ItemDAO
 
-class ItensFrutasActivity : BaseActivity() {
+class ItensProdutosActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityItensFrutasBinding
+    private lateinit var binding: ActivityItensProdutosBinding
     private lateinit var adapter: ProdutoAdapter
 
-    private val dao = GeladeiraDAO(TipoConteudoEnum.FRUTAS)
+    private lateinit var dao: ItemDAO
 
     private val produtos = ArrayList<Produto?>()
 
+    private lateinit var local: LocalEnum
+    private lateinit var conteudo: TipoConteudoEnum
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityItensFrutasBinding.inflate(layoutInflater)
+        binding = ActivityItensProdutosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        setLocalConteudo()
+        setDao()
         voltarTelaGeladeiras()
         alimentosCadastrados()
-
         configurarListners()
         lerProdutos()
+    }
 
+    private fun setLocalConteudo() {
+        val iLocal = intent.getIntExtra(LOCAL, 0)
+        val iConteudo = intent.getIntExtra(CONTEUDO, 0)
+        local = LocalEnum.values()[iLocal]
+        conteudo = TipoConteudoEnum.values()[iConteudo]
+
+        binding.textItemProduto.text = conteudo.descricao
+    }
+
+    private fun setDao() {
+        if (local == LocalEnum.DISPENSA) {
+            dao = DispensaDAO(conteudo)
+        } else if (local == LocalEnum.GELADEIRA) {
+            dao = GeladeiraDAO(conteudo)
+        }
     }
 
     private fun lerProdutos() {
@@ -136,7 +159,11 @@ class ItensFrutasActivity : BaseActivity() {
 
     private fun voltarTelaGeladeiras(){
         binding.btnVoltarItemFrutas.setOnClickListener {
-            trocarTela(TelaGaladeiraActivity())
+            if (adapter.houveAtualizacao()) {
+                sairSemSalvar()
+            } else {
+                finish()
+            }
         }
     }
 
@@ -148,11 +175,17 @@ class ItensFrutasActivity : BaseActivity() {
 
     companion object {
 
-        fun getInstance(
-            local: LocalEnum,
-            conteudo: TipoConteudoEnum
-        ) {
+        private const val LOCAL = "local"
+        private const val CONTEUDO = "conteudo"
 
+        fun getIntent(
+            _context: Context,
+            _local: LocalEnum,
+            _conteudo: TipoConteudoEnum
+        ): Intent {
+            val intent = Intent(_context, ItensProdutosActivity::class.java)
+            intent.putExtra(LOCAL, _local.ordinal).putExtra(CONTEUDO, _conteudo.ordinal)
+            return intent
         }
 
     }

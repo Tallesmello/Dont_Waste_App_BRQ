@@ -41,14 +41,6 @@
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_categorias.xml" value="0.33" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_esqueci_minha_senha.xml" value="0.25" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_home_nao_logada.xml" value="0.33" />
-<<<<<<< .merge_file_a03784
-<<<<<<< HEAD
-        <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_itens_frutas.xml" value="0.25" />
-=======
-        <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_itens_frutas.xml" value="0.33" />
->>>>>>> sugestao_recycler
-=======
->>>>>>> .merge_file_a03396
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_login.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_primeiro_acesso.xml" value="0.33" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_App_BRQ/app/src/main/res/layout/activity_produtos_proximos_vencimento.xml" value="0.3671875" />
@@ -72,13 +64,16 @@
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_home_nao_logada.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_itens_frutas.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_itens_produtos.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_lista_itens_geladeira.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/activity_primeiro_acesso.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/activity_tela_galadeira.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_geladeira.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

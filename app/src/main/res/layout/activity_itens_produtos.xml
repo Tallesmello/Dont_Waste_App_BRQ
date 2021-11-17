@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ItensFrutasActivity">
+    tools:context=".activity.ItensProdutosActivity">
 
     <!--    Imagem lixeira  -->
 
@@ -177,7 +177,7 @@
                     android:contentDescription="@string/todo_test" />
 
                 <TextView
-                    android:id="@+id/text_item_frutas"
+                    android:id="@+id/text_item_produto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="36dp"

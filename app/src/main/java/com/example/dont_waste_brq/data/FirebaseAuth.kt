@@ -50,12 +50,9 @@ object FirebaseAuth {
 
     }
     //aki vai validar o user que ta conectado
-    fun verificarLogado(): Boolean {
-        firebaseAuth.currentUser.apply {
+    fun usuarioLogado(): Boolean = firebaseAuth.currentUser != null
 
-            return true
-        }
-    }
+
 //    essa função gera a key para cada user UID
     fun gerandoKeyDoUsuario() = firebaseAuth.uid.toString()
 
