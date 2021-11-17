@@ -10,34 +10,30 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
-import com.example.dont_waste_brq.data.RealtimeDatabase
-import com.example.dont_waste_brq.model.ProdutoGeladeira
-import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
+import com.example.dont_waste_brq.model.Produto
 
-class ProdutoGeladeiraAdapter(
-    val itens: ArrayList<ProdutoGeladeira>
-) : RecyclerView.Adapter<ProdutoGeladeiraViewHolder>() {
+class ProdutoAdapter(
+    val itens: ArrayList<Produto?>
+) : RecyclerView.Adapter<ProdutoViewHolder>() {
 
     private var houveAtualizacao = false
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoGeladeiraViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoViewHolder {
         val inflater =
             LayoutInflater.from(parent.context).inflate(R.layout.item_geladeira, parent, false)
-        return ProdutoGeladeiraViewHolder(inflater)
+        return ProdutoViewHolder(inflater)
     }
 
-    override fun onBindViewHolder(holder: ProdutoGeladeiraViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
         itens[position].apply {
            holder.bind(this, getInstanceRemover()) { atualizou() }
         }
     }
 
-    private fun getInstanceRemover(tipo : TipoConteudoEnum): Remover {
+    private fun getInstanceRemover(): Remover {
         return object : Remover {
-            override fun executar(item: ProdutoGeladeira,tipo : TipoConteudoEnum) {
-                removerItem(item,tipo)
+            override fun executar(item: Produto?) {
+                removerItem(item)
             }
         }
     }
@@ -47,15 +43,13 @@ class ProdutoGeladeiraAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun removerItem(item: ProdutoGeladeira,tipo: TipoConteudoEnum) {
-        val dao = GeladeiraDAO(tipo)
-        dao.removerItem(item.id)
+    fun removerItem(item: Produto?) {
         itens.remove(item)
         notifyDataSetChanged()
         atualizou()
     }
 
-    fun adicionarItem(item: ProdutoGeladeira) {
+    fun adicionarItem(item: Produto) {
         itens.add(item)
         notifyItemInserted(itens.size)
         atualizou()
@@ -64,58 +58,56 @@ class ProdutoGeladeiraAdapter(
     fun houveAtualizacao() = houveAtualizacao
 
     fun resetAtualizacoes() {
-        // será usado se/quando as atualizações forem salvas e
-        // continuar na mesma activity
         houveAtualizacao = false
     }
 
     private fun atualizou() { houveAtualizacao = true }
 }
 
-class ProdutoGeladeiraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ProdutoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(
-        item: ProdutoGeladeira,
+        item: Produto?,
         remover: Remover,
-        atualizou : () -> Unit,
-        tipo : TipoConteudoEnum
+        atualizou : () -> Unit
     ) {
         val nome = itemView.findViewById<TextView>(R.id.tv_descricao)
-        nome.text = item.nome
+        nome.text = item?.nome
         val quantidade = itemView.findViewById<TextView>(R.id.contador_item_frutas)
-        quantidade.text = item.quantidade.toString()
+        quantidade.text = item?.quantidade.toString()
 
         val buttonRemover = itemView.findViewById<ImageButton>(R.id.imageButton_remover)
         buttonRemover.setOnClickListener {
-            if (item.quantidade > 0) {
-                item.quantidade -= 1
-                quantidade.text = item.quantidade.toString()
-                atualizou()
-            }
-            else {
-               exibirDialog(itemView.context, item, remover,tipo)
+            item?.let { item ->
+                if (item.quantidade > 0) {
+                    item.quantidade -= 1
+                    quantidade.text = item.quantidade.toString()
+                    atualizou()
+                }
+                else {
+                    exibirDialog(itemView.context, item, remover)
+                }
             }
         }
 
         val buttonAdicionar = itemView.findViewById<ImageButton>(R.id.imageButton_adicionar)
         buttonAdicionar.setOnClickListener {
-            item.quantidade += 1
-            quantidade.text = item.quantidade.toString()
+            item?.let { item.quantidade += 1 }
+            quantidade.text = item?.quantidade.toString()
             atualizou()
         }
     }
 
     private fun exibirDialog(
         context: Context,
-        item: ProdutoGeladeira,
-        remover: Remover,
-        tipo : TipoConteudoEnum
+        item: Produto?,
+        remover: Remover
     ) {
         val dialog = AlertDialog.Builder(context)
         dialog.setTitle("Remover item")
-        dialog.setMessage("Deseja remover o(a) ${item.nome} ?")
+        dialog.setMessage("Deseja remover o(a) ${item?.nome} ?")
         dialog.setPositiveButton("Sim") { dialogInterface, i ->
-            remover.executar(item,tipo)
+            remover.executar(item)
         }
         dialog.setNegativeButton("Não") { dialogInterface, i ->
         }
@@ -125,5 +117,5 @@ class ProdutoGeladeiraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
 }
 
 interface Remover {
-    fun executar(item: ProdutoGeladeira,tipo : TipoConteudoEnum)
+    fun executar(item: Produto?)
 }

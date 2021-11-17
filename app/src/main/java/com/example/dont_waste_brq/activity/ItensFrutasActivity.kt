@@ -4,20 +4,22 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dont_waste_brq.activity.adapter.ProdutoGeladeiraAdapter
+import com.example.dont_waste_brq.activity.adapter.ProdutoAdapter
+import com.example.dont_waste_brq.activity.enum.LocalEnum
+import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityItensFrutasBinding
+import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.model.ProdutoGeladeira
+import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 
 class ItensFrutasActivity : BaseActivity() {
 
     private lateinit var binding: ActivityItensFrutasBinding
-    private lateinit var adapter: ProdutoGeladeiraAdapter
+    private lateinit var adapter: ProdutoAdapter
 
-    val produtos = arrayListOf(
-        ProdutoGeladeira("Banana"),
-        ProdutoGeladeira("Maçã"),
-        ProdutoGeladeira("Morango")
-    )
+    private val dao = GeladeiraDAO(TipoConteudoEnum.FRUTAS)
+
+    private val produtos = ArrayList<Produto?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +29,31 @@ class ItensFrutasActivity : BaseActivity() {
 
         voltarTelaGeladeiras()
         alimentosCadastrados()
-        configuraRecyclerView()
-        configurarListners()
 
+        configurarListners()
+        lerProdutos()
+
+    }
+
+    private fun lerProdutos() {
+        dao.lerItens { ok: Boolean, mensagemErro: String?, itens: ArrayList<Produto?>? ->
+            lerProdutosResult(ok, mensagemErro, itens)
+        }
+    }
+
+    private fun lerProdutosResult(
+        sucesso: Boolean, mensagemErro: String?, itens: ArrayList<Produto?>?
+    ) {
+        if (sucesso) {
+            if (itens.isNullOrEmpty()) {
+                mensagem("Nenhum produto lido")
+            } else {
+                produtos.addAll(itens)
+            }
+            configuraRecyclerView()
+        } else {
+            mensagem("Erro ao ler produtos: $mensagemErro")
+        }
     }
 
     private fun configurarListners() {
@@ -59,6 +83,22 @@ class ItensFrutasActivity : BaseActivity() {
                 mensagem("Campo deve estar preenchido")
             }
         }
+
+        binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
+            dao.adicionarItens(produtos){
+                sucesso: Boolean, mensagemErro: String? ->
+                salvarStatus(sucesso, mensagemErro)
+            }
+        }
+    }
+
+    private fun salvarStatus(sucesso: Boolean, mensagemErro: String?){
+        if (sucesso) {
+            mensagem("Produtos salvos")
+            adapter.resetAtualizacoes()
+        } else {
+            mensagem("Erro ao salvar produtos\n$mensagemErro")
+        }
     }
 
     private fun esconderLayoutNovoItem() {
@@ -68,7 +108,7 @@ class ItensFrutasActivity : BaseActivity() {
     }
 
     private fun configuraRecyclerView() {
-        adapter = ProdutoGeladeiraAdapter(produtos)
+        adapter = ProdutoAdapter(produtos)
         binding.recyclerItens.adapter = adapter
         binding.recyclerItens.layoutManager = LinearLayoutManager(this)
     }
@@ -85,10 +125,10 @@ class ItensFrutasActivity : BaseActivity() {
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle("Atenção")
         dialog.setMessage("Itens atualizados não salvos. Sair sem salvar?")
-        dialog.setPositiveButton("Sim") { dialogInterface, i ->
+        dialog.setPositiveButton("Sim") { _, _ ->
             finish()
         }
-        dialog.setNegativeButton("Não") { dialogInterface, i ->
+        dialog.setNegativeButton("Não") { _, _ ->
         }
         dialog.create()
         dialog.show()
@@ -104,5 +144,16 @@ class ItensFrutasActivity : BaseActivity() {
         binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
             trocarTela(AlimentosCadastradosActivity())
         }
+    }
+
+    companion object {
+
+        fun getInstance(
+            local: LocalEnum,
+            conteudo: TipoConteudoEnum
+        ) {
+
+        }
+
     }
 }

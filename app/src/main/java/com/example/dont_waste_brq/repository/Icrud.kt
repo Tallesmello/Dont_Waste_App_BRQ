@@ -4,7 +4,10 @@ import com.example.dont_waste_brq.model.Produto
 import com.google.android.gms.tasks.Task
 
 interface Icrud {
-    fun adicionarItens(produto : Produto)
-    fun removerItem(id: String) : Task<Void>
+
+    fun lerItens(result: (Boolean, String?, ArrayList<Produto?>?) -> Unit)
+    fun adicionarItens(lista : ArrayList<Produto?>, result: (Boolean, String?) -> Unit)
+    fun adicionarItem(produto : Produto)
+    fun removerItem(produto: Produto) : Task<Void>
 
 }
