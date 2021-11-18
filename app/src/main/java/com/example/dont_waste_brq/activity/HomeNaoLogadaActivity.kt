@@ -22,6 +22,7 @@ class HomeNaoLogadaActivity : BaseActivity() {
 
         if (FirebaseAuth.usuarioLogado()) {
             startActivity(Intent(this, HomeLogadaActivity::class.java))
+            finish()
         }
 
     }

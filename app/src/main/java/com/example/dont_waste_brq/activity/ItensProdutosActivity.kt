@@ -35,8 +35,7 @@ class ItensProdutosActivity : BaseActivity() {
 
         setLocalConteudo()
         setDao()
-        voltarTelaGeladeiras()
-        alimentosCadastrados()
+        setSubTitulo()
         configurarListners()
         lerProdutos()
     }
@@ -47,6 +46,10 @@ class ItensProdutosActivity : BaseActivity() {
         local = LocalEnum.values()[iLocal]
         conteudo = TipoConteudoEnum.values()[iConteudo]
 
+
+    }
+
+    private fun setSubTitulo() {
         binding.textItemProduto.text = conteudo.descricao
     }
 
@@ -59,9 +62,20 @@ class ItensProdutosActivity : BaseActivity() {
     }
 
     private fun lerProdutos() {
+        showProgressBar()
         dao.lerItens { ok: Boolean, mensagemErro: String?, itens: ArrayList<Produto?>? ->
             lerProdutosResult(ok, mensagemErro, itens)
         }
+    }
+
+    private fun showProgressBar() {
+        binding.recyclerItens.visibility = View.GONE
+        binding.progressbarProdutos.visibility = View.VISIBLE
+    }
+
+    private fun showRecycler() {
+        binding.recyclerItens.visibility = View.VISIBLE
+        binding.progressbarProdutos.visibility = View.GONE
     }
 
     private fun lerProdutosResult(
@@ -77,6 +91,7 @@ class ItensProdutosActivity : BaseActivity() {
         } else {
             mensagem("Erro ao ler produtos: $mensagemErro")
         }
+        showRecycler()
     }
 
     private fun configurarListners() {
@@ -108,9 +123,18 @@ class ItensProdutosActivity : BaseActivity() {
         }
 
         binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
+            showProgressBar()
             dao.adicionarItens(produtos){
                 sucesso: Boolean, mensagemErro: String? ->
                 salvarStatus(sucesso, mensagemErro)
+            }
+        }
+
+        binding.btnVoltarItemFrutas.setOnClickListener {
+            if (adapter.houveAtualizacao()) {
+                sairSemSalvar()
+            } else {
+                finish()
             }
         }
     }
@@ -122,6 +146,7 @@ class ItensProdutosActivity : BaseActivity() {
         } else {
             mensagem("Erro ao salvar produtos\n$mensagemErro")
         }
+        showRecycler()
     }
 
     private fun esconderLayoutNovoItem() {
@@ -155,22 +180,6 @@ class ItensProdutosActivity : BaseActivity() {
         }
         dialog.create()
         dialog.show()
-    }
-
-    private fun voltarTelaGeladeiras(){
-        binding.btnVoltarItemFrutas.setOnClickListener {
-            if (adapter.houveAtualizacao()) {
-                sairSemSalvar()
-            } else {
-                finish()
-            }
-        }
-    }
-
-    private fun alimentosCadastrados(){
-        binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
-            trocarTela(AlimentosCadastradosActivity())
-        }
     }
 
     companion object {
