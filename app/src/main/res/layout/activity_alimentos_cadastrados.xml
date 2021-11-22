@@ -11,11 +11,9 @@
         android:layout_height="match_parent"
         tools:context=".activity.AlimentosCadastradosActivity">
 
-
         <include
             android:id="@+id/appBar_alimentos_cadastrados"
             layout="@layout/appbar" />
-
 
         <ImageView
             android:id="@+id/imageView_logo_geladeira_item_frutas"
