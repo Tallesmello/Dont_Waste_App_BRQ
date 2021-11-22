@@ -1,14 +1,18 @@
 package com.example.dont_waste_brq.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.cardview.widget.CardView
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
+import com.example.dont_waste_brq.activity.enum.LocalEnum
+import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
+import com.example.dont_waste_brq.model.Armazenar
+import com.example.dont_waste_brq.model.ProdutoGeladeira
+import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class TelaGaladeiraActivity : BaseActivity() {
@@ -21,17 +25,31 @@ class TelaGaladeiraActivity : BaseActivity() {
         binding = ActivityTelaGaladeiraBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         inicializaçãoComponentes()
         inicializaçãoToolbar()
+        trocadeTelaItem()
         Listners()
+
+        binding.cardViewFrutasVerduras.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
+        }
 
         binding.btnVoltarGeladeira.setOnClickListener {
             trocarTela(TelaCategoriasActivity())
             finish()
         }
+
+        binding.cardViewFrutasVerduras.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
+            finish()
+        }
     }
 
+    private fun trocadeTelaItem(){
+        binding.cardUmGeladeira.setOnClickListener {
+            trocarTela(ItensFrutasActivity())
+        }
+    }
     /**
      * Icone home volta para Home Logada
      */
@@ -84,5 +102,4 @@ class TelaGaladeiraActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
 
     }
-
 }

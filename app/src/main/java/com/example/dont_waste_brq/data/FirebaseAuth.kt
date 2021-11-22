@@ -7,10 +7,8 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
-object Firebase {
+object FirebaseAuth {
     private val firebaseAuth = FirebaseAuth.getInstance()
-
-
     fun cadastrarUsuario(usuario: Usuario, campoEmail: TextInputLayout, sucesso: () -> Unit) {
         firebaseAuth.createUserWithEmailAndPassword(
             usuario.email,
@@ -24,11 +22,7 @@ object Firebase {
                 } catch (e: FirebaseAuthUserCollisionException) {
                     campoEmail.error = "Email já cadastrado"
                     campoEmail.requestFocus()
-
-
-
                 }
-
             }
         }
     }
@@ -42,26 +36,20 @@ object Firebase {
         }
     }
 
-        fun resetSenha(email: String, sucesso: (task: Task<Void>) -> Unit) {
-            firebaseAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener {
-                    sucesso(it)
-                }
-        }
-
-    fun deslogarApp(){
-         firebaseAuth.signOut()
-        return
-
+    fun resetSenha(email: String, sucesso: (task: Task<Void>) -> Unit) {
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener {
+                sucesso(it)
+            }
     }
+    fun deslogarApp() = firebaseAuth.signOut()
 
-    fun verificarLogado() : Boolean {
-        firebaseAuth.currentUser.apply {
-            return true
-        }
-    }
+    //aki vai validar o user que ta conectado
+    fun verificarLogado()  = firebaseAuth.currentUser != null
+//    essa função gera a key para cada user UID
+    fun gerandoKeyDoUsuario() = firebaseAuth.uid.toString()
 
-    }
+}
 
 
 

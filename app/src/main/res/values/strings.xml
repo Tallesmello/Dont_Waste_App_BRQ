@@ -56,7 +56,9 @@
     <string name="todo_test">TODO</string>
     <string name="frutas_leg_e_verduras_item">FRUTAS LEG. E VERDURAS</string>
     <string name="mam_o_ITEM">MAMÃO</string>
-    <string name="quantidade_item">0</string>
+    <string name="quantidade_item">001</string>
     <string name="alimentos_cadastrados_item_frutas_btn">Alimentos cadastrados</string>
     <string name="novo_item_btn">+ Novo item</string>
+    <string name="salvar_ali_cadastrados">Salvar</string>
+    <string name="dt_cadastrado">DT CADASTRADO</string>
 </resources>

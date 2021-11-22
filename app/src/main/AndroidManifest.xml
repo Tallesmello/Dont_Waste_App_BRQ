@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dont_Waste_BRQ">
         <activity
-            android:name=".activity.ItensFrutasActivity"
+            android:name=".activity.AlimentosCadastradosActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ListaItensGeladeiraActivity"
+            android:name=".activity.ItensFrutasActivity"
             android:exported="true" />
         <activity
             android:name=".activity.TelaDespensaActivity"

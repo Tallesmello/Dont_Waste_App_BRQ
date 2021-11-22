@@ -2,8 +2,7 @@ package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
 import com.example.dont_waste_brq.databinding.ActivityHomeNaoLogadaBinding
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+
 
 
 
@@ -18,14 +17,6 @@ class HomeNaoLogadaActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
         initListeners()
-
-        val dataBase = Firebase.database
-        val reference = dataBase.reference
-        reference.child("primeiro No")
-            .child("Segundo nó")
-            .child("Terceiro Nó")
-            .push()
-            .setValue("Valor do terceiro nó")
 
     }
 

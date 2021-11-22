@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.data.Firebase
+import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityPrimeiroAcessoBinding
 import com.example.dont_waste_brq.model.Usuario
 
@@ -32,7 +32,7 @@ class PrimeiroAcessoActivity : BaseActivity() {
         binding.btnProximoCadastro.setOnClickListener {
             if (dadosValidos()) {
                 val user = gerandoUsuario()
-                Firebase.cadastrarUsuario(user, binding.textEmailCadastro) { trocarTela(SegundaTelaCadastroActivity()) }
+                FirebaseAuth.cadastrarUsuario(user, binding.textEmailCadastro) { trocarTela(SegundaTelaCadastroActivity()) }
             }
         }
     }

@@ -3,10 +3,9 @@ package com.example.dont_waste_brq.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityLoginBinding
-import com.example.dont_waste_brq.data.Firebase
+import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.model.Usuario
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -14,8 +13,6 @@ import com.google.firebase.auth.AuthResult
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding:  ActivityLoginBinding
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +45,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun autenticacaoEmailESenhaFirebase(usuario: Usuario) =
-        Firebase.logarUsuario(usuario) { sucesso(it) }
+        FirebaseAuth.logarUsuario(usuario) { sucesso(it) }
 
     private fun sucesso(task: Task<AuthResult>) {
         if (task.isSuccessful) {

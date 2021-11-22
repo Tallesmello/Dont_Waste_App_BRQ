@@ -1,17 +1,14 @@
 package com.example.dont_waste_brq.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.data.Firebase
+import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityMenuHamburguerBinding
-import com.google.firebase.auth.FirebaseAuth
 
 class MenuHamburguer : BaseActivity() {
 
     lateinit var binding: ActivityMenuHamburguerBinding
-    lateinit var auth: FirebaseAuth
+    lateinit var auth: com.google.firebase.auth.FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +39,7 @@ class MenuHamburguer : BaseActivity() {
             dialog.setTitle("Sair")
             dialog.setMessage("Deseja realmente sair?")
             dialog.setPositiveButton("Sair") { dialogInterface, i ->
-                Firebase.deslogarApp()
+                FirebaseAuth.deslogarApp()
                 trocarTela(HomeNaoLogadaActivity())
                 finish()
 
