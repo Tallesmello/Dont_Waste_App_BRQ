@@ -2,9 +2,10 @@ package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
 import android.util.Patterns
+import androidx.lifecycle.ViewModelProvider
+import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
 import androidx.appcompat.app.AlertDialog
 import com.example.dont_waste_brq.data.FirebaseAuth
-import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
 import com.google.android.gms.tasks.Task
 
 

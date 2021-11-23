@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
 object FirebaseAuth {
     private val firebaseAuth = FirebaseAuth.getInstance()
+
     fun cadastrarUsuario(usuario: Usuario, campoEmail: TextInputLayout, sucesso: () -> Unit) {
         firebaseAuth.createUserWithEmailAndPassword(
             usuario.email,
@@ -45,7 +46,9 @@ object FirebaseAuth {
     fun deslogarApp() = firebaseAuth.signOut()
 
     //aki vai validar o user que ta conectado
-    fun verificarLogado()  = firebaseAuth.currentUser != null
+    fun usuarioLogado(): Boolean = firebaseAuth.currentUser != null
+
+
 //    essa função gera a key para cada user UID
     fun gerandoKeyDoUsuario() = firebaseAuth.uid.toString()
 

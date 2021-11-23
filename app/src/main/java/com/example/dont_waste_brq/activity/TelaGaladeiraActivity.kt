@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.cardview.widget.CardView
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.activity.enum.LocalEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
-import com.example.dont_waste_brq.model.Armazenar
-import com.example.dont_waste_brq.model.ProdutoGeladeira
-import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class TelaGaladeiraActivity : BaseActivity() {
@@ -30,8 +26,46 @@ class TelaGaladeiraActivity : BaseActivity() {
         trocadeTelaItem()
         Listners()
 
+
+    }
+
+    private fun trocadeTelaItem(){
+        binding.cardUmGeladeira.setOnClickListener {
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.FRUTAS))
+        }
+    }
+    /**
+     * Icone home volta para Home Logada
+     */
+    private fun Listners() {
+        binding.appBarTelaGeladeira.iconHome.setOnClickListener {
+            trocarTela(HomeLogadaActivity())
+
+        }
         binding.cardViewFrutasVerduras.setOnClickListener {
-            trocarTela(ItensFrutasActivity())
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.FRUTAS))
+        }
+        binding.cardViewLaticinios.setOnClickListener {
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.LATICIONIOS))
+        }
+        binding.cardViewCarnes.setOnClickListener {
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.CARNES))
+        }
+        binding.cardViewFriosEmbutidos.setOnClickListener {
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.FRIOS))
+        }
+        binding.cardViewBebidas.setOnClickListener {
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.BEBIDAS))
+        }
+        binding.cardViewBolosSobremesas.setOnClickListener {
+            startActivity(ItensProdutosActivity
+                .getIntent(this, LocalEnum.GELADEIRA, TipoConteudoEnum.SOBREMESAS))
         }
 
         binding.btnVoltarGeladeira.setOnClickListener {
@@ -39,25 +73,6 @@ class TelaGaladeiraActivity : BaseActivity() {
             finish()
         }
 
-        binding.cardViewFrutasVerduras.setOnClickListener {
-            trocarTela(ItensFrutasActivity())
-            finish()
-        }
-    }
-
-    private fun trocadeTelaItem(){
-        binding.cardUmGeladeira.setOnClickListener {
-            trocarTela(ItensFrutasActivity())
-        }
-    }
-    /**
-     * Icone home volta para Home Logada
-     */
-        private fun Listners() {
-        binding.appBarTelaGeladeira.iconHome.setOnClickListener {
-            trocarTela(HomeLogadaActivity())
-
-        }
     }
 
     private fun inicializaçãoToolbar() {

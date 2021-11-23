@@ -9,8 +9,8 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".activity.ItensFrutasActivity">
+    android:layout_height="match_parent"
+    tools:context=".activity.ItensProdutosActivity">
 
     <!--    Imagem lixeira  -->
 
@@ -177,7 +177,7 @@
                     android:contentDescription="@string/todo_test" />
 
                 <TextView
-                    android:id="@+id/text_item_frutas"
+                    android:id="@+id/text_item_produto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="36dp"
@@ -208,9 +208,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView_item_frutas"
         app:layout_constraintVertical_bias="0.0"
-        tools:itemCount="1"
+        tools:itemCount="2"
         tools:listitem="@layout/item_geladeira"
         tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_produtos"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        tools:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/button_novo_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_itens"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_novo_item"
@@ -223,7 +236,7 @@
         app:layout_constraintBottom_toTopOf="@id/layout_novo_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_itens"
+        app:layout_constraintTop_toBottomOf="@id/progressbar_produtos"
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
