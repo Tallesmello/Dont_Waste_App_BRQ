@@ -1,6 +1,5 @@
 package com.example.dont_waste_brq.repository.dao
 
-import com.example.dont_waste_brq.data.RealtimeDatabase
 import com.example.dont_waste_brq.model.Armazenar
 import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.repository.Icrud
