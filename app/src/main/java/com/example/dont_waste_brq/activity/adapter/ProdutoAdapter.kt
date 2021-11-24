@@ -17,7 +17,6 @@ class ProdutoAdapter(
 ) : RecyclerView.Adapter<ProdutoViewHolder>() {
 
     private var houveAtualizacao = false
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoViewHolder {
         val inflater =
             LayoutInflater.from(parent.context).inflate(R.layout.item_geladeira, parent, false)
@@ -26,7 +25,7 @@ class ProdutoAdapter(
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
         itens[position].apply {
-           holder.bind(this, getInstanceRemover()) { atualizou() }
+            holder.bind(this, getInstanceRemover()) { atualizou() }
         }
     }
 
@@ -56,7 +55,6 @@ class ProdutoAdapter(
     }
 
     fun houveAtualizacao() = houveAtualizacao
-
     fun resetAtualizacoes() {
         houveAtualizacao = false
     }
@@ -89,7 +87,6 @@ class ProdutoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 }
             }
         }
-
         val buttonAdicionar = itemView.findViewById<ImageButton>(R.id.imageButton_adicionar)
         buttonAdicionar.setOnClickListener {
             item?.let { item.quantidade += 1 }

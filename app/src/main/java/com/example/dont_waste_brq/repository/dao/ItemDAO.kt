@@ -1,18 +1,20 @@
 package com.example.dont_waste_brq.repository.dao
 
-import com.example.dont_waste_brq.data.RealtimeDatabase
+import com.example.dont_waste_brq.data.FirebaseAuth
+import com.example.dont_waste_brq.data.FirebaseRealtimeDatabase
 import com.example.dont_waste_brq.model.Armazenar
 import com.example.dont_waste_brq.model.Produto
+import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.Icrud
-import com.google.android.gms.tasks.Task
 
 abstract class ItemDAO(private val armazenar: Armazenar): Icrud {
 
     override fun lerItens(
         result: (Boolean, String?, ArrayList<Produto?>?) -> Unit
     ) {
-        RealtimeDatabase
-            .chaveCliente()
+        FirebaseRealtimeDatabase
+            .pegarInstancia()
+            .child(FirebaseAuth.gerandoKeyDoUsuario())
             .child(armazenar.local.toString())
             .child(armazenar.tipoConteudo.toString())
             .get()
@@ -21,10 +23,10 @@ abstract class ItemDAO(private val armazenar: Armazenar): Icrud {
                     val produtos = ArrayList<Produto?>()
                     val result = task.result
                     result?.let {
-                        it.children.forEach {
-                            val produto: Produto? = it.getValue(Produto::class.java)
-                            produtos.add(produto)
+                        val itens = it.children.map {
+                            it.getValue(ProdutoGeladeira::class.java)!!
                         }
+                        produtos.addAll(itens)
                     }
                     result(true, null, produtos)
                 } else {
@@ -37,8 +39,9 @@ abstract class ItemDAO(private val armazenar: Armazenar): Icrud {
         lista: ArrayList<Produto?>,
         result: (Boolean, String?) -> Unit
     ) {
-        RealtimeDatabase
-            .chaveCliente()
+        FirebaseRealtimeDatabase
+            .pegarInstancia()
+            .child(FirebaseAuth.gerandoKeyDoUsuario())
             .child(armazenar.local.toString())
             .child(armazenar.tipoConteudo.toString())
             .setValue(lista)
@@ -52,16 +55,13 @@ abstract class ItemDAO(private val armazenar: Armazenar): Icrud {
     }
 
     override fun adicionarItem(produto: Produto) {
-        RealtimeDatabase
-            .chaveCliente()
+        FirebaseRealtimeDatabase
+            .pegarInstancia()
+            .child(FirebaseAuth.gerandoKeyDoUsuario())
             .child(armazenar.local.toString())
             .child(armazenar.tipoConteudo.toString())
             .push()
             .setValue(produto.nome,produto.quantidade)
-    }
-
-    override fun removerItem(produto: Produto): Task<Void> {
-        return RealtimeDatabase.pegarInstancia().child(produto.toString()).removeValue();
     }
 
 }
