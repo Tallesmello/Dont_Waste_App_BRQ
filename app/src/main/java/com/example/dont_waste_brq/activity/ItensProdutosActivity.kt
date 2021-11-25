@@ -128,7 +128,7 @@ class ItensProdutosActivity : BaseActivity() {
                 sucesso: Boolean, mensagemErro: String? ->
                 salvarStatus(sucesso, mensagemErro)
             }
-                startActivity(intent)
+                startActivity(Intent(this, AlimentosCadastradosActivity::class.java))
         }
 
         binding.btnVoltarItemFrutas.setOnClickListener {
