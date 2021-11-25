@@ -11,7 +11,4 @@ class DispensaDAO(
 ) : ItemDAO(
     Armazenar(ProdutoDispensa.DISPENSA, tipo)
 ) {
-    override fun removerItem(produto: Produto): Task<Void> {
-        TODO("Not yet implemented")
-    }
 }

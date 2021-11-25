@@ -8,6 +8,5 @@ interface Icrud {
     fun lerItens(result: (Boolean, String?, ArrayList<Produto?>?) -> Unit)
     fun adicionarItens(lista : ArrayList<Produto?>, result: (Boolean, String?) -> Unit)
     fun adicionarItem(produto : Produto)
-    fun removerItem(produto: Produto) : Task<Void>
 
 }

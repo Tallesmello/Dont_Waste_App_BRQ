@@ -13,4 +13,8 @@
     <color name="red">#FF0000</color>
     <color name="cinza_view">#979595</color>
     <color name="cinza_escuro">#D3D3D3</color>
+    <color name="cinza_alpha">#55000000</color>
+    <color name="colorGrey">#C5BABE</color>
+    <color name="colorGreen">#00B050</color>
+    <color name="colorGreenPrimary">#5FBAA7</color>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.dont_waste_brq.activity
 
+import android.content.Intent
 import android.os.Bundle
+import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityHomeNaoLogadaBinding
 
 
@@ -17,6 +19,11 @@ class HomeNaoLogadaActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
         initListeners()
+
+        if (FirebaseAuth.usuarioLogado()) {
+            startActivity(Intent(this, HomeLogadaActivity::class.java))
+            finish()
+        }
 
     }
 

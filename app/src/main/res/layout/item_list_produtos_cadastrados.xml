@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_nome_alimento_cadastrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Mamão"
+        />
+
+    <TextView
+        android:id="@+id/item_produtos_cadastrado_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Mamão"
+        />
+
+    <ImageButton
+        android:id="@+id/imageButton_remover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_sinal_de_menos"
+        android:contentDescription="@string/todo" />
+
+    <TextView
+        android:id="@+id/contador_item_frutas"
+        android:layout_width="42dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordar_costumizado"
+        android:gravity="center"
+        android:layout_margin="4dp"
+        tools:text="@string/quantidade_item"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/imageButton_adicionar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/ic_add" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipColor"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            app:chipBackgroundColor="@color/colorGreenPrimary"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+           />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_neutro"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:padding="16dp"
+            android:focusableInTouchMode="true"
+            app:backgroundTint="@color/colorGrey"
+            app:layout_constraintEnd_toEndOf="@id/chipColor"
+            app:layout_constraintStart_toStartOf="@id/chipColor"
+            app:layout_constraintTop_toTopOf="@+id/chipColor" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_consumido"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:alpha="0"
+            android:padding="16dp"
+            app:backgroundTint="@color/colorGrey"
+            app:layout_constraintStart_toStartOf="@+id/chipColor"
+            app:layout_constraintTop_toTopOf="@+id/chipColor" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_deperdicios"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="14dp"
+            android:padding="16dp"
+            app:backgroundTint="@color/colorGrey"
+            android:alpha="0"
+            app:layout_constraintEnd_toEndOf="@+id/chipColor"
+            app:layout_constraintTop_toTopOf="@+id/chipColor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
