@@ -288,11 +288,13 @@
             android:id="@+id/recycler_view_alimentos_cadastrados"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_salvar_alimentos_cadastrados"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView_alimentos_cadastrados"
-            tools:listitem="@layout/item_list_produtos_cadastrados"
-            >
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_list_produtos_cadastrados">
 
         </androidx.recyclerview.widget.RecyclerView>
 

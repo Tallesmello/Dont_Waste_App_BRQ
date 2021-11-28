@@ -1,6 +1,9 @@
 package com.example.dont_waste_brq.model
 
-interface Produto {
+import java.io.Serializable
+
+interface Produto : Serializable {
     val nome: String
     var quantidade: Int
+    val data: String
 }

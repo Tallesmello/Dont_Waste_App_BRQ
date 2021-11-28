@@ -1,14 +1,9 @@
 package com.example.dont_waste_brq.activity.adapter
 
-import android.content.Intent
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.toColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dont_waste_brq.R
-import com.example.dont_waste_brq.activity.ItensProdutosActivity
 import com.example.dont_waste_brq.activity.adapter.AlimentoCadastradoAdapter.*
 import com.example.dont_waste_brq.activity.enum.EstadoEnum
 import com.example.dont_waste_brq.databinding.ItemListProdutosCadastradosBinding
@@ -38,46 +33,42 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) : RecyclerVi
                 tvNomeAlimentoCadastrado.text = item.nome
                 itemProdutosCadastradoData.text = item.data
                 contadorItemFrutas.text = item.quantidade
-                fabConsumido.setOnClickListener {
-                    item.estado.descricao = EstadoEnum.CONSUMIDO.toString()
-                    fabConsumido.alpha = 1f
-                    fabNeutro.alpha = 0.0f
-                    fabDeperdicios.alpha = 0.0f
-                    if (fabConsumido.alpha == 1f) {
-                        chipColor.setChipBackgroundColorResource(R.color.colorGreen)
-
-                    }
-                }
-                fabDeperdicios.setOnClickListener {
-                    item.estado.descricao = EstadoEnum.DESPERDICIO.toString()
-                    fabNeutro.alpha = 0.0f
-                    fabDeperdicios.alpha = 1f
-                    fabConsumido.alpha = 0.0f
-                    if(fabDeperdicios.alpha == 1f) {
-                        chipColor.setChipBackgroundColorResource(R.color.red)
-                    }
-                }
-                fabNeutro.setOnClickListener {
-                    item.estado.descricao = EstadoEnum.NEUTRO.toString()
-                    fabConsumido.alpha = 0.0f
-                    fabDeperdicios.alpha = 0.0f
-                    fabNeutro.alpha = 1f
-                    chipColor.setChipBackgroundColorResource(R.color.colorGreenPrimary)
-                }
+                configuraBotao(item, holder.binding)
 
             }
         }
-//            val colorChip = item.estado.descricao
-//            chipColor.chipBackgroundColor = verificaCor(holder.itemView, colorChip)
 
+    private fun configuraBotao(
+        item: AlimentoCadastrado,
+        binding: ItemListProdutosCadastradosBinding,
+    ) {
+        binding.fabConsumido.setOnClickListener {
+            item.estado.descricao = EstadoEnum.CONSUMIDO.toString()
+            binding.fabConsumido.alpha = 1f
+            binding.fabNeutro.alpha = 0.0f
+            binding.fabDeperdicios.alpha = 0.0f
+            if (binding.fabConsumido.alpha == 1f) {
+                binding.chipColor.setChipBackgroundColorResource(R.color.colorGreen)
 
-
-//    private fun verificaCor(itemView: View, colorChip: Int): ColorStateList? {
-//        if (colorChip == R.color.colorGreenPrimary) {
-//
-//        }
-//    }
-
+            }
+        }
+        binding.fabDeperdicios.setOnClickListener {
+            item.estado.descricao = EstadoEnum.DESPERDICIO.toString()
+            binding.fabNeutro.alpha = 0.0f
+            binding.fabDeperdicios.alpha = 1f
+            binding.fabConsumido.alpha = 0.0f
+            if (binding.fabDeperdicios.alpha == 1f) {
+                binding.chipColor.setChipBackgroundColorResource(R.color.red)
+            }
+        }
+        binding.fabNeutro.setOnClickListener {
+            item.estado.descricao = EstadoEnum.NEUTRO.toString()
+            binding.fabConsumido.alpha = 0.0f
+            binding.fabDeperdicios.alpha = 0.0f
+            binding.fabNeutro.alpha = 1f
+            binding.chipColor.setChipBackgroundColorResource(R.color.colorGreenPrimary)
+        }
+    }
 
 
     override fun getItemCount(): Int = list.size

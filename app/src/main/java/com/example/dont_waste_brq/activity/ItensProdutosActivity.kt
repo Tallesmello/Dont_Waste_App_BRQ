@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.NavType
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dont_waste_brq.activity.adapter.ProdutoAdapter
 import com.example.dont_waste_brq.activity.enum.LocalEnum
@@ -15,6 +16,7 @@ import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.DispensaDAO
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.example.dont_waste_brq.repository.dao.ItemDAO
+import java.io.Serializable
 
 class ItensProdutosActivity : BaseActivity() {
 
@@ -127,8 +129,10 @@ class ItensProdutosActivity : BaseActivity() {
             dao.adicionarItens(produtos){
                 sucesso: Boolean, mensagemErro: String? ->
                 salvarStatus(sucesso, mensagemErro)
+                val intent = Intent(this, AlimentosCadastradosActivity::class.java)
+                intent.putExtra("produto", produtos)
             }
-                startActivity(Intent(this, AlimentosCadastradosActivity::class.java))
+                startActivity(intent)
         }
 
         binding.btnVoltarItemFrutas.setOnClickListener {
