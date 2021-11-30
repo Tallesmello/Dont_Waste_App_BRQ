@@ -1,19 +1,37 @@
 package com.example.dont_waste_brq.repository.dao
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.data.FirebaseRealtimeDatabase
 import com.example.dont_waste_brq.model.Armazenar
 import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.Icrud
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 
 abstract class ItemDAO(private val armazenar: Armazenar): Icrud {
+
+    override fun lerLocal(result: (Boolean, String?, ArrayList<Produto>?) -> Unit) {
+        FirebaseRealtimeDatabase
+            .pegarInstancia()
+            .child(FirebaseAuth.gerandoKeyDoUsuario())
+            .child(armazenar.local.toString())
+            .child(armazenar.tipoConteudo.toString())
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val produtos = ArrayList<Produto>()
+                    val result = task.result
+                    result?.let {
+                        val itens = it.children.map {
+                            it.getValue(ProdutoGeladeira::class.java)!!
+                        }
+                        produtos.addAll(itens)
+                    }
+                    result(true, null, produtos)
+                } else {
+                    result(false, task.exception?.message, null)
+                }
+            }
+    }
 
     override fun lerItens(
         result: (Boolean, String?, ArrayList<Produto?>?) -> Unit
