@@ -2,10 +2,9 @@ package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.activity.adapter.AlimentoCadastradoAdapter
-import com.example.dont_waste_brq.activity.adapter.ProdutoAdapter
+import com.example.dont_waste_brq.activity.enum.EstadoEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityAlimentosCadastradosBinding
 import com.example.dont_waste_brq.databinding.ItemListProdutosCadastradosBinding
@@ -30,6 +29,40 @@ class AlimentosCadastradosActivity : BaseActivity() {
         binding = ActivityAlimentosCadastradosBinding.inflate(layoutInflater)
         setContentView(binding.root)
         lerLocal()
+
+        binding.btnSalvarAlimentosCadastrados.setOnClickListener {
+
+            verificaBotao(alimentos, alimentoAdapter )
+
+        }
+    }
+    fun verificaBotao(
+        item: ArrayList<AlimentoCadastrado>,
+        alimentoAdapter: AlimentoCadastradoAdapter, ){
+        if ( isClickable){
+            configuraBotao2(item,binding, EstadoEnum.NEUTRO,R.color.colorGreenPrimary)
+        }else if (binding.fabDeperdicios.isClickable){
+            configuraBotao2(item,binding, EstadoEnum.DESPERDICIO,R.color.red)
+        }else if (binding.fabConsumido.isClickable){
+            configuraBotao2(item,binding, EstadoEnum.CONSUMIDO,R.color.colorGreen)
+        }
+
+    }
+
+    fun configuraBotao2 (
+        item: ArrayList<AlimentoCadastrado>,
+        binding: ItemListProdutosCadastradosBinding,
+        consumido: EstadoEnum,
+        color: Int
+    ): EstadoEnum {
+        item.map {it.estado.descricao = consumido.toString()}
+        binding.fabConsumido.alpha = 1f
+        binding.fabNeutro.alpha = 0.0f
+        binding.fabDeperdicios.alpha = 0.0f
+        if (binding.fabConsumido.alpha == 1f) {
+            binding.chipColor.setChipBackgroundColorResource(color)
+        }
+        return consumido
     }
 
     private fun lerLocal() {

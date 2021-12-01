@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.225" />
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable/ic_add.xml" value="0.225" />
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable/ic_carnes_background.xml" value="0.225" />
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable/ic_launcher_background.xml" value="0.225" />
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable/ic_menu_camera.xml" value="0.225" />
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable/ic_menu_hamburguer.xml" value="0.225" />
+        <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/drawable/side_nav_bar.xml" value="0.225" />
         <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/layout/activity_alimentos_cadastrados.xml" value="0.33" />
         <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/layout/activity_itens_produtos.xml" value="0.25625" />
         <entry key="..\:/Users/beatrizlima/Desktop/Projeto Oficial/app/src/main/res/layout/activity_menu.xml" value="0.20885416666666667" />

@@ -33,23 +33,33 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) : RecyclerVi
                 tvNomeAlimentoCadastrado.text = item.nome
                 itemProdutosCadastradoData.text = item.data
                 contadorItemFrutas.text = item.quantidade
-                configuraBotao(item, holder.binding)
+                configuraBotao(item,holder.binding)
+
+
 
             }
         }
 
-    private fun configuraBotao(
+//    private fun gerarAlimento(binding: ItemListProdutosCadastradosBinding) {
+//        val alimento = AlimentoCadastrado(
+//            nome = binding.tvNomeAlimentoCadastrado.text.toString(),
+//            quantidade = binding.contadorItemFrutas.text.toString(),
+//            data = binding.itemProdutosCadastradoData.text.toString(),
+//            estado = configuraBotao()
+//        )
+//    }
+
+    private fun configuraBotao (
         item: AlimentoCadastrado,
         binding: ItemListProdutosCadastradosBinding,
-    ) {
+    )  {
         binding.fabConsumido.setOnClickListener {
             item.estado.descricao = EstadoEnum.CONSUMIDO.toString()
             binding.fabConsumido.alpha = 1f
             binding.fabNeutro.alpha = 0.0f
             binding.fabDeperdicios.alpha = 0.0f
             if (binding.fabConsumido.alpha == 1f) {
-                binding.chipColor.setChipBackgroundColorResource(R.color.colorGreen)
-
+                binding.chipColor.setChipBackgroundColorResource(R.color.red)
             }
         }
         binding.fabDeperdicios.setOnClickListener {
@@ -58,7 +68,7 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) : RecyclerVi
             binding.fabDeperdicios.alpha = 1f
             binding.fabConsumido.alpha = 0.0f
             if (binding.fabDeperdicios.alpha == 1f) {
-                binding.chipColor.setChipBackgroundColorResource(R.color.red)
+                binding.chipColor.setChipBackgroundColorResource(R.color.colorGreen)
             }
         }
         binding.fabNeutro.setOnClickListener {

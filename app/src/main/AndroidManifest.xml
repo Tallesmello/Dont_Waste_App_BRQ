@@ -13,13 +13,7 @@
         android:theme="@style/Theme.Dont_Waste_BRQ">
         <activity
             android:name=".activity.AlimentosCadastradosActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ItensProdutosActivity"
             android:exported="true" />
@@ -38,11 +32,6 @@
         <activity
             android:name=".activity.ActivityMenu"
             android:exported="true" />
-        <activity
-            android:name=".activity.HomeTeste"
-            android:exported="true"
-            android:label="@string/title_activity_home_teste"
-            android:theme="@style/Theme.Dont_Waste_BRQ.NoActionBar" />
         <activity
             android:name=".activity.VencimentosProximosActivity"
             android:exported="true" />
@@ -70,6 +59,11 @@
         <activity
             android:name=".activity.HomeNaoLogadaActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>
