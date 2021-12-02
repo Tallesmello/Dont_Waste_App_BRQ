@@ -15,6 +15,7 @@
         android:layout_margin="4dp"
         android:fontFamily="@font/open_sans_bold"
         tools:text="@string/mam_o_ITEM"
+        android:maxLength="10"
         android:textColor="@color/black"
         android:textSize="16sp" />
 

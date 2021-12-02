@@ -10,7 +10,7 @@ interface Produto : Serializable {
 
     fun toAlimentoCadastrado(): AlimentoCadastrado = AlimentoCadastrado(
         this.nome,
-        this.quantidade.toString(),
+        this.quantidade,
         this.data,
         EstadoEnum.NEUTRO
     )

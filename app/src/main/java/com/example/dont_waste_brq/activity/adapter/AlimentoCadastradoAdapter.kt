@@ -9,10 +9,9 @@ import com.example.dont_waste_brq.activity.enum.EstadoEnum
 import com.example.dont_waste_brq.databinding.ItemListProdutosCadastradosBinding
 import com.example.dont_waste_brq.model.AlimentoCadastrado
 
-class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) : RecyclerView.Adapter<AlimentoCadastradoViewHolder>() {
-
-    inner class AlimentoCadastradoViewHolder(val binding: ItemListProdutosCadastradosBinding) :
-        RecyclerView.ViewHolder(binding.root)
+class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) :
+    RecyclerView.Adapter<AlimentoCadastradoViewHolder>() {
+    lateinit var novaLista : MutableList<AlimentoCadastrado>
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,16 +26,41 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) : RecyclerVi
         )
     }
 
-        override fun onBindViewHolder(holder: AlimentoCadastradoViewHolder, position: Int) {
-            val item = list[position]
-            holder.binding.apply {
-                tvNomeAlimentoCadastrado.text = item.nome
-                itemProdutosCadastradoData.text = item.data
-                contadorItemFrutas.text = item.quantidade
-                configuraBotao(item, holder.binding)
+    override fun onBindViewHolder(holder: AlimentoCadastradoViewHolder, position: Int) {
+        val item = list[position]
+        holder.binding.apply {
+            tvNomeAlimentoCadastrado.text = item.nome
+            itemProdutosCadastradoData.text = item.data.subSequence(0,5)
+            contadorItemFrutas.text = item.quantidade.toString()
+            configuraBotao(item, holder.binding)
+            configurarMaisEMenos(holder.binding,item)
+            montarLista(item)
+        }
+    }
 
+    private fun montarLista(item: AlimentoCadastrado) : MutableList<AlimentoCadastrado> {
+        novaLista = ArrayList()
+        novaLista.add(item)
+        return novaLista
+    }
+
+    private fun configurarMaisEMenos(
+        binding: ItemListProdutosCadastradosBinding,
+        item: AlimentoCadastrado
+    ) {
+        val quantidade = binding.contadorItemFrutas
+        quantidade.text = item.quantidade.toString()
+        binding.imageButtonAdicionar.setOnClickListener {
+            item.quantidade += 1
+            quantidade.text = item.quantidade.toString()
+        }
+        binding.imageButtonRemover.setOnClickListener {
+            if (item.quantidade > 0){
+                item.quantidade -= 1
+                quantidade.text = item.quantidade.toString()
             }
         }
+    }
 
     private fun configuraBotao(
         item: AlimentoCadastrado,
@@ -73,3 +97,8 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) : RecyclerVi
 
     override fun getItemCount(): Int = list.size
 }
+
+class AlimentoCadastradoViewHolder(
+    val binding: ItemListProdutosCadastradosBinding
+) : RecyclerView.ViewHolder(binding.root)
+

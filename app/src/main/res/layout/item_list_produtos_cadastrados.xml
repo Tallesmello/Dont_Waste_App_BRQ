@@ -13,8 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
-        android:text="Mamão"
-        />
+        android:text="Mamão" />
 
     <TextView
         android:id="@+id/item_produtos_cadastrado_data"
