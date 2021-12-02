@@ -1,6 +1,7 @@
 package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dont_waste_brq.R
@@ -13,17 +14,16 @@ import com.example.dont_waste_brq.model.AlimentoCadastrado
 import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.example.dont_waste_brq.repository.dao.ItemDAO
+import com.google.android.gms.tasks.Task
 
 class AlimentosCadastradosActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAlimentosCadastradosBinding
     private lateinit var alimentoAdapter : AlimentoCadastradoAdapter
     private val alimentos = ArrayList<AlimentoCadastrado>()
-
     private lateinit var dao: ItemDAO
-
     private val produtos = ArrayList<Produto>()
-
+    private var lista : MutableList<AlimentoCadastrado> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,10 +77,28 @@ class AlimentosCadastradosActivity : BaseActivity() {
         alimentoAdapter = AlimentoCadastradoAdapter(alimentos)
         recyclerViewAlimentosCadastrados.adapter = alimentoAdapter
         recyclerViewAlimentosCadastrados.layoutManager = LinearLayoutManager(this@AlimentosCadastradosActivity)
-        alimentoAdapter.enviandoLista()
-    }
+        val listaPronta = alimentoAdapter.enviandoLista()
+        configurandoParaoBD(listaPronta)
     }
 
-    fun recebeValores(){
-
+    private fun configurandoParaoBD(listaPronta: MutableList<AlimentoCadastrado>) {
+        for (l in listaPronta){
+            val alimeto = AlimentoCadastrado(
+                nome = l.nome,
+                quantidade = l.quantidade,
+                data = l.data,
+                estado = l.estado
+            )
+            lista.add(alimeto)
+        }
+        dao.adicionarProutosComConsumo(lista, { sucesso(it) })
     }
+
+    private fun sucesso(it: Task<Void>) {
+        if (it.isSuccessful){
+            mensagem("Deu certo ")
+        }else{
+            mensagem("deu errado ")
+        }
+    }
+}

@@ -11,7 +11,7 @@ import com.example.dont_waste_brq.model.AlimentoCadastrado
 
 class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) :
     RecyclerView.Adapter<AlimentoCadastradoViewHolder>() {
-    lateinit var novaLista : MutableList<AlimentoCadastrado>
+    var novaLista: MutableList<AlimentoCadastrado> = arrayListOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,16 +30,15 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) :
         val item = list[position]
         holder.binding.apply {
             tvNomeAlimentoCadastrado.text = item.nome
-            itemProdutosCadastradoData.text = item.data.subSequence(0,5)
+            itemProdutosCadastradoData.text = item.data.subSequence(0, 5)
             contadorItemFrutas.text = item.quantidade.toString()
             configuraBotao(item, holder.binding)
-            configurarMaisEMenos(holder.binding,item)
+            configurarMaisEMenos(holder.binding, item)
             montarLista(item)
         }
     }
 
-    private fun montarLista(item: AlimentoCadastrado) : MutableList<AlimentoCadastrado> {
-        novaLista = ArrayList()
+    private fun montarLista(item: AlimentoCadastrado): MutableList<AlimentoCadastrado> {
         novaLista.add(item)
         return novaLista
     }
@@ -57,7 +56,7 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) :
             quantidade.text = item.quantidade.toString()
         }
         binding.imageButtonRemover.setOnClickListener {
-            if (item.quantidade > 0){
+            if (item.quantidade > 0) {
                 item.quantidade -= 1
                 quantidade.text = item.quantidade.toString()
             }

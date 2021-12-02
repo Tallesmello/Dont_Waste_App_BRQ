@@ -14,4 +14,5 @@ interface Produto : Serializable {
         this.data,
         EstadoEnum.NEUTRO
     )
+
 }
