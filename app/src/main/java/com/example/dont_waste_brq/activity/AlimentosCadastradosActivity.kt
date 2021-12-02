@@ -30,6 +30,7 @@ class AlimentosCadastradosActivity : BaseActivity() {
         binding = ActivityAlimentosCadastradosBinding.inflate(layoutInflater)
         setContentView(binding.root)
         lerLocal()
+
     }
 
     private fun lerLocal() {
@@ -76,7 +77,8 @@ class AlimentosCadastradosActivity : BaseActivity() {
         alimentoAdapter = AlimentoCadastradoAdapter(alimentos)
         recyclerViewAlimentosCadastrados.adapter = alimentoAdapter
         recyclerViewAlimentosCadastrados.layoutManager = LinearLayoutManager(this@AlimentosCadastradosActivity)
-        }
+        alimentoAdapter.enviandoLista()
+    }
     }
 
     fun recebeValores(){

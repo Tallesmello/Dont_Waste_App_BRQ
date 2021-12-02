@@ -44,6 +44,8 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) :
         return novaLista
     }
 
+    fun enviandoLista() = novaLista
+
     private fun configurarMaisEMenos(
         binding: ItemListProdutosCadastradosBinding,
         item: AlimentoCadastrado
