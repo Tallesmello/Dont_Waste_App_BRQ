@@ -1,6 +1,5 @@
 package com.example.dont_waste_brq.repository.dao
 
-import android.widget.Toast
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.data.FirebaseRealtimeDatabase
 import com.example.dont_waste_brq.model.AlimentoCadastrado
@@ -90,18 +89,6 @@ abstract class ItemDAO(private val armazenar: Armazenar): Icrud {
             .push()
             .setValue(produto.nome,produto.quantidade)
     }
-    fun adicionarProutosComConsumo(list : MutableList<AlimentoCadastrado>,result :(task : Task<Void>)-> Unit){
-        FirebaseRealtimeDatabase
-            .pegarInstancia()
-            .child(FirebaseAuth.gerandoKeyDoUsuario())
-            .child("Consumo")
-            .setValue(list).addOnCompleteListener {task->
-                if (task.isSuccessful){
-                    result(task)
-                }else{
-                    result(task)
-                }
-            }
-    }
+
 
 }

@@ -34,16 +34,15 @@ class AlimentoCadastradoAdapter(val list: List<AlimentoCadastrado>) :
             contadorItemFrutas.text = item.quantidade.toString()
             configuraBotao(item, holder.binding)
             configurarMaisEMenos(holder.binding, item)
-            montarLista(item)
         }
+        montarLista(item)
     }
 
     private fun montarLista(item: AlimentoCadastrado): MutableList<AlimentoCadastrado> {
         novaLista.add(item)
         return novaLista
     }
-
-    fun enviandoLista() = novaLista
+    val listaNaoSeiMaisNome get() = novaLista
 
     private fun configurarMaisEMenos(
         binding: ItemListProdutosCadastradosBinding,
