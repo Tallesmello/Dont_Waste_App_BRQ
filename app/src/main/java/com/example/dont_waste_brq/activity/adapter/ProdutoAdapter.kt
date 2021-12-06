@@ -11,9 +11,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.model.Produto
+import com.example.dont_waste_brq.model.ProdutoGeladeira
 
 class ProdutoAdapter(
-    val itens: ArrayList<Produto?>
+    val itens: ArrayList<ProdutoGeladeira>
 ) : RecyclerView.Adapter<ProdutoViewHolder>() {
 
     private var houveAtualizacao = false
@@ -24,7 +25,8 @@ class ProdutoAdapter(
     }
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
-        itens[position].apply {
+        val produtoGeladeira = itens[position] as ProdutoGeladeira
+        produtoGeladeira.apply {
             holder.bind(this, getInstanceRemover()) { atualizou() }
         }
     }
@@ -48,7 +50,7 @@ class ProdutoAdapter(
         atualizou()
     }
 
-    fun adicionarItem(item: Produto) {
+    fun adicionarItem(item: ProdutoGeladeira) {
         itens.add(item)
         notifyItemInserted(itens.size)
         atualizou()
@@ -65,18 +67,18 @@ class ProdutoAdapter(
 class ProdutoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(
-        item: Produto?,
+        item: Produto,
         remover: Remover,
         atualizou : () -> Unit
     ) {
         val nome = itemView.findViewById<TextView>(R.id.tv_descricao)
-        nome.text = item?.nome
+        nome.text = item.nome
         val quantidade = itemView.findViewById<TextView>(R.id.contador_item_frutas)
-        quantidade.text = item?.quantidade.toString()
+        quantidade.text = item.quantidade.toString()
 
         val buttonRemover = itemView.findViewById<ImageButton>(R.id.imageButton_remover)
         buttonRemover.setOnClickListener {
-            item?.let { item ->
+            item.let { item ->
                 if (item.quantidade > 0) {
                     item.quantidade -= 1
                     quantidade.text = item.quantidade.toString()
@@ -89,8 +91,8 @@ class ProdutoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         val buttonAdicionar = itemView.findViewById<ImageButton>(R.id.imageButton_adicionar)
         buttonAdicionar.setOnClickListener {
-            item?.let { item.quantidade += 1 }
-            quantidade.text = item?.quantidade.toString()
+            item.let { item.quantidade += 1 }
+            quantidade.text = item.quantidade.toString()
             atualizou()
         }
     }

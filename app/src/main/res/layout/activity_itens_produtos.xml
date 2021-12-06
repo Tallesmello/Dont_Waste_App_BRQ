@@ -8,6 +8,7 @@
     android:fillViewport="true">
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/container_geladeira"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ItensProdutosActivity">
@@ -313,7 +314,5 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </ScrollView>

@@ -1,22 +1,27 @@
 package com.example.dont_waste_brq.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.NavType
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dont_waste_brq.activity.AlimentosCadastradosActivity.Companion.PRODUTOS
 import com.example.dont_waste_brq.activity.adapter.ProdutoAdapter
 import com.example.dont_waste_brq.activity.enum.LocalEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityItensProdutosBinding
-import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.DispensaDAO
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.example.dont_waste_brq.repository.dao.ItemDAO
-import java.io.Serializable
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class ItensProdutosActivity : BaseActivity() {
 
@@ -25,10 +30,12 @@ class ItensProdutosActivity : BaseActivity() {
 
     private lateinit var dao: ItemDAO
 
-    private val produtos = ArrayList<Produto?>()
+    private val produtos = ArrayList<ProdutoGeladeira>()
 
     private lateinit var local: LocalEnum
     private lateinit var conteudo: TipoConteudoEnum
+
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +46,24 @@ class ItensProdutosActivity : BaseActivity() {
         setDao()
         setSubTitulo()
         configurarListners()
+        configurarLauncher()
         lerProdutos()
+    }
+
+    private fun configurarLauncher() {
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val _produtos = result.data
+                    ?.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
+                if (!_produtos.isNullOrEmpty()) {
+                    produtos.clear()
+                    produtos.addAll(_produtos)
+                    configuraRecyclerView()
+                }
+            }
+        }
     }
 
     private fun setLocalConteudo() {
@@ -47,8 +71,6 @@ class ItensProdutosActivity : BaseActivity() {
         val iConteudo = intent.getIntExtra(CONTEUDO, 0)
         local = LocalEnum.values()[iLocal]
         conteudo = TipoConteudoEnum.values()[iConteudo]
-
-
     }
 
     private fun setSubTitulo() {
@@ -65,9 +87,8 @@ class ItensProdutosActivity : BaseActivity() {
 
     private fun lerProdutos() {
         showProgressBar()
-        dao.lerItens { ok: Boolean, mensagemErro: String?, itens: ArrayList<Produto?>? ->
-            lerProdutosResult(ok, mensagemErro, itens)
-        }
+        dao.lerLocal {sucesso: Boolean, mensagem: String?, json: String? ->
+            lerProdutosResult(sucesso, mensagem, json)}
     }
 
     private fun showProgressBar() {
@@ -81,12 +102,16 @@ class ItensProdutosActivity : BaseActivity() {
     }
 
     private fun lerProdutosResult(
-        sucesso: Boolean, mensagemErro: String?, itens: ArrayList<Produto?>?
+        sucesso: Boolean, mensagemErro: String?, json: String?
     ) {
         if (sucesso) {
-            if (itens.isNullOrEmpty()) {
+            if (json == null) {
                 mensagem("Nenhum produto lido")
             } else {
+                val gson = Gson()
+                val itemType = object : TypeToken<List<ProdutoGeladeira>>() {}.type
+                val itens = gson.fromJson<List<ProdutoGeladeira>>(json, itemType)
+
                 produtos.addAll(itens)
             }
             configuraRecyclerView()
@@ -130,8 +155,23 @@ class ItensProdutosActivity : BaseActivity() {
                 sucesso: Boolean, mensagemErro: String? ->
                 salvarStatus(sucesso, mensagemErro)
             }
-            val intent = Intent(this, AlimentosCadastradosActivity::class.java)
-            startActivity(intent)
+            var ok = false
+            if (!produtos.isNullOrEmpty()) {
+                for (prod in produtos) {
+                    if (prod.quantidade > 0) {
+                        ok = true
+                    }
+                }
+            }
+            if (ok) {
+                chamarAlimentosCadastrados()
+            } else {
+                Snackbar.make(
+                    binding.containerGeladeira,
+                    "Sem alimentos para consumir",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
 
         binding.btnVoltarItemFrutas.setOnClickListener {
@@ -141,6 +181,11 @@ class ItensProdutosActivity : BaseActivity() {
                 finish()
             }
         }
+    }
+
+    private fun chamarAlimentosCadastrados() {
+        val intent = AlimentosCadastradosActivity.getIntent(this, conteudo, produtos)
+        resultLauncher.launch(intent)
     }
 
     private fun salvarStatus(sucesso: Boolean, mensagemErro: String?){
