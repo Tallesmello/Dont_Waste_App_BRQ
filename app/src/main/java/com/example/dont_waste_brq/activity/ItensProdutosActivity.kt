@@ -129,10 +129,9 @@ class ItensProdutosActivity : BaseActivity() {
             dao.adicionarItens(produtos){
                 sucesso: Boolean, mensagemErro: String? ->
                 salvarStatus(sucesso, mensagemErro)
-                val intent = Intent(this, AlimentosCadastradosActivity::class.java)
-                intent.putExtra("produto", produtos)
             }
-                startActivity(intent)
+            val intent = Intent(this, AlimentosCadastradosActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnVoltarItemFrutas.setOnClickListener {
