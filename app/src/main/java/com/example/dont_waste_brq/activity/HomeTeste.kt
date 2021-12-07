@@ -1,19 +1,20 @@
 package com.example.dont_waste_brq.activity
 
 import android.os.Bundle
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
+import com.example.dont_waste_brq.activity.enum.EstadoEnum
+import com.example.dont_waste_brq.activity.enum.LocalEnum
+import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
+import com.example.dont_waste_brq.data.FirebaseAuth
+import com.example.dont_waste_brq.data.FirebaseRealtimeDatabase
 import com.example.dont_waste_brq.databinding.ActivityHomeTesteBinding
+import com.example.dont_waste_brq.model.Armazenar
+import com.example.dont_waste_brq.model.Consumo
+import com.example.dont_waste_brq.model.Produto
+import com.example.dont_waste_brq.model.ProdutoGeladeira
+import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 
-class HomeTeste : AppCompatActivity() {
+class HomeTeste : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHomeTesteBinding
@@ -23,6 +24,69 @@ class HomeTeste : AppCompatActivity() {
 
         binding = ActivityHomeTesteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        lerDados()
+    }
+
+    private fun lerDados() {
+        val dao = GeladeiraDAO(TipoConteudoEnum.FRUTAS)
+//        dao.lerLocal{sucesso: Boolean, mensagem: String?, itens: ArrayList<Any>? ->
+//            lerProdutos(sucesso, mensagem, itens)
+//        }
+    }
+
+    private fun lerProdutos(sucesso: Boolean, mensagem: String?, itens: ArrayList<Any>?) {
+        if (sucesso) {
+            val produtos: ArrayList<Produto> = itens as ArrayList<Produto>
+            println("sucessosucessosucesso")
+            println(produtos.toString())
+            mensagem("sucesso")
+        } else {
+            mensagem("erro: $mensagem")
+        }
+    }
+
+
+    private fun adicionarDados() {
+        val produtos = arrayListOf<Produto>(
+            ProdutoGeladeira("uva", 5,
+                consumo = arrayListOf(
+                    Consumo(1, EstadoEnum.CONSUMIDO),
+                    Consumo(1, EstadoEnum.CONSUMIDO)
+                ))
+        )
+        adicionarItens(
+            Armazenar(LocalEnum.GELADEIRA, TipoConteudoEnum.FRUTAS), produtos) {
+                sucesso: Boolean, mensagem: String? -> resultAdicao(sucesso, mensagem) }
+    }
+
+    private fun resultAdicao(sucesso: Boolean, mensagem: String?) {
+        if (sucesso) {
+            mensagem("sucesso")
+        } else {
+            mensagem("erro: $mensagem")
+        }
+    }
+
+    fun adicionarItens(
+        armazenar: Armazenar,
+        lista: ArrayList<Produto>,
+        result: (Boolean, String?) -> Unit
+    ) {
+        FirebaseRealtimeDatabase
+            .pegarInstancia()
+            .child(FirebaseAuth.gerandoKeyDoUsuario())
+            .child(armazenar.local.toString())
+            .child(armazenar.tipoConteudo.toString())
+            .setValue(lista)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    result(true, null)
+                } else {
+                    result(false, task.exception?.message)
+                }
+            }
+    }
+
 
 //        setSupportActionBar(binding.appBarHomeTeste.toolbar)
 //
@@ -54,5 +118,4 @@ class HomeTeste : AppCompatActivity() {
 //        val navController = findNavController(R.id.nav_host_fragment_content_home_teste)
 //        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 //    }
-    }
 }

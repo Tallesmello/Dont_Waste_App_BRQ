@@ -10,6 +10,4 @@ class GeladeiraDAO(
     tipo : TipoConteudoEnum
 ) : ItemDAO(
     Armazenar(ProdutoGeladeira.GELADEIRA, tipo)
-) {
-
-}
+)

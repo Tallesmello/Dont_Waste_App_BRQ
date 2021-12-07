@@ -3,7 +3,8 @@ package com.example.dont_waste_brq.activity.enum
 enum class LocalEnum(val descricao: String) {
 
     GELADEIRA("GELADEIRA"),
-    DISPENSA("DISPENSA");
+    DISPENSA("DISPENSA"),
+    CONSUMO("CONSUMO");
     companion object {
 
         fun getArrayListOfLocal () : ArrayList<String> {

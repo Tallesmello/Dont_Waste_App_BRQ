@@ -62,7 +62,8 @@
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_BRQ/app/src/main/res/layout/list_item.xml" value="0.35507246376811596" />
         <entry key="..\:/Users/tallesmello/AndroidStudioProjects/Dont_Waste_BRQ/app/src/main/res/menu/menu_options.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/drawable-v24/bordar_costumizado.xml" value="0.10625" />
-        <entry key="app/src/main/res/layout/activity_alimentos_cadastrados.xml" value="0.20729166666666668" />
+        <entry key="app/src/main/res/drawable/bola.xml" value="0.25794871794871793" />
+        <entry key="app/src/main/res/layout/activity_alimentos_cadastrados.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_home_nao_logada.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_itens_frutas.xml" value="0.25" />
@@ -71,8 +72,10 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/activity_primeiro_acesso.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_tela_galadeira.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/consumo.xml" value="0.46111111111111114" />
         <entry key="app/src/main/res/layout/item_geladeira.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_list_produtos_cadastrados.xml" value="0.36822916666666666" />
+        <entry key="app/src/main/res/layout/item_list_produtos_cadastrados.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/view_consumo_desperdicio.xml" value="0.24583333333333332" />
       </map>
     </option>
   </component>

@@ -4,7 +4,8 @@ import com.example.dont_waste_brq.activity.enum.EstadoEnum
 
 data class AlimentoCadastrado(
     var nome : String,
-    val quantidade: String,
+    var quantidade: Int,
+    var estoque: Int,
     val data: String,
-    val estado: EstadoEnum
+    var estado: EstadoEnum
 )
