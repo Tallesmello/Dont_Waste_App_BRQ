@@ -8,4 +8,7 @@ data class AlimentoCadastrado(
     var estoque: Int,
     val data: String,
     var estado: EstadoEnum
-)
+){
+
+}
+

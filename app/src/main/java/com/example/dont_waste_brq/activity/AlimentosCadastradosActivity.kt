@@ -13,6 +13,7 @@ import com.example.dont_waste_brq.model.Consumo
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.example.dont_waste_brq.repository.dao.ItemDAO
+import java.lang.NullPointerException
 
 class AlimentosCadastradosActivity : BaseActivity() {
 
@@ -50,10 +51,14 @@ class AlimentosCadastradosActivity : BaseActivity() {
         alimentos.clear()
         intent.let {
             tipoConteudo = TipoConteudoEnum.values()[it.getIntExtra(TIPO_CONTEUDO, 0)]
-            val _produtos = it.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
-            if (!_produtos.isNullOrEmpty()) {
-                produtos.addAll(_produtos)
-                alimentos.addAll(_produtos.map { it.toAlimentoCadastrado() })
+            try {
+                val _produtos = it.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
+                if (!_produtos.isNullOrEmpty()) {
+                    produtos.addAll(_produtos)
+                    alimentos.addAll(_produtos.map { it.toAlimentoCadastrado() })
+                }
+            }catch (e : NullPointerException){
+                e.printStackTrace()
             }
             initRecyclerView()
         }
@@ -73,10 +78,12 @@ class AlimentosCadastradosActivity : BaseActivity() {
                 if (produtos[i].consumo == null) {
                     produtos[i].consumo = arrayListOf()
                 }
-                produtos[i].consumo?.add(Consumo(
-                    alimentos[i].quantidade,
-                    alimentos[i].estado
-                ))
+                produtos[i].consumo?.add(
+                    Consumo(
+                        alimentos[i].quantidade,
+                        alimentos[i].estado
+                    )
+                )
                 produtos[i].quantidade -= alimentos[i].quantidade
                 ok = true
             }
@@ -90,8 +97,8 @@ class AlimentosCadastradosActivity : BaseActivity() {
 
     private fun salvar() {
         dao = GeladeiraDAO(tipoConteudo)
-        dao.adicionarItens(produtos) {
-            sucesso: Boolean, mensagem: String? -> resultAdicao(sucesso, mensagem)
+        dao.adicionarItens(produtos) { sucesso: Boolean, mensagem: String? ->
+            resultAdicao(sucesso, mensagem)
         }
     }
 
