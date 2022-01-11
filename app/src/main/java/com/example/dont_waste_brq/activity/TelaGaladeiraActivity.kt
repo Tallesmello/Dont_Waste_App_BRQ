@@ -9,6 +9,7 @@ import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.activity.enum.LocalEnum
 import com.example.dont_waste_brq.activity.enum.TipoConteudoEnum
 import com.example.dont_waste_brq.databinding.ActivityTelaGaladeiraBinding
+import com.example.dont_waste_brq.util.nextScreen
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class TelaGaladeiraActivity : BaseActivity() {
@@ -69,7 +70,7 @@ class TelaGaladeiraActivity : BaseActivity() {
         }
 
         binding.btnVoltarGeladeira.setOnClickListener {
-            trocarTela(TelaCategoriasActivity())
+            nextScreen(TelaCategoriasActivity())
             finish()
         }
 
@@ -112,7 +113,7 @@ class TelaGaladeiraActivity : BaseActivity() {
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
               R.id.menu_hamburguer.apply {
-            trocarTela(MenuHamburguer())
+            nextScreen(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)
 

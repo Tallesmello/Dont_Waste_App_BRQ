@@ -8,6 +8,7 @@ import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityPrimeiroAcessoBinding
 import com.example.dont_waste_brq.model.Usuario
+import com.example.dont_waste_brq.util.nextScreen
 
 class PrimeiroAcessoActivity : BaseActivity() {
 
@@ -23,7 +24,7 @@ class PrimeiroAcessoActivity : BaseActivity() {
 
     private fun initListeners() {
         binding.btnVoltaCadastro.setOnClickListener {
-            trocarTela(HomeNaoLogadaActivity())
+            nextScreen(HomeNaoLogadaActivity())
             finish()
         }
         binding.btnAjudaCadastro.setOnClickListener {

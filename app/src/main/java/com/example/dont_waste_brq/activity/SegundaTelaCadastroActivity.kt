@@ -9,6 +9,7 @@ import com.example.dont_waste_brq.activity.enum.FrequenciaEnum
 import com.example.dont_waste_brq.activity.enum.QtdPessoasEnum
 import com.example.dont_waste_brq.databinding.ActivitySegundaTelaCadastroBinding
 import com.example.dont_waste_brq.model.Cadastro
+import com.example.dont_waste_brq.util.nextScreen
 import com.google.android.material.datepicker.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,17 +45,17 @@ class SegundaTelaCadastroActivity : BaseActivity() {
 
     private fun setupListners() {
         binding.btnVoltaHmNLogadaSegundaTelaCadastro.setOnClickListener {
-           trocarTela(HomeNaoLogadaActivity())
+           nextScreen(HomeNaoLogadaActivity())
             finish()
         }
         binding.btnVoltarSegundaTelaCadastro.setOnClickListener {
-            trocarTela(PrimeiroAcessoActivity())
+            nextScreen(PrimeiroAcessoActivity())
 
         }
         binding.btnSalvarSegundaTelaCadastro.setOnClickListener {
             if (validarCadastro()) {
                 salvarCadastro()
-                trocarTela(HomeLogadaActivity())
+                nextScreen(HomeLogadaActivity())
                 finish()
             }
         }

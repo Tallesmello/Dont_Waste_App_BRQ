@@ -8,6 +8,7 @@ import android.view.MenuItem
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityProdutosProximosVencimentoBinding
 import com.example.dont_waste_brq.databinding.ActivityRelatorioDeDesperdicioBinding
+import com.example.dont_waste_brq.util.nextScreen
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class VencimentosProximosActivity : BaseActivity() {
@@ -31,7 +32,7 @@ class VencimentosProximosActivity : BaseActivity() {
 
     private fun setListners() {
         binding.toolbarVencimentos.iconHome.setOnClickListener {
-            trocarTela(HomeLogadaActivity())
+            nextScreen(HomeLogadaActivity())
             finish()
         }
     }
@@ -61,7 +62,7 @@ class VencimentosProximosActivity : BaseActivity() {
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         R.id.menu_hamburguer.apply {
-            trocarTela(MenuHamburguer())
+            nextScreen(MenuHamburguer())
         }
         return super.onOptionsItemSelected(item)
     }

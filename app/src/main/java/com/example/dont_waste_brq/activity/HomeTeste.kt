@@ -13,6 +13,7 @@ import com.example.dont_waste_brq.model.Consumo
 import com.example.dont_waste_brq.model.Produto
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
+import com.example.dont_waste_brq.util.toast
 
 class HomeTeste : BaseActivity() {
 
@@ -38,7 +39,7 @@ class HomeTeste : BaseActivity() {
         if (sucesso) {
             sucesso(itens)
         } else {
-            mensagem("erro: $mensagem")
+            toast("erro: $mensagem")
         }
     }
 
@@ -46,7 +47,7 @@ class HomeTeste : BaseActivity() {
         val produtos: ArrayList<Produto> = itens as ArrayList<Produto>
         println("sucessosucessosucesso")
         println(produtos.toString())
-        mensagem("sucesso")
+        toast("sucesso")
     }
 
 
