@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityMenuHamburguerBinding
+import com.example.dont_waste_brq.util.nextScreen
 
 class MenuHamburguer : BaseActivity() {
 
@@ -17,7 +18,7 @@ class MenuHamburguer : BaseActivity() {
         setContentView(view)
 
         binding.textCadastrar.setOnClickListener {
-            trocarTela(TelaCategoriasActivity())
+            nextScreen(TelaCategoriasActivity())
         }
 
         binding.imageSair.setOnClickListener {
@@ -25,33 +26,31 @@ class MenuHamburguer : BaseActivity() {
         }
 
 
-            binding.textLogout.setOnClickListener {
-                    exibirDialog()
-
-                }
-
-            }
-
-
-
-        private fun exibirDialog() {
-            val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("Sair")
-            dialog.setMessage("Deseja realmente sair?")
-            dialog.setPositiveButton("Sair") { dialogInterface, i ->
-                FirebaseAuth.deslogarApp()
-                trocarTela(HomeNaoLogadaActivity())
-                finish()
-
-            }
-            dialog.setNegativeButton("Cancelar") { dialogInterface, i ->
-                trocarTela(this)
-                finish()
-
-            }
-            dialog.create()
-            dialog.show()
+        binding.textLogout.setOnClickListener {
+            exibirDialog()
         }
 
     }
+
+
+    private fun exibirDialog() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Sair")
+        dialog.setMessage("Deseja realmente sair?")
+        dialog.setPositiveButton("Sair") { dialogInterface, i ->
+            FirebaseAuth.deslogarApp()
+            trocarTela(HomeNaoLogadaActivity())
+            finish()
+
+        }
+        dialog.setNegativeButton("Cancelar") { dialogInterface, i ->
+            trocarTela(this)
+            finish()
+
+        }
+        dialog.create()
+        dialog.show()
+    }
+
+}
 

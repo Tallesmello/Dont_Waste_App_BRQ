@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityRelatorioDeDesperdicioBinding
+import com.example.dont_waste_brq.util.nextScreen
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class DesperdiciosActivity : BaseActivity() {
@@ -18,19 +19,20 @@ class DesperdiciosActivity : BaseActivity() {
         binding = ActivityRelatorioDeDesperdicioBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         inicializarComponentes()
+        carregandoToolbar()
+        setListners()
+    }
 
+    private fun carregandoToolbar() {
         val toolbar = binding.toolbarDesperdicios.toolbar
         toolbar.title = " "
         setSupportActionBar(toolbar)
-
-        setListners()
     }
 
     private fun setListners() {
         binding.toolbarDesperdicios.iconHome.setOnClickListener {
-            trocarTela(HomeLogadaActivity())
+            nextScreen(HomeLogadaActivity())
             finish()
         }
     }

@@ -22,8 +22,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageView_logo_categoria"
         app:layout_constraintTop_toTopOf="parent" />
-
-
     <TextView
         android:id="@+id/waste_categorias"
         android:layout_width="65dp"

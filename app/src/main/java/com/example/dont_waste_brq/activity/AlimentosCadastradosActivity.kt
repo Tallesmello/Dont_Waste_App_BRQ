@@ -28,11 +28,12 @@ class AlimentosCadastradosActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAlimentosCadastradosBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setBinding()
+        listners()
         getValues()
+
     }
 
-    private fun setBinding() {
+    private fun listners() {
         binding.btnSalvarAlimentosCadastrados.setOnClickListener {
             salvarAlimentos()
         }
@@ -41,27 +42,17 @@ class AlimentosCadastradosActivity : BaseActivity() {
         }
     }
 
-    private fun fim() {
-        setResult(RESULT_CANCELED)
-        finish()
+    private fun getValues() {
+        clearAll()
+        intent.let {
+            peparandoIntent(it)
+        }
     }
 
-    private fun getValues() {
-        produtos.clear()
-        alimentos.clear()
-        intent.let {
-            tipoConteudo = TipoConteudoEnum.values()[it.getIntExtra(TIPO_CONTEUDO, 0)]
-            try {
-                val _produtos = it.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
-                if (!_produtos.isNullOrEmpty()) {
-                    produtos.addAll(_produtos)
-                    alimentos.addAll(_produtos.map { it.toAlimentoCadastrado() })
-                }
-            }catch (e : NullPointerException){
-                e.printStackTrace()
-            }
-            initRecyclerView()
-        }
+    private fun peparandoIntent(it: Intent) {
+        tipoConteudo = TipoConteudoEnum.values()[it.getIntExtra(TIPO_CONTEUDO, 0)]
+        buscarLista(it)
+        initRecyclerView()
     }
 
     private fun initRecyclerView() {
@@ -71,18 +62,34 @@ class AlimentosCadastradosActivity : BaseActivity() {
             LinearLayoutManager(this@AlimentosCadastradosActivity)
     }
 
+    private fun buscarLista(it: Intent) {
+        try {
+            val _produtos = it.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
+            if (!_produtos.isNullOrEmpty()) {
+                adicionarItens(_produtos)
+            }
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun adicionarItens(_produtos: ArrayList<ProdutoGeladeira>) {
+        produtos.addAll(_produtos)
+        alimentos.addAll(_produtos.map { it.toAlimentoCadastrado() })
+    }
+
+    private fun clearAll() {
+        produtos.clear()
+        alimentos.clear()
+    }
+
     private fun salvarAlimentos() {
         var ok = false
         for (i in 0 until alimentos.size) {
             if (alimentos[i].quantidade > 0 && alimentos[i].estado != EstadoEnum.NEUTRO) {
-                if (produtos[i].consumo == null) {
-                    produtos[i].consumo = arrayListOf()
-                }
+                verificandoSeOItemENulo(i)
                 produtos[i].consumo?.add(
-                    Consumo(
-                        alimentos[i].quantidade,
-                        alimentos[i].estado
-                    )
+                    addConsumoParaALista(i)
                 )
                 produtos[i].quantidade -= alimentos[i].quantidade
                 ok = true
@@ -95,10 +102,9 @@ class AlimentosCadastradosActivity : BaseActivity() {
         }
     }
 
-    private fun salvar() {
-        dao = GeladeiraDAO(tipoConteudo)
-        dao.adicionarItens(produtos) { sucesso: Boolean, mensagem: String? ->
-            resultAdicao(sucesso, mensagem)
+    private fun verificandoSeOItemENulo(i: Int) {
+        if (produtos[i].consumo == null) {
+            produtos[i].consumo = arrayListOf()
         }
     }
 
@@ -110,6 +116,18 @@ class AlimentosCadastradosActivity : BaseActivity() {
 
         } else {
             mensagem("erro: $mensagem")
+        }
+    }
+
+    private fun addConsumoParaALista(i: Int) = Consumo(
+        alimentos[i].quantidade,
+        alimentos[i].estado
+    )
+
+    private fun salvar() {
+        dao = GeladeiraDAO(tipoConteudo)
+        dao.adicionarItens(produtos) { sucesso: Boolean, mensagem: String? ->
+            resultAdicao(sucesso, mensagem)
         }
     }
 
@@ -125,6 +143,11 @@ class AlimentosCadastradosActivity : BaseActivity() {
         ) = Intent(_context, AlimentosCadastradosActivity::class.java)
             .putExtra(PRODUTOS, produtos)
             .putExtra(TIPO_CONTEUDO, tipoConteudo.ordinal)
+    }
+
+    private fun fim() {
+        setResult(RESULT_CANCELED)
+        finish()
     }
 }
 

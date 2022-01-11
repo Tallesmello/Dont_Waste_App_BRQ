@@ -36,28 +36,36 @@ class HomeTeste : BaseActivity() {
 
     private fun lerProdutos(sucesso: Boolean, mensagem: String?, itens: ArrayList<Any>?) {
         if (sucesso) {
-            val produtos: ArrayList<Produto> = itens as ArrayList<Produto>
-            println("sucessosucessosucesso")
-            println(produtos.toString())
-            mensagem("sucesso")
+            sucesso(itens)
         } else {
             mensagem("erro: $mensagem")
         }
     }
 
+    private fun sucesso(itens: ArrayList<Any>?) {
+        val produtos: ArrayList<Produto> = itens as ArrayList<Produto>
+        println("sucessosucessosucesso")
+        println(produtos.toString())
+        mensagem("sucesso")
+    }
+
 
     private fun adicionarDados() {
         val produtos = arrayListOf<Produto>(
-            ProdutoGeladeira("uva", 5,
-                consumo = arrayListOf(
-                    Consumo(1, EstadoEnum.CONSUMIDO),
-                    Consumo(1, EstadoEnum.CONSUMIDO)
-                ))
+            gerandoListaProdutosConsumido()
         )
         adicionarItens(
             Armazenar(LocalEnum.GELADEIRA, TipoConteudoEnum.FRUTAS), produtos) {
                 sucesso: Boolean, mensagem: String? -> resultAdicao(sucesso, mensagem) }
     }
+
+    private fun gerandoListaProdutosConsumido() = ProdutoGeladeira(
+        "uva", 5,
+        consumo = arrayListOf(
+            Consumo(1, EstadoEnum.CONSUMIDO),
+            Consumo(1, EstadoEnum.CONSUMIDO)
+        )
+    )
 
     private fun resultAdicao(sucesso: Boolean, mensagem: String?) {
         if (sucesso) {
@@ -68,6 +76,14 @@ class HomeTeste : BaseActivity() {
     }
 
     fun adicionarItens(
+        armazenar: Armazenar,
+        lista: ArrayList<Produto>,
+        result: (Boolean, String?) -> Unit
+    ) {
+        adicionandoItemNoBanco(armazenar, lista, result)
+    }
+
+    private fun adicionandoItemNoBanco(
         armazenar: Armazenar,
         lista: ArrayList<Produto>,
         result: (Boolean, String?) -> Unit

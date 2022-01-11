@@ -7,6 +7,7 @@ import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityLoginBinding
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.model.Usuario
+import com.example.dont_waste_brq.util.nextScreen
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 
@@ -26,22 +27,31 @@ class LoginActivity : BaseActivity() {
     private fun initListeners() {
         binding.btnLoginTelaLogin.setOnClickListener {
             if (dadosValidos()) {
-                val userExistente = Usuario(
-                    binding.editEmailLogin.text.toString(),
-                    binding.editSenhaLogin.text.toString()
-                )
-                // Usar o Login salvo no Firebase
-                autenticacaoEmailESenhaFirebase(userExistente)
+                cadastrandoUser()
             }
         }
         binding.btnEsqueciSenhaLogin.setOnClickListener {
-            trocarTela(EsqueciMinhaSenhaActivity())
+            nextScreen(EsqueciMinhaSenhaActivity())
         }
 
         binding.btnVoltaHmNLogadaLogin.setOnClickListener {
-            trocarTela(HomeNaoLogadaActivity())
+            nextScreen(HomeNaoLogadaActivity())
             finish()
         }
+    }
+
+    private fun cadastrandoUser() {
+        val userExistente = validandoUsuarioExistente()
+        // Usar o Login salvo no Firebase
+        autenticacaoEmailESenhaFirebase(userExistente)
+    }
+
+    private fun validandoUsuarioExistente(): Usuario {
+        val userExistente = Usuario(
+            binding.editEmailLogin.text.toString(),
+            binding.editSenhaLogin.text.toString()
+        )
+        return userExistente
     }
 
     private fun autenticacaoEmailESenhaFirebase(usuario: Usuario) =

@@ -9,6 +9,4 @@ data class Cadastro(
     val qtdPessoas: QtdPessoasEnum?,
     val ultimaData: Date,
     val fraquenciaCompra: FrequenciaEnum?
-){
-
-}
+)

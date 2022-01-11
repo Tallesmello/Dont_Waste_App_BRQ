@@ -5,6 +5,8 @@ import android.util.Patterns
 import androidx.appcompat.app.AlertDialog
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityEsqueciMinhaSenhaBinding
+import com.example.dont_waste_brq.util.dialog
+import com.example.dont_waste_brq.util.nextScreen
 import com.google.android.gms.tasks.Task
 
 
@@ -18,19 +20,20 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
         binding = ActivityEsqueciMinhaSenhaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        listners()
+    }
 
-
+    private fun listners() {
         binding.btnLoginTelaSenha.setOnClickListener {
             recuperarSenha()
         }
 
         binding.btnVoltaHmNLogadaSenha.setOnClickListener {
-            trocarTela(HomeNaoLogadaActivity())
+            nextScreen(HomeNaoLogadaActivity())
             finish()
         }
-
     }
-
+    //tirar depois
     private fun exibirDialog(mensagem: String) {
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle("Redefinição de senha")
@@ -65,14 +68,18 @@ class EsqueciMinhaSenhaActivity : BaseActivity() {
             exibirDialog("Foi encaminhado um link com redefinição de senha no e-mail cadastrado. \n" +
                     "Por favor, verifique seu e-mail.")
         } else {
-            var mensagem = task.exception?.message
-            if (mensagem != null) {
-                if (mensagem.startsWith("There is no user record")) {
-                    mensagem = "Usuário não encontrado"
-                }
-            }
-            binding.textEmailSenha.error = "Ops, email não encontrado!"
+            erro(task)
         }
+    }
+
+    private fun erro(task: Task<Void>) {
+        var mensagem = task.exception?.message
+        if (mensagem != null) {
+            if (mensagem.startsWith("There is no user record")) {
+                mensagem = "Usuário não encontrado"
+            }
+        }
+        binding.textEmailSenha.error = "Ops, email não encontrado!"
     }
 
 }

@@ -19,6 +19,10 @@ import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.DispensaDAO
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.example.dont_waste_brq.repository.dao.ItemDAO
+import com.example.dont_waste_brq.util.hide
+import com.example.dont_waste_brq.util.nextScreen
+import com.example.dont_waste_brq.util.show
+import com.example.dont_waste_brq.util.snackbar
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -55,15 +59,23 @@ class ItensProdutosActivity : BaseActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val _produtos = result.data
-                    ?.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
-                if (!_produtos.isNullOrEmpty()) {
-                    produtos.clear()
-                    produtos.addAll(_produtos)
-                    configuraRecyclerView()
-                }
+                validandoProdutos(result)
             }
         }
+    }
+
+    private fun validandoProdutos(result: ActivityResult) {
+        val _produtos = result.data
+            ?.getSerializableExtra(PRODUTOS) as ArrayList<ProdutoGeladeira>
+        if (!_produtos.isNullOrEmpty()) {
+            adicionandoSeNaoForNulo(_produtos)
+        }
+    }
+
+    private fun adicionandoSeNaoForNulo(_produtos: ArrayList<ProdutoGeladeira>) {
+        produtos.clear()
+        produtos.addAll(_produtos)
+        configuraRecyclerView()
     }
 
     private fun setLocalConteudo() {
@@ -92,13 +104,13 @@ class ItensProdutosActivity : BaseActivity() {
     }
 
     private fun showProgressBar() {
-        binding.recyclerItens.visibility = View.GONE
-        binding.progressbarProdutos.visibility = View.VISIBLE
+        binding.recyclerItens.hide()
+        binding.progressbarProdutos.show()
     }
 
     private fun showRecycler() {
-        binding.recyclerItens.visibility = View.VISIBLE
-        binding.progressbarProdutos.visibility = View.GONE
+        binding.recyclerItens.show()
+        binding.progressbarProdutos.hide()
     }
 
     private fun lerProdutosResult(
@@ -108,11 +120,7 @@ class ItensProdutosActivity : BaseActivity() {
             if (json == null) {
                 mensagem("Nenhum produto lido")
             } else {
-                val gson = Gson()
-                val itemType = object : TypeToken<List<ProdutoGeladeira>>() {}.type
-                val itens = gson.fromJson<List<ProdutoGeladeira>>(json, itemType)
-
-                produtos.addAll(itens)
+                lendoProdutos(json)
             }
             configuraRecyclerView()
         } else {
@@ -121,70 +129,98 @@ class ItensProdutosActivity : BaseActivity() {
         showRecycler()
     }
 
-    private fun configurarListners() {
-        binding.buttonNovoItem.setOnClickListener {
-            if (binding.layoutNovoItem.visibility == View.GONE) {
-                binding.buttonNovoItem.visibility = View.GONE
-                binding.layoutNovoItem.visibility = View.VISIBLE
-                binding.edittextNovoItem.requestFocus()
-            } else {
-                binding.layoutNovoItem.visibility = View.GONE
-            }
+    private fun lendoProdutos(json: String?) {
+        val gson = Gson()
+        val itemType = object : TypeToken<List<ProdutoGeladeira>>() {}.type
+        val itens = gson.fromJson<List<ProdutoGeladeira>>(json, itemType)
+
+        produtos.addAll(itens)
+    }
+
+    private fun configurarListners() = with(binding) {
+        buttonNovoItem.setOnClickListener {
+            abrindoNovoItem()
         }
 
-        binding.btnCancelarNovoItem.setOnClickListener {
+        btnCancelarNovoItem.setOnClickListener {
             esconderLayoutNovoItem()
         }
 
-        binding.btnIncluirNovoItem.setOnClickListener {
-            if (binding.edittextNovoItem.text.trim().isNotEmpty()) {
-                adapter.adicionarItem(
-                    ProdutoGeladeira(
-                        binding.edittextNovoItem.text.toString()
-                    )
-                )
-                esconderLayoutNovoItem()
-            } else {
-                mensagem("Campo deve estar preenchido")
-            }
+        btnIncluirNovoItem.setOnClickListener {
+            confirmandoInclusaoDoNovoItem()
         }
 
-        binding.btnAlimentosCadastradosItemFrutas.setOnClickListener {
-            showProgressBar()
-            dao.adicionarItens(produtos){
-                sucesso: Boolean, mensagemErro: String? ->
-                salvarStatus(sucesso, mensagemErro)
-            }
+        btnAlimentosCadastradosItemFrutas.setOnClickListener {
+            salvarStatusDoAlimentoCadastrado()
+        }
+        btnVoltarItemFrutas.setOnClickListener {
+            sair()
+        }
+    }
 
-            val intent = Intent(this, AlimentosCadastradosActivity::class.java)
-            startActivity(intent)
+    private fun sair() {
+        if (adapter.houveAtualizacao()) {
+            sairSemSalvar()
+        } else {
+            finish()
+        }
+    }
 
-            var ok = false
-            if (!produtos.isNullOrEmpty()) {
-                for (prod in produtos) {
-                    if (prod.quantidade > 0) {
-                        ok = true
-                    }
+    private fun salvarStatusDoAlimentoCadastrado() {
+        showProgressBar()
+        enviandoAoBanco()
+        nextScreen(AlimentosCadastradosActivity())
+        var ok = false
+        ok = verificandoQuantidadeDeItens(ok)
+        result(ok)
+    }
+
+    private fun result(ok: Boolean) {
+        if (ok) {
+            chamarAlimentosCadastrados()
+        } else {
+            snackbar(binding.containerGeladeira, "Sem alimentos para consumir")
+        }
+    }
+
+    private fun verificandoQuantidadeDeItens(ok: Boolean): Boolean {
+        var ok1 = ok
+        if (!produtos.isNullOrEmpty()) {
+            for (prod in produtos) {
+                if (prod.quantidade > 0) {
+                    ok1 = true
                 }
             }
-            if (ok) {
-                chamarAlimentosCadastrados()
-            } else {
-                Snackbar.make(
-                    binding.containerGeladeira,
-                    "Sem alimentos para consumir",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
-
         }
+        return ok1
+    }
 
-        binding.btnVoltarItemFrutas.setOnClickListener {
-            if (adapter.houveAtualizacao()) {
-                sairSemSalvar()
-            } else {
-                finish()
-            }
+    private fun enviandoAoBanco() {
+        dao.adicionarItens(produtos) { sucesso: Boolean, mensagemErro: String? ->
+            salvarStatus(sucesso, mensagemErro)
+        }
+    }
+
+    private fun confirmandoInclusaoDoNovoItem() {
+        if (binding.edittextNovoItem.text.trim().isNotEmpty()) {
+            adapter.adicionarItem(
+                ProdutoGeladeira(
+                    binding.edittextNovoItem.text.toString()
+                )
+            )
+            esconderLayoutNovoItem()
+        } else {
+            mensagem("Campo deve estar preenchido")
+        }
+    }
+
+    private fun abrindoNovoItem() {
+        if (binding.layoutNovoItem.visibility == View.GONE) {
+            binding.buttonNovoItem.hide()
+            binding.layoutNovoItem.show()
+            binding.edittextNovoItem.requestFocus()
+        } else {
+            binding.layoutNovoItem.hide()
         }
     }
 
@@ -222,7 +258,7 @@ class ItensProdutosActivity : BaseActivity() {
             super.onBackPressed()
         }
     }
-
+    //remover mais tarde
     private fun sairSemSalvar(){
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle("Atenção")

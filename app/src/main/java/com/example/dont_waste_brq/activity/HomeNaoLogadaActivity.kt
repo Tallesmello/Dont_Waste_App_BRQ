@@ -4,8 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityHomeNaoLogadaBinding
-
-
+import com.example.dont_waste_brq.util.nextScreen
 
 
 class HomeNaoLogadaActivity : BaseActivity() {
@@ -19,20 +18,22 @@ class HomeNaoLogadaActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
         initListeners()
+        verificandoUsuarioLogado()
+    }
 
+    private fun verificandoUsuarioLogado() {
         if (FirebaseAuth.usuarioLogado()) {
-            startActivity(Intent(this, HomeLogadaActivity::class.java))
+            nextScreen(HomeLogadaActivity())
             finish()
         }
-
     }
 
     private fun initListeners() {
         binding.btnPrimeiroAcessoHmNLogada.setOnClickListener {
-            trocarTela(PrimeiroAcessoActivity())
+            nextScreen(PrimeiroAcessoActivity())
         }
         binding.btnLoginHmNLogada.setOnClickListener {
-            trocarTela(LoginActivity())
+            nextScreen(LoginActivity())
         }
     }
 }

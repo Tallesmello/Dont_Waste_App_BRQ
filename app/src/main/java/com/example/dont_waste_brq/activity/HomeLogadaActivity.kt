@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.core.view.size
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityHomeLogadaBinding
+import com.example.dont_waste_brq.util.nextScreen
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class HomeLogadaActivity : BaseActivity() {
@@ -19,34 +20,26 @@ class HomeLogadaActivity : BaseActivity() {
         binding = ActivityHomeLogadaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         inicializaçãoToolbar()
         inicializaçãoComponentes()
-
-        binding.btnDesperdiciosHomeLogada.setOnClickListener {
-            trocarTela(DesperdiciosActivity())
-            finish()
-        }
-
-        binding.btnVencimentosProximosHomeLogada.setOnClickListener {
-            trocarTela(VencimentosProximosActivity())
-            finish()
-        }
-
-        val toolbar = binding.toolbarHomelogada.toolbar
-        toolbar.title = " "
-        setSupportActionBar(toolbar)
-
         setListners()
 
     }
 
     private fun setListners() {
         binding.toolbarHomelogada.iconHome.setOnClickListener {
-            trocarTela(HomeLogadaActivity())
+            nextScreen(HomeLogadaActivity())
+        }
+        binding.btnDesperdiciosHomeLogada.setOnClickListener {
+            nextScreen(DesperdiciosActivity())
+            finish()
+        }
+
+        binding.btnVencimentosProximosHomeLogada.setOnClickListener {
+            nextScreen(VencimentosProximosActivity())
+            finish()
         }
     }
-
     private fun inicializaçãoToolbar() {
         val toolbar = binding.toolbarHomelogada.toolbar
         toolbar.title = " "
@@ -85,7 +78,7 @@ class HomeLogadaActivity : BaseActivity() {
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         R.id.menu_hamburguer.apply {
-            trocarTela(MenuHamburguer())
+            nextScreen(MenuHamburguer())
             finish()
         }
         return super.onOptionsItemSelected(item)

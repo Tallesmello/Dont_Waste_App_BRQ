@@ -5,6 +5,8 @@ import android.os.Bundle
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityMenuBinding
 import com.example.dont_waste_brq.databinding.ActivityRelatorioDeDesperdicioBinding
+import com.example.dont_waste_brq.util.hideAll
+import com.example.dont_waste_brq.util.nextScreen
 
 class ActivityMenu : BaseActivity() {
 
@@ -16,11 +18,13 @@ class ActivityMenu : BaseActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        listners()
 
+    }
+
+    private fun listners() {
         binding.textCadastrar.setOnClickListener {
-            trocarTela(LoginActivity())
+            nextScreen(LoginActivity())
         }
-
-
     }
 }
