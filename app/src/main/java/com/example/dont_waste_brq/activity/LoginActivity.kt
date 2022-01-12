@@ -7,6 +7,8 @@ import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.databinding.ActivityLoginBinding
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.model.Usuario
+import com.example.dont_waste_brq.util.helper.ValidarCampoHelper.emailValido
+import com.example.dont_waste_brq.util.helper.ValidarCampoHelper.senhaValida
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 
@@ -61,27 +63,29 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun dadosValidos(): Boolean {
+        return validarDados(
+            binding.editEmailLogin.text.toString(),
+            binding.editSenhaLogin.text.toString()
+        )
+    }
+
+    fun validarDados(
+        email: String,
+        senha: String
+    ): Boolean {
         var ok = true
-        val email = binding.editEmailLogin.text.toString()
-        val senha = binding.editSenhaLogin.text.toString()
         binding.textEmailLogin.error = ""
         binding.textSenhaLogin.error = ""
-        if (email.trim().isEmpty() ||
-            !Patterns.EMAIL_ADDRESS
-                .matcher(email).matches()
-        ) {
+        if (!emailValido(email)) {
             binding.textEmailLogin.error = getString(R.string.dados_invalidos)
             ok = false
         }
-        if (senha.trim().length < 6) {
+        if (!senhaValida(senha)) {
             binding.textSenhaLogin.error = getString(R.string.dados_invalidos)
             ok = false
         }
         return ok
     }
-
-
-
 }
 
 
