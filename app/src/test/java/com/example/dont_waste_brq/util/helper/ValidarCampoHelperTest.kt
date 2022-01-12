@@ -2,10 +2,7 @@ package com.example.dont_waste_brq.util.helper
 
 import org.junit.Assert.*
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 
-@RunWith(JUnit4::class)
 class ValidarCampoHelperTest {
     @Test
     fun `em emailValido quando email estiver vazio deve retornar falso`(){
