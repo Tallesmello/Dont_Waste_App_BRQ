@@ -13,7 +13,6 @@ import com.example.dont_waste_brq.model.Consumo
 import com.example.dont_waste_brq.model.ProdutoGeladeira
 import com.example.dont_waste_brq.repository.dao.GeladeiraDAO
 import com.example.dont_waste_brq.repository.dao.ItemDAO
-import java.lang.NullPointerException
 
 class AlimentosCadastradosActivity : BaseActivity() {
 
@@ -74,7 +73,7 @@ class AlimentosCadastradosActivity : BaseActivity() {
     private fun salvarAlimentos() {
         var ok = false
         for (i in 0 until alimentos.size) {
-            if (alimentos[i].quantidade > 0 && alimentos[i].estado != EstadoEnum.NEUTRO) {
+            if (verificaSeAlimentoEVazioOuNeutro(i)) {
                 if (produtos[i].consumo == null) {
                     produtos[i].consumo = arrayListOf()
                 }
@@ -94,6 +93,9 @@ class AlimentosCadastradosActivity : BaseActivity() {
             fim()
         }
     }
+
+    private fun verificaSeAlimentoEVazioOuNeutro(i: Int) =
+        alimentos[i].quantidade > 0 && alimentos[i].estado != EstadoEnum.NEUTRO
 
     private fun salvar() {
         dao = GeladeiraDAO(tipoConteudo)

@@ -2,12 +2,13 @@ package com.example.dont_waste_brq.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Toast
 import com.example.dont_waste_brq.R
 import com.example.dont_waste_brq.data.FirebaseAuth
 import com.example.dont_waste_brq.databinding.ActivityPrimeiroAcessoBinding
 import com.example.dont_waste_brq.model.Usuario
+import com.example.dont_waste_brq.util.helper.ValidarCampoHelper.emailValido
+import com.example.dont_waste_brq.util.helper.ValidarCampoHelper.senhaValida
 
 class PrimeiroAcessoActivity : BaseActivity() {
 
@@ -45,21 +46,41 @@ class PrimeiroAcessoActivity : BaseActivity() {
         return user
     }
 
-    private fun dadosValidos(): Boolean {
+//    private fun dadosValidos(): Boolean {
+//        var ok = true
+//        val email = binding.editEmailCadastro.text.toString()
+//        val senha = binding.editSenhaCadastro.text.toString()
+//        binding.textEmailCadastro.error = ""
+//        binding.textSenhaCadastro.error = ""
+//        if (emailValido(email)
+//        ) {
+//            binding.textEmailCadastro.error = getString(R.string.insira_um_email_valido)
+//            ok = false
+//        }
+//        if (senhaValida(senha)) {
+//            binding.textSenhaCadastro.error = getString(R.string.insira_uma_senha_valido)
+//            ok = false
+//        }
+//        return ok
+//    }
+
+    fun dadosValidos() : Boolean {
+        return validarDados(
+            binding.editEmailCadastro.text.toString(),
+            binding.editSenhaCadastro.text.toString()
+        )
+    }
+
+    fun validarDados(email: String, senha:String) : Boolean {
         var ok = true
-        val email = binding.editEmailCadastro.text.toString()
-        val senha = binding.editSenhaCadastro.text.toString()
         binding.textEmailCadastro.error = ""
         binding.textSenhaCadastro.error = ""
-        if (email.trim().isEmpty() ||
-            !Patterns.EMAIL_ADDRESS
-                .matcher(email).matches()
-        ) {
-            binding.textEmailCadastro.error = getString(R.string.insira_um_email_valido)
+        if(!emailValido(email)) {
+            binding.textEmailCadastro.error = getString(R.string.dados_invalidos)
             ok = false
         }
-        if (senha.trim().length < 6) {
-            binding.textSenhaCadastro.error = getString(R.string.insira_uma_senha_valido)
+        if (!senhaValida(senha)) {
+            binding.textSenhaCadastro.error = getString(R.string.dados_invalidos)
             ok = false
         }
         return ok
@@ -74,5 +95,7 @@ class PrimeiroAcessoActivity : BaseActivity() {
         toast.setGravity(0, -80, 380);
         toast.show()
     }
+
+
 
 }
